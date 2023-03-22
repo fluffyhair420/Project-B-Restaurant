@@ -1,0 +1,107 @@
+[
+	{
+		"TableNumber": "1",
+		"Seats": "2",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "2",
+		"Seats": "2",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "3",
+		"Seats": "2",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "4",
+		"Seats": "2",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "5",
+		"Seats": "2",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "6",
+		"Seats": "2",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "7",
+		"Seats": "2",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "8",
+		"Seats": "2",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "9",
+		"Seats": "4",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "10",
+		"Seats": "4",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "11",
+		"Seats": "4",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "12",
+		"Seats": "4",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "13",
+		"Seats": "4",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "14",
+		"Seats": "6",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	},
+	{
+		"TableNumber": "15",
+		"Seats": "6",
+		"Reserved": false,
+		"ReservedName": "",
+		"ReservedDate": []
+	}
+]
