@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 namespace Project_B_Restaurant_Code {
     public class Program {
         static void Main() {
-
+            Reserve reserve = new Reserve();
+            reserve.MainReserve();
         }
     }
 }
