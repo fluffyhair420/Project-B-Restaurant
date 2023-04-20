@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Project_B_Restaurant_Code {
+namespace Restaurant {
     public class Reservation {
         public string Name { get; set; }
         public string Date { get; set; }

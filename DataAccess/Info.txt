@@ -1,0 +1,5 @@
+This layer connects to your data source and/or encapsulates the data in a
+format that can be user in the higher layers.
+
+Often class-objects are created for all the data.​
+

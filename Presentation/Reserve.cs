@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace Project_B_Restaurant_Code {
+namespace Restaurant {
     public class Reserve {
-        string jsonFile = "./Table.json"; // Path to the json file
+        string jsonFile = "DataSources/Table.json"; // Path to the json file
 
         int partySize = 0;
         int tableNumber = 0;
@@ -264,7 +264,8 @@ Sunday:     17:00-21:00");
                     ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
                     string userConfirm = Console.ReadLine();
                     if (userConfirm == "Y" || userConfirm == "y") {
-                        ReserveTable(tableNumber, reservationDate, reservationName, reservationID);
+                        ReserveTable(tableNumber, reservationName, reservationDate, reservationID);
+                        break;
                     } else {
                         Console.WriteLine("Please enter the correct information.");
                         MainReserve();
