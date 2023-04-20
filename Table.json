@@ -1,167 +1,77 @@
 [
 	{
-		"TableNumber": "1",
-		"Seats": "2",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 1,
+		"Seats": 2,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "2",
-		"Seats": "2",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 2,
+		"Seats": 2,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "3",
-		"Seats": "2",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 3,
+		"Seats": 2,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "4",
-		"Seats": "2",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 4,
+		"Seats": 2,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "5",
-		"Seats": "2",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 5,
+		"Seats": 2,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "6",
-		"Seats": "2",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 6,
+		"Seats": 2,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "7",
-		"Seats": "2",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 7,
+		"Seats": 2,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "8",
-		"Seats": "2",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 8,
+		"Seats": 2,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "9",
-		"Seats": "4",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 9,
+		"Seats": 4,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "10",
-		"Seats": "4",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 10,
+		"Seats": 4,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "11",
-		"Seats": "4",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 11,
+		"Seats": 4,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "12",
-		"Seats": "4",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 12,
+		"Seats": 4,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "13",
-		"Seats": "4",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 13,
+		"Seats": 4,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "14",
-		"Seats": "6",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 14,
+		"Seats": 6,
+		"Reservation": []
 	},
 	{
-		"TableNumber": "15",
-		"Seats": "6",
-		"Reservation": [
-			{
-				"Name": "",
-				"Date": "00/00/0000 00:00",
-				"ID": "1234567"
-			}
-		]
+		"TableNumber": 15,
+		"Seats": 6,
+		"Reservation": []
 	}
 ]
