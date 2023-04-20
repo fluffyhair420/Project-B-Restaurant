@@ -1,0 +1,143 @@
+{
+    "January": 
+    [
+      {
+        "ID": 1,
+        "Name": "Steak",
+        "Description": "a thick cut of meat generally sliced across the muscle fibers, grilled by our top chef",
+        "Price": 35.50,
+        "hasFish": false,
+        "hasShellFish": false,
+        "hasMeat": true,
+        "isVegan": false,
+        "isGlutenFree" : true
+    },
+      {
+        "ID": 2,
+        "Name": "Tomato Soup",
+        "Description": "soup containing tomato, spinach and paprika powder",
+        "Price": 30.75,
+        "hasFish": false,
+        "hasShellFish":false,
+        "hasMeat": false,
+        "isVegan": true,
+        "isGlutenFree" : true
+      },
+      {
+        "ID": 3,
+        "Name": "Spanakopita",
+        "Description": "Spanakopita is a Greek spinach pie. This pie is filled with spinach and goats cheese.",
+        "Price": 44.50,
+        "hasFish":false,
+        "hasShellFish":false,
+        "hasMeat":false,
+        "isVegan":false,
+        "isGlutenFree":false
+      },
+      {
+        "ID": 4,
+        "Name": "Matsutake Mushrooms Salad",
+        "Description": "This salad contains matsuke mushrooms, tomato's and lettuce. Tricholoma matsutake, is a species of choice edible mycorrhizal mushroom that grows in East Asia, northern Europe, and North America. It is prized in Japanese cuisine for its distinct spicy-aromatic odor.",
+        "Price": 45.50,
+        "hasFish": false,
+        "hasShellFish":false,
+        "hasMeat": false,
+        "isVegan": true,
+        "isGlutenFree": true
+      },
+      {
+        "ID": 5,
+        "Name": "Oysters",
+        "Description": "A bivalve mollusk, which is eaten raw or cooked. This is a shellfish",
+        "Price": 45.50,
+        "hasFish":false,
+        "hasMeat": false,
+        "hasShellFish":true,
+        "isVegan": false,
+        "isGlutenFree": true
+      },
+      {
+        "ID": 6,
+        "Name": "Bluefin Tuna",
+        "Description": "Cooked tuna",
+        "Price": 48.00,
+        "hasFish": true,
+        "hasShellFish":false,
+        "hasMeat": false,
+        "isVegan": false,
+        "isGlutenFree": true
+      },
+      {
+        "ID": 7,
+        "Name": "‘Bacon’ Wrapped Vegan Scallops",
+        "Description": "Vegan scallops wrapped in vegan 'bacon', with Paprika Sauce",
+        "Price": 50.50,
+        "hasFish": false,
+        "hasShellFish":false,
+        "hasMeat": false,
+        "isVegan": true,
+        "isGlutenFree": true
+      }
+    ],
+    "February":
+    [
+      {
+        "ID": 1,
+        "Name": "Steak",
+        "Description": "a thick cut of meat generally sliced across the muscle fibers, grilled by our top chef",
+        "Price": 35.50,
+        "hasFish": false,
+        "hasShellFish": false,
+        "hasMeat": true,
+        "isVegan": false,
+        "isGlutenFree" : true
+      },
+      {
+        "ID": 2,
+        "Name": "Deluxe Hamburger",
+        "Description": "a Hambuger with lettuce, tomato and gluten free bread",
+        "Price": 30.75,
+        "hasFish": false,
+        "hasShellFish":false,
+        "hasMeat": true,
+        "isVegan": false,
+        "isGlutenFree" : true
+      },
+      {
+        "ID": 3,
+        "Name": "Tomato Soup",
+        "Description": "soup containing tomato, spinach and paprika powder",
+        "Price": 30.75,
+        "hasFish": false,
+        "hasShellFish":false,
+        "hasMeat": false,
+        "isVegan": true,
+        "isGlutenFree" : true
+      },
+      {
+        "ID": 4,
+        "Name": "Onion Soup",
+        "Description": "a blend of mellow, slowly cooked, caramelised onions in a broth laced with white wine and cognac.",
+        "Price": 50.50,
+        "hasFish": false,
+        "hasMeat": false,
+        "isVegan":false,
+        "hasShellFish": false,
+        "isGlutenFree":false
+      },
+      {
+        "ID": 5,
+        "Name": "Gua bao",
+        "Description": "A type of lotus leaf bun originating from Fujian cuisine, a traditional gua bao consists of slices of pork belly meat dressed with pickled mustard greens, coriander and ground peanuts.",
+        "Price": 50.50,
+        "hasFish": false,
+        "hasMeat": true,
+        "isVegan":false,
+        "hasShellFish": false,
+        "isGlutenFree":false
+      }
+    ]
+  }
+  
+  
+  
