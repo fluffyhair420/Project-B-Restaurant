@@ -3,18 +3,17 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace ScreenManagement
+namespace Restaurant
 {
 
     public class Menu : Screen
     {
-        //private readonly Screen _option;
-        public string Month = "January"; //this is the Month the menu displays, I will later implement a way for the admin to edit this.
-
+        private readonly Screen _option;
+        public string Month = "January"; 
+        public menuDis menushow = new menuDis();
         public Menu()
         {
-            // _option = new Screen_2_Options();
-
+            // _option = new Menu();
             //_option.SetPrevious(this);
         }
 
@@ -23,37 +22,23 @@ namespace ScreenManagement
             Log("Menu");
             ConsoleKeyInfo input;
             ConsoleKeyInfo input_;
+            
             do
             {
-                // make a list of the json info of this month, print that stuff in a for loop with name, and price.
                 Console.Clear();
-                //use the json function to get a list of this months dishes
-                List<Dish> dishes = Dish.LoadDishesFromJson(Month); 
-                //using string menu we add the id, name and price of every item in the list dishes to it so we can display all this information.
-                string menu = "";
-                foreach (Dish dish in dishes)
-                {
-                    menu += $"{dish.ID,-3} {dish.Name,-30} ${dish.Price,4}\n";
-                }
-                Display("Our Current Menu:");
-                Display("========{food}========");
-                Display(menu);
-                Display("For information on dishes/drinks press 1 and then input the number assosiated with it.");
-                Display("To filter (for vegan/glutenfree/vegetarian options) press 9");
-                Display("Press Q to exit the program");
-
-
-                input = Console.ReadKey();
+                menushow.menuDisplay(0); //this displays the main menu
+                input = Console.ReadKey(true);
             }
-            while (input.Key != ConsoleKey.Escape && input.Key != ConsoleKey.D9 && input.Key != ConsoleKey.D1 && input.Key != ConsoleKey.Q);
+            while (input.Key != ConsoleKey.Escape && input.Key != ConsoleKey.D9 && input.Key != ConsoleKey.D1 && input.Key != ConsoleKey.Q && input.Key != ConsoleKey.D8);
 
-
+            //this is for the details of the dishes
             if (input.Key == ConsoleKey.D1)
             {
                 int userInput;
                 bool validInput = false;
                 do
                 {
+                    //this if statement checks if the input is valid
                     Console.WriteLine("\ninput the number of the dish you want to see the description of");
                     if (int.TryParse(Console.ReadLine(), out userInput))
                     {
@@ -65,7 +50,28 @@ namespace ScreenManagement
                     }
                 } 
                 while (!validInput);
+                //takes the given input and gives it to the dishDetails methode
                 dishDetails(userInput);   
+            }
+
+            //IT WORKSSSSSSSS
+            if(input.Key == ConsoleKey.D8){
+                Console.Clear();
+                Console.WriteLine("input the month");
+                string month = Console.ReadLine();
+                do
+                {
+                    menuDis.changeMonth(month);
+                    input_ = Console.ReadKey();
+                }
+                while (input_.Key != ConsoleKey.Escape);    
+
+                if (input_.Key == ConsoleKey.Escape)
+                {
+                    var Menu = new Menu();
+                    Menu.Show();
+                }            
+                
             }
 
             if (input.Key == ConsoleKey.D9)
@@ -73,12 +79,8 @@ namespace ScreenManagement
                 Console.Clear();
                 do
                 {
-                    Console.WriteLine("\nWhat would you like to filter on?");
-                    Console.WriteLine("1. Vegan");
-                    Console.WriteLine("2. Gluten free");
-                    Console.WriteLine("3. Vegetarian");
-                    input_ = Console.ReadKey();
-
+                    Console.WriteLine("\nWhat would you like to filter on?\n1. Vegan\n2. Gluten free\n3. Vegetarian");
+                    input_ = Console.ReadKey(true);
                 }
                 while (input_.Key != ConsoleKey.Escape && input_.Key != ConsoleKey.D1 && input_.Key != ConsoleKey.D2 && input_.Key != ConsoleKey.D3);
 
@@ -89,32 +91,29 @@ namespace ScreenManagement
                     do
                     {
                         Console.Clear();
-                        List<Dish> dishes = Dish.LoadDishesFromJson(Month); 
-                        string menu = "";
-                        foreach (Dish dish in dishes){
-                            if (dish.isVegan){
-                                menu += $"{dish.ID,-3} {dish.Name,-30} ${dish.Price,4}\n";
-                            }
-                        }
-                        Display("\nOur vegan Menu:");
-                        Display("========{food}========");
-                        Display(menu);
-                        Display("For information on dishes/drinks press 1 and then input the number assosiated with it.");
-                        input = Console.ReadKey();
-                    
+                        menushow.menuDisplay(1);
+                        input = Console.ReadKey(true);
                     }
-                    while (input.Key != ConsoleKey.Escape && input.Key != ConsoleKey.D1);
+                    while ( input.Key != ConsoleKey.D1); //input.Key != ConsoleKey.Escape &&
 
                     if (input.Key == ConsoleKey.D1)
                     {
-                        Console.WriteLine("\ninput the number if the dish you want to see the description of");
-                        int userInput = Convert.ToInt32(Console.ReadLine());
+                        int userInput;
+                        bool validInput = false;
+                        do
+                        {
+                            Console.WriteLine("\ninput the number of the dish you want to see the description of");
+                            if (int.TryParse(Console.ReadLine(), out userInput))
+                            {
+                                validInput = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid input. Please enter a valid number.");
+                            }
+                        } 
+                        while (!validInput);
                         dishDetails(userInput);    
-                    }
-
-                    if (input_.Key == ConsoleKey.Escape)
-                    {
-                        base.Back();
                     }
                 }
 
@@ -124,21 +123,11 @@ namespace ScreenManagement
                     do
                     {
                         Console.Clear();
-                        List<Dish> dishes = Dish.LoadDishesFromJson(Month); 
-                        string menu = "";
-                        foreach (Dish dish in dishes){
-                            if (dish.isGlutenFree){
-                                menu += $"{dish.ID,-3} {dish.Name,-30} ${dish.Price,4}\n";
-                            }
-                        }
-                        Display("\nOur Gluten free Menu:");
-                        Display("========{food}========");
-                        Display(menu);
-                        Display("For information on dishes/drinks press 1 and then input the number assosiated with it.");
-                        input = Console.ReadKey();
+                        menushow.menuDisplay(2);
+                        input = Console.ReadKey(true);
                         
                     }
-                    while (input.Key != ConsoleKey.Escape && input.Key != ConsoleKey.D1);
+                    while (input.Key != ConsoleKey.D1);
 
                     if (input.Key == ConsoleKey.D1)
                     {
@@ -163,14 +152,7 @@ namespace ScreenManagement
                         
                         // Display the details of the selected dish
                         dishDetails(userInput);    
-                    }
-
-                    if (input_.Key == ConsoleKey.Escape)
-                    {
-                        base.Back();
-                    }
-
-                    
+                    }                
                 }
 
                 //vegatarian menu
@@ -179,21 +161,11 @@ namespace ScreenManagement
                     do
                     {
                         Console.Clear();
-                        List<Dish> dishes = Dish.LoadDishesFromJson(Month); 
-                        string menu = "";
-                        foreach (Dish dish in dishes){
-                            if (!dish.hasMeat && !dish.hasFish && !dish.hasShellFish){
-                                menu += $"{dish.ID,-3} {dish.Name,-30} ${dish.Price,4}\n";
-                            }
-                        }
-                        Display("\nOur vegatarian Menu:");
-                        Display("========{food}========");
-                        Display(menu);
-                        Display("For information on dishes/drinks press 1 and then input the number assosiated with it.");
-                        input = Console.ReadKey();
+                        menushow.menuDisplay(3);
+                        input = Console.ReadKey(true);
                     
                     }
-                    while (input.Key != ConsoleKey.Escape && input.Key != ConsoleKey.D1);
+                    while (input.Key != ConsoleKey.D1);
 
                     if (input.Key == ConsoleKey.D1)
                     {
@@ -220,14 +192,7 @@ namespace ScreenManagement
                         // Display the details of the selected dish
                         dishDetails(userInput);    
                     }
-
-                    if (input_.Key == ConsoleKey.Escape)
-                    {
-                        base.Back();
-                    }
                 }
-
-
 
                 //allows the code to go back to the screen before this one.
                 if (input_.Key == ConsoleKey.Escape)
@@ -245,9 +210,6 @@ namespace ScreenManagement
             {
                 base.Back();
             }
-
-
-
         }
 
         //after using DishByID to get the dish, this methode prints out the details of the dish.
@@ -273,6 +235,7 @@ namespace ScreenManagement
                 else {
                     Console.WriteLine($"No dish found with Id: {Id}");
                 }
+                Console.WriteLine("press escape to go back to the main menu");
                 input = Console.ReadKey();
             }
             while (input.Key != ConsoleKey.Escape);
@@ -285,7 +248,7 @@ namespace ScreenManagement
 
         // with the user input (id) this methode can use that to get the whole dish
         public Dish dishByID(int Id){
-            List<Dish> dishes = Dish.LoadDishesFromJson(Month); 
+            List<Dish> dishes = Dish.LoadDishesFromJson(menuDis.Month); 
             foreach (Dish dish in dishes){
             if (dish.ID == Id){
                 return dish;

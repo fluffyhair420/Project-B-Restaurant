@@ -38,6 +38,7 @@
         "ID": 4,
         "Name": "Matsutake Mushrooms Salad",
         "Description": "This salad contains matsuke mushrooms, tomato's and lettuce. Tricholoma matsutake, is a species of choice edible mycorrhizal mushroom that grows in East Asia, northern Europe, and North America. It is prized in Japanese cuisine for its distinct spicy-aromatic odor.",
+        "Price": 45.50,
         "hasFish": false,
         "hasShellFish":false,
         "hasMeat": false,
@@ -78,7 +79,7 @@
         "isGlutenFree": true
       }
     ],
-    "Febuary":
+    "February":
     [
       {
         "ID": 1,

@@ -1,6 +1,6 @@
 using System;
 
-namespace ScreenManagement
+namespace Restaurant
 {
     public class Screen
     {
