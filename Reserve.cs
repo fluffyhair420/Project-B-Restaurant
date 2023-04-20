@@ -264,7 +264,8 @@ Sunday:     17:00-21:00");
                     ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
                     string userConfirm = Console.ReadLine();
                     if (userConfirm == "Y" || userConfirm == "y") {
-                        ReserveTable(tableNumber, reservationDate, reservationName, reservationID);
+                        ReserveTable(tableNumber, reservationName, reservationDate, reservationID);
+                        break;
                     } else {
                         Console.WriteLine("Please enter the correct information.");
                         MainReserve();
