@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Globalization;
 using Newtonsoft.Json;
 
-namespace Project_B_Restaurant_Code {
+namespace Restaurant {
     public class Reserve {
-        string jsonFile = "./Table.json"; // Path to the json file
+        string jsonFile = "DataSources/Table.json"; // Path to the json file
 
         int partySize = 0;
         int tableNumber = 0;
