@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 
-namespace ScreenManagement
+namespace Restaurant
 {
     
     // class dish (with Name, Price, Description, hasFish, hasMeat, isVegan)
@@ -24,6 +24,7 @@ namespace ScreenManagement
         public bool hasMeat { get; set; }
         public bool isVegan { get; set; }
         public bool isGlutenFree { get; set; }
+        
         public Dish(int Id, string name, decimal price, string description, bool hasfish, bool hasshellFish, bool hasmeat, bool isvegan, bool isgluttenfree)
         {
             this.ID = Id;
