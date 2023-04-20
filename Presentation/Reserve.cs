@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 
 namespace Restaurant {
     public class Reserve {
+        // Why is this broken???????
         string jsonFile = "DataSources/Table.json"; // Path to the json file
 
         int partySize = 0;
