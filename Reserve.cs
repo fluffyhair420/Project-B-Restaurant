@@ -165,59 +165,64 @@ Reservation ID: {reservationID}
 
             List<Table> tables = LoadJson();
 
-            while (true) {
-                ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
-                Console.WriteLine("What is the size of your party?");
-                Console.WriteLine("Keep in mind that we can only seat up to 6 per party");
-                Console.Write("Party size: ");
-                partySize = Convert.ToInt16(Console.ReadLine());
-                if (partySize < 1 || partySize > 6) {
-                    Console.WriteLine("Please keep in mind that we can only seat up to 6 per party");
-                } else {
-                    Console.Clear();
-                    break;
-                }
-            }
+            Console.WriteLine("Would you like to make a reservation? Y/N");
+            string userInput = Console.ReadLine();
 
-            while (true) {
-                ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
-                Console.Write($"Available tables party of {partySize}: ");
-                switch (partySize) {
-                    case 1:
-                    case 2: {
-                            Console.WriteLine("1 2 3 4 5 6 7 8");
-                            break;
-                        }
-                    case 3:
-                    case 4: {
-                            Console.WriteLine("9 10 11 12 13");
-                            break;
-                        }
-                    case 5:
-                    case 6: {
-                            Console.WriteLine("14 15");
-                            break;
-                        }
-                }
-                Console.WriteLine("Which table would you like to reserve?");
-                tableNumber = Convert.ToInt16(Console.ReadLine());
-                if (partySize <= 2 && (tableNumber >= 1 && tableNumber <= 8)) {
-                    Console.Clear();
-                    break;
-                } else if (partySize <= 4 && (tableNumber >= 9 && tableNumber <= 13)) {
-                    Console.Clear();
-                    break;
-                } else if (partySize <= 6 && (tableNumber >= 14 && tableNumber <= 15)) {
-                    Console.Clear();
-                    break;
-                } else {
-                    Console.WriteLine("\nThis table does not exist");
-                }
-            }
+            if (userInput == "Y" || userInput == "y") {
 
-            while (true) {
-                ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
-                Console.WriteLine(@"Open hours:
+                while (true) {
+                    ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
+                    Console.WriteLine("What is the size of your party?");
+                    Console.WriteLine("Keep in mind that we can only seat up to 6 per party");
+                    Console.Write("Party size: ");
+                    partySize = Convert.ToInt16(Console.ReadLine());
+                    if (partySize < 1 || partySize > 6) {
+                        Console.WriteLine("Please keep in mind that we can only seat up to 6 per party");
+                    } else {
+                        Console.Clear();
+                        break;
+                    }
+                }
+
+                while (true) {
+                    ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
+                    Console.Write($"Available tables party of {partySize}: ");
+                    switch (partySize) {
+                        case 1:
+                        case 2: {
+                                Console.WriteLine("1 2 3 4 5 6 7 8");
+                                break;
+                            }
+                        case 3:
+                        case 4: {
+                                Console.WriteLine("9 10 11 12 13");
+                                break;
+                            }
+                        case 5:
+                        case 6: {
+                                Console.WriteLine("14 15");
+                                break;
+                            }
+                    }
+                    Console.WriteLine("Which table would you like to reserve?");
+                    tableNumber = Convert.ToInt16(Console.ReadLine());
+                    if (partySize <= 2 && (tableNumber >= 1 && tableNumber <= 8)) {
+                        Console.Clear();
+                        break;
+                    } else if (partySize <= 4 && (tableNumber >= 9 && tableNumber <= 13)) {
+                        Console.Clear();
+                        break;
+                    } else if (partySize <= 6 && (tableNumber >= 14 && tableNumber <= 15)) {
+                        Console.Clear();
+                        break;
+                    } else {
+                        Console.WriteLine("\nThis table does not exist");
+                    }
+                }
+
+                while (true) {
+                    ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
+                    Console.WriteLine(@"Open hours:
 Monday:     17:00-22:00
 Tuesday:    17:00-22:00
 Wednesday:  17:00-22:00
@@ -225,25 +230,48 @@ Thursday:   17:00-22:00
 Friday:     17:00-22:00
 Saturday:   17:00-22:00
 Sunday:     17:00-21:00");
-                Console.WriteLine("When would you like to schedule the reservation?");
-                Console.WriteLine("Keep in mind the format is dd/MM/yyyy HH:mm");
-                Console.WriteLine("For example 01/04/2023 17:00");
-                string userReservationDate = Console.ReadLine();
-                if (ReservationDateValid(userReservationDate) == true) {
-                    if (CompareReservationDate(userReservationDate, tableNumber) == true) {
-                        Console.WriteLine("The reservation time is within 2 hours of another reservation, please try another");
+                    Console.WriteLine("When would you like to schedule the reservation?");
+                    Console.WriteLine("Keep in mind the format is dd/MM/yyyy HH:mm");
+                    Console.WriteLine("For example 01/04/2023 17:00");
+                    reservationDate = Console.ReadLine();
+                    if (ReservationDateValid(reservationDate) == true) {
+                        if (CompareReservationDate(reservationDate, tableNumber) == true) {
+                            Console.WriteLine("The reservation time is within 2 hours of another reservation, please try another");
+                        } else {
+                            Console.Clear();
+                            break;
+                        }
                     } else {
-                        reservationDate = userReservationDate;
-                        break;
+                        Console.WriteLine("The date you input is invalid, please try again.");
                     }
-                } else {
-                    Console.WriteLine("The date you input is invalid, please try again.");
                 }
-            }
 
-            while (true) {
-                Console.WriteLine("Please enter the name for the reservation.");
+                while (true) {
+                    ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
+                    Console.WriteLine("Please enter the name for the reservation.");
+                    reservationName = Console.ReadLine();
+                    if (reservationName != null) {
+                        Console.Clear();
+                        break;
+                    } else {
+                        Console.WriteLine("You can't leave this field empty");
+                        Console.WriteLine("Please try again.");
+                    }
+                }
 
+                while (true) {
+                    Console.WriteLine("Is the information correct? Y/N");
+                    ShowReservationInfo(partySize, tableNumber, reservationDate, reservationName, reservationID);
+                    string userConfirm = Console.ReadLine();
+                    if (userConfirm == "Y" || userConfirm == "y") {
+                        ReserveTable(tableNumber, reservationDate, reservationName, reservationID);
+                    } else {
+                        Console.WriteLine("Please enter the correct information.");
+                        MainReserve();
+                    }
+                }
+            } else {
+                return;
             }
         }
     }
