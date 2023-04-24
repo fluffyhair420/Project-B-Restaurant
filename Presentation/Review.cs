@@ -1,11 +1,9 @@
 static class Review
 {
-    //static private ReviewToJson reviewToJson = new();
-
-
     public static void Start()
     {
         while(true){
+        
 
         Console.WriteLine(@"
 1:  Write a review
@@ -20,10 +18,15 @@ static class Review
         {
             WriteReview();
         }
-        // else if (userInput is "2")
-        // {
-        //     ReadReview();
-        // }
+        else if (userInput is "2")
+        {
+            ReadReview();
+        }
+        else if (userInput is "4")
+        {
+            Environment.Exit(0);
+        }
+
         // else if (userInput is "3")
         // {
         //     RemoveReview();
@@ -33,35 +36,42 @@ static class Review
         //     Environment.Exit(0);
         //     // Redirect to main menu
         // }
-
         }
     }
 
     public static void WriteReview(){
 
-        // Normally a valid reservation code has to be entered before the user can write a review
+        // TODO    Add check if given ID belongs to a valid reservation
         Console.WriteLine("Enter your reservation code");
-        string reservationCode = Console.ReadLine();
+        string reservationID = Console.ReadLine();
+
+        // If there is already a review with the given ID
+        if (JsonLogic.CheckID(reservationID) == 1)
+        {
+            Console.WriteLine("There already exists a review for this reservation");
+            Start();
+        }
 
         Console.WriteLine("Write your review\n");
-        string userReview = Console.ReadLine();
+        string reviewText = Console.ReadLine();
 
         while(true){
             Console.WriteLine(@$"Do you want to post this review?
 
-{userReview}
+{reviewText}
 
 1: Post review
 2: Return to menu");
+
 
             string userInput = Console.ReadLine();
 
             if (userInput == "1")
             {
                 Console.WriteLine("Review posted!");
-                string userName = "testname";
-
-                //reviewToJson.Start();
+                string userName = "testusername"; // TODO take username from user account
+                WriteToJson.WriteJsonToFile(userName, reviewText, reservationID);
+                Start();
             }
             else if (userInput == "2")
             {
@@ -70,7 +80,14 @@ static class Review
         }
     }
 
-    // public static void ReadReview(){
+    public static void ReadReview()
+    {
+        string reviews = JsonLogic.LoadReviews();
+
+        Console.WriteLine(reviews);
+    }
+
+    
     //     Review reviewObj = new();
 
     //     Console.WriteLine("\n");
