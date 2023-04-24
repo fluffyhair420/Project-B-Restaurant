@@ -21,7 +21,7 @@ namespace Restaurant
                 Display("For information on dishes/drinks press 1 and then input the number assosiated with it.");
                 Display("To filter (for vegan/glutenfree/vegetarian options) press 9");
                 Display("input 8 to change the month for the menu");
-                Display("Press Q to exit the program");
+                Display("Press Q to go to main menu");
             }
 
             if (menuNumber == 1){

@@ -202,7 +202,8 @@ namespace Restaurant
             }
             //exit the program completly
             if (input.Key == ConsoleKey.Q){
-                Environment.Exit(0);
+                Console.Clear();
+                MainMenu.Main();
             }
 
             //allows the code to go back to the screen before this one.

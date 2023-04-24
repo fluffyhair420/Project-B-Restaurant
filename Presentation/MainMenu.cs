@@ -49,6 +49,8 @@ namespace Restaurant
                         break;
                     case 2:
                         wrongInput = false;
+                        Menu menu = new Menu();
+                        menu.Show();
                         break;
                     case 3:
                         Reserve reserve = new Reserve();
