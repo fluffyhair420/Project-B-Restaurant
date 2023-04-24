@@ -40,7 +40,7 @@ namespace Restaurant
 
         public static List<Dish> LoadDishesFromJson(string Month)
         {
-            using (StreamReader r = new StreamReader("Dishes.json"))
+            using (StreamReader r = new StreamReader(@"C:\Users\ikben\Documents\GitHub\Project-B-Restaurant\DataSources\Dishes.json"))
                 {
                     string json = r.ReadToEnd();
                     //List<Dish> dishes = JsonConvert.DeserializeObject<List<Dish>>(json);
