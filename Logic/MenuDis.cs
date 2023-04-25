@@ -25,7 +25,6 @@ namespace Restaurant
                 Display("input 8 to change the month for the menu");
                 Display("Press Q to go to main menu");
             }
-
             if (menuNumber == 1)
             {
                 //vegan menu
@@ -44,7 +43,6 @@ namespace Restaurant
                 Display(menu);
                 Display("For information on dishes/drinks press 1 and then input the number assosiated with it.");
             }
-
             if (menuNumber == 2)
             {
                 //gluten free menu
@@ -63,7 +61,6 @@ namespace Restaurant
                 Display(menu);
                 Display("For information on dishes/drinks press 1 and then input the number assosiated with it.");
             }
-
             if (menuNumber == 3)
             {
                 //vegetarion menu
@@ -82,13 +79,11 @@ namespace Restaurant
                 Display(menu);
                 Display("For information on dishes/drinks press 1 and then input the number assosiated with it.");
             }
-
-
         }
-
         public static void changeMonth(string month)
         {
             List<string> months = new() { "January", "February" };
+
             if (!(months.Contains(month)))
             {
                 do
@@ -96,13 +91,14 @@ namespace Restaurant
                     Console.WriteLine("this isnt a valid input, please input a month");
                     month = Console.ReadLine();
                 }
+
                 while (!(months.Contains(month)));
+
             }
             else
             {
                 Month = month;
             }
-
         }
     }
 }

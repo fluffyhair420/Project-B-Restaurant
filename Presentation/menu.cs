@@ -9,6 +9,7 @@ namespace Restaurant
     public class Menu : Screen
     {
         private readonly Screen _option;
+
         public string Month = "January";
         public menuDis menushow = new menuDis();
         public Menu()
@@ -22,7 +23,6 @@ namespace Restaurant
             Log("Menu");
             ConsoleKeyInfo input;
             ConsoleKeyInfo input_;
-
             do
             {
                 Console.Clear();
@@ -65,14 +65,12 @@ namespace Restaurant
                     menuDis.changeMonth(month);
                     input_ = Console.ReadKey();
                 }
-                while (input_.Key != ConsoleKey.Escape);
-
+                while (input_.Key != ConsoleKey.Escape);]
                 if (input_.Key == ConsoleKey.Escape)
                 {
                     var Menu = new Menu();
                     Menu.Show();
                 }
-
             }
 
             if (input.Key == ConsoleKey.D9)
@@ -96,7 +94,6 @@ namespace Restaurant
                         input = Console.ReadKey(true);
                     }
                     while (input.Key != ConsoleKey.D1); //input.Key != ConsoleKey.Escape &&
-
                     if (input.Key == ConsoleKey.D1)
                     {
                         int userInput;
@@ -126,7 +123,6 @@ namespace Restaurant
                         Console.Clear();
                         menushow.menuDisplay(2);
                         input = Console.ReadKey(true);
-
                     }
                     while (input.Key != ConsoleKey.D1);
 
@@ -155,7 +151,6 @@ namespace Restaurant
                         dishDetails(userInput);
                     }
                 }
-
                 //vegatarian menu
                 if (input_.Key == ConsoleKey.D3)
                 {
@@ -164,7 +159,6 @@ namespace Restaurant
                         Console.Clear();
                         menushow.menuDisplay(3);
                         input = Console.ReadKey(true);
-
                     }
                     while (input.Key != ConsoleKey.D1);
 
@@ -253,13 +247,10 @@ namespace Restaurant
                         Console.WriteLine("this dish has meat in it");
                     }
                 }
-
-
                 Console.WriteLine("press escape to go back to the main menu");
                 input = Console.ReadKey();
             }
             while (input.Key != ConsoleKey.Escape);
-
             if (input.Key == ConsoleKey.Escape)
             {
                 var Menu = new Menu();
