@@ -48,7 +48,7 @@ namespace Restaurant
 
             // Password
             Console.WriteLine("\nPassword: ");
-            string userPassWord = ""; 
+            string userPassWord = "";
             bool passwordValid = false;
             while (passwordValid == false)
             {
@@ -57,7 +57,7 @@ namespace Restaurant
 - 1 capital letter
 - 1 number
 ");
-                userPassWord = Console.ReadLine();  
+                userPassWord = Console.ReadLine();
                 passwordValid = UserCheck.PasswordCheck(userPassWord);
             }
 
@@ -97,7 +97,7 @@ typ ""Y"" or ""N"": ");
                                 UserLogin userLogin = new UserLogin();
                                 userLogin.Login();
                                 break;
-                            
+
                             case "N":
                                 wrongInput = false;
                                 Console.WriteLine(@"
