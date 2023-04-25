@@ -1,8 +1,10 @@
 namespace Restaurant
 {
-    class MainMenu{
+    class MainMenu
+    {
 
-        public static void Main(){
+        public static void Main()
+        {
 
             Console.WriteLine(@"
 === Welcome ===
@@ -14,7 +16,8 @@ namespace Restaurant
 ");
 
             bool wrongInput = true;
-            while (wrongInput){
+            while (wrongInput)
+            {
                 int userChoice = Convert.ToInt32(Console.ReadLine());
                 switch (userChoice)
                 {
@@ -63,8 +66,8 @@ namespace Restaurant
                         wrongInput = false;
                         break;
                     default:
-                       Console.WriteLine("Invalid input. Please enter a number between and including 1-5.\n");
-                       break; 
+                        Console.WriteLine("Invalid input. Please enter a number between and including 1-5.\n");
+                        break;
                 }
 
                 // if (userChoice == "1"){
