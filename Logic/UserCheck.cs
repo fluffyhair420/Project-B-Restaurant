@@ -34,7 +34,7 @@ namespace Restaurant
                 Console.WriteLine("Invalid email address.");
                 return false;
             }
-        }       
+        }
 
         public static bool PasswordCheck(string userpassword)
         {
@@ -70,7 +70,7 @@ namespace Restaurant
                 return false;
             }
         }
-        
-         
+
+
     }
 }
