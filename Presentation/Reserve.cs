@@ -18,63 +18,6 @@ namespace Restaurant {
         int reservationID = GenReservationID();
 
         /*
-        * Reserve.LoadJson() method loads reads the JSON file
-        * Sets the JSON data in a list of Table objects
-        * Returns a list of Table objects for use later
-        * ===
-        * Made the method public so it will be accessible later on
-        */
-        public List<Table> LoadJson() {
-            List<Table> tables = new List<Table>(); // Create a new list of Table objects
-            try {
-                using (StreamReader reader = new StreamReader(jsonFile)) {
-                    string json = reader.ReadToEnd();
-                    tables = JsonConvert.DeserializeObject<List<Table>>(json);
-                }
-            } catch (FileNotFoundException e) {
-                Console.WriteLine($"ERROR: File not found. Please check Reserve.LoadJson() method. {e.Message}.");
-            } catch (Exception e) {
-                Console.WriteLine($"ERROR: Something went wrong. Please check Reserve.LoadJson() method. {e.Message}.");
-            }
-            return tables;
-        }
-
-        /*
-        * ReserveTable() method takes in:
-        * The tableNumber: is the number of the table that the user wants to reserve
-        * The reservationName: is the name that the user wants the table to be reserved for
-        * The reservationDate: is the date that the user wants to reserve the table for
-        * === === === ===
-        * Made the method private, should not be used outside the Reserve class
-        */
-        private void ReserveTable(int tableNumber, string reservationName, string reservationDate, int reservationID) {
-            try {
-                List<Table> tables = LoadJson();
-
-                Table table = tables.FirstOrDefault(t => t.TableNumber == tableNumber);
-
-                Reservation newReservation = new Reservation {
-                    Name = reservationName,
-                    Date = reservationDate,
-                    ID = reservationID
-                };
-
-                table.Reservation.Add(newReservation); // add the new reservation to the Table list
-                table.Reservation = table.Reservation.OrderBy(r => r.Date).ToList(); // sort the Table list by earliest date to latest date
-
-                string json = JsonConvert.SerializeObject(tables, Formatting.Indented);
-                using (StreamWriter writer = new StreamWriter(jsonFile)) {
-                    writer.Write(json);
-                }
-
-                Console.WriteLine($"Table {tableNumber} has been reserved for {reservationName} on {reservationDate}.");
-            } catch (Exception e) {
-                Console.WriteLine($"ERROR: Something went wrong. Please check Reserve.ReserveTable() method. {e.Message}.");
-            }
-        }
-
-
-        /*
         * 
         TODO: Compare user input date with already existing date in the JSON
         */
