@@ -65,7 +65,7 @@ namespace Restaurant
                     menuDis.changeMonth(month);
                     input_ = Console.ReadKey();
                 }
-                while (input_.Key != ConsoleKey.Escape);]
+                while (input_.Key != ConsoleKey.Escape);
                 if (input_.Key == ConsoleKey.Escape)
                 {
                     var Menu = new Menu();
