@@ -1,4 +1,15 @@
-﻿// 
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-Console.WriteLine("Going from main to review menu\n");
-Review.Start();
+namespace Restaurant
+{
+    public class Program
+    {
+        static void Main()
+        {
+
+        }
+    }
+}
