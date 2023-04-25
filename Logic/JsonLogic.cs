@@ -65,6 +65,19 @@ Review:
 
     }
 
+    public static void RemoveReview(int reviewIndex)
+    {
+        // Get json contents
+        JArray JArr = ReadFromJson.ReadJsonFromFile();
+
+        // Remove review at given index (Reviews start at 1 in presentation so 1 is added to index)
+        JArr.RemoveAt(reviewIndex+1);
+
+        WriteToJson.WriteArrayToFile(JArr);
+
+
+    }
+
 
     
 //     // public void ConvertToJson(string userName, string reviewText, string reservationID)

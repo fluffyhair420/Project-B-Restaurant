@@ -22,6 +22,10 @@ static class Review
         {
             ReadReview();
         }
+        else if (userInput is "3")
+        {
+            RemoveReview();
+        }
         else if (userInput is "4")
         {
             Environment.Exit(0);
@@ -38,6 +42,14 @@ static class Review
         // }
         }
     }
+
+    public static void ReadReview()
+    {
+        string reviews = JsonLogic.LoadReviews();
+
+        Console.WriteLine(reviews);
+    }
+
 
     public static void WriteReview(){
 
@@ -70,7 +82,7 @@ static class Review
             {
                 Console.WriteLine("Review posted!");
                 string userName = "testusername"; // TODO take username from user account
-                WriteToJson.WriteJsonToFile(userName, reviewText, reservationID);
+                WriteToJson.WriteReviewToFile( reservationID, userName, reviewText);
                 Start();
             }
             else if (userInput == "2")
@@ -80,12 +92,19 @@ static class Review
         }
     }
 
-    public static void ReadReview()
+    public static void RemoveReview()
     {
         string reviews = JsonLogic.LoadReviews();
 
         Console.WriteLine(reviews);
+
+        //while userInput != valid review number / Q
+        Console.WriteLine("Enter the number of the review to delete");
+
+        // TODOTODOTODOTODOTODOTODOTODOTODO
+
     }
+
 
     
     //     Review reviewObj = new();
