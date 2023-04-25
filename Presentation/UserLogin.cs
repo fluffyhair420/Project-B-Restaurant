@@ -7,7 +7,9 @@ namespace Restaurant
         static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
         string json = File.ReadAllText(path);
 
-
+        // TO DO
+        // Save which user is currently logged in
+        // If JSON file is empty
         public void Login()
         {
             // Email

@@ -60,7 +60,7 @@ namespace Restaurant
                         reserve.MainReserve();
                         break;
                     case 4:
-                        wrongInput = false;
+                        Review.Start();
                         break;
                     case 5:
                         wrongInput = false;
