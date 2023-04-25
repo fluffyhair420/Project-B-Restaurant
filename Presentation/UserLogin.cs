@@ -6,7 +6,7 @@ namespace Restaurant
     {
         static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
         string json = File.ReadAllText(path);
-        
+
 
         public void Login()
         {
@@ -63,7 +63,7 @@ Typ ""Y"" or ""N"": ");
                             UserRegister userRegister = new UserRegister();
                             userRegister.Register();
                             break;
-                        
+
                         case "N":
                             wrongInput = false;
                             Console.WriteLine(@"
@@ -76,26 +76,26 @@ free to register.");
                             Console.Write("\nInvalid input. Please typ \"Y\" or \"N\": ");
                             break;
                     }
-                    
-//                     if (userInput == "Y")
-//                     {
-//                         wrongInput = false;
-//                         UserRegister userRegister = new UserRegister();
-//                         userRegister.Register();
-//                     }
-//                     else if (userInput == "N")
-//                     {
-//                         wrongInput = false;
-//                         Console.WriteLine(@"
-// May you decide to continue with an account later on, please feel
-// free to register.");
-//                         MainMenu.Main();
-//                     }
 
-//                     else
-//                     {
-//                         Console.Write("\nInvalid input. Please typ \"Y\" or \"N\": ");
-//                     }
+                    //                     if (userInput == "Y")
+                    //                     {
+                    //                         wrongInput = false;
+                    //                         UserRegister userRegister = new UserRegister();
+                    //                         userRegister.Register();
+                    //                     }
+                    //                     else if (userInput == "N")
+                    //                     {
+                    //                         wrongInput = false;
+                    //                         Console.WriteLine(@"
+                    // May you decide to continue with an account later on, please feel
+                    // free to register.");
+                    //                         MainMenu.Main();
+                    //                     }
+
+                    //                     else
+                    //                     {
+                    //                         Console.Write("\nInvalid input. Please typ \"Y\" or \"N\": ");
+                    //                     }
                 }
             }
         }

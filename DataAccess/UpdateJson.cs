@@ -5,7 +5,8 @@ namespace Restaurant
     class UpdateJson
     {
 
-        public UpdateJson(){
+        public UpdateJson()
+        {
 
         }
         public void writeToJson(string firstName, string lastName, string userName, string phoneNumber,
@@ -22,9 +23,17 @@ namespace Restaurant
 
 
                 // Create a list of user information
-                UserInfo newUser = new UserInfo { UserID = users.Count > 0 ? users[users.Count - 1].UserID + 1 : 1,
-                UserName = userName, PassWord = passWord, FirstName = firstName, LastName = lastName,
-                Email = email, PhoneNumber = phoneNumber, Address = address};
+                UserInfo newUser = new UserInfo
+                {
+                    UserID = users.Count > 0 ? users[users.Count - 1].UserID + 1 : 1,
+                    UserName = userName,
+                    PassWord = passWord,
+                    FirstName = firstName,
+                    LastName = lastName,
+                    Email = email,
+                    PhoneNumber = phoneNumber,
+                    Address = address
+                };
                 users.Add(newUser);
 
 
@@ -34,9 +43,9 @@ namespace Restaurant
                 // Write the JSON to a file
                 File.WriteAllText(path, json);
             }
-            
+
             // if json file is empty, create first account with ID number 1
-            else 
+            else
             {
                 // Create a list of user information
                 List<UserInfo> firstUser = new List<UserInfo>

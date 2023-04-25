@@ -9,7 +9,8 @@ namespace Restaurant
     public class Menu : Screen
     {
         private readonly Screen _option;
-        public string Month = "January"; 
+
+        public string Month = "January";
         public menuDis menushow = new menuDis();
         public Menu()
         {
@@ -22,7 +23,6 @@ namespace Restaurant
             Log("Menu");
             ConsoleKeyInfo input;
             ConsoleKeyInfo input_;
-            
             do
             {
                 Console.Clear();
@@ -48,14 +48,15 @@ namespace Restaurant
                     {
                         Console.WriteLine("Invalid input. Please enter a valid number.");
                     }
-                } 
+                }
                 while (!validInput);
                 //takes the given input and gives it to the dishDetails methode
-                dishDetails(userInput);   
+                dishDetails(userInput);
             }
 
             //IT WORKSSSSSSSS
-            if(input.Key == ConsoleKey.D8){
+            if (input.Key == ConsoleKey.D8)
+            {
                 Console.Clear();
                 Console.WriteLine("input the month");
                 string month = Console.ReadLine();
@@ -64,14 +65,12 @@ namespace Restaurant
                     menuDis.changeMonth(month);
                     input_ = Console.ReadKey();
                 }
-                while (input_.Key != ConsoleKey.Escape);    
-
+                while (input_.Key != ConsoleKey.Escape);]
                 if (input_.Key == ConsoleKey.Escape)
                 {
                     var Menu = new Menu();
                     Menu.Show();
-                }            
-                
+                }
             }
 
             if (input.Key == ConsoleKey.D9)
@@ -94,8 +93,7 @@ namespace Restaurant
                         menushow.menuDisplay(1);
                         input = Console.ReadKey(true);
                     }
-                    while ( input.Key != ConsoleKey.D1); //input.Key != ConsoleKey.Escape &&
-
+                    while (input.Key != ConsoleKey.D1); //input.Key != ConsoleKey.Escape &&
                     if (input.Key == ConsoleKey.D1)
                     {
                         int userInput;
@@ -111,9 +109,9 @@ namespace Restaurant
                             {
                                 Console.WriteLine("Invalid input. Please enter a valid number.");
                             }
-                        } 
+                        }
                         while (!validInput);
-                        dishDetails(userInput);    
+                        dishDetails(userInput);
                     }
                 }
 
@@ -125,7 +123,6 @@ namespace Restaurant
                         Console.Clear();
                         menushow.menuDisplay(2);
                         input = Console.ReadKey(true);
-                        
                     }
                     while (input.Key != ConsoleKey.D1);
 
@@ -147,14 +144,13 @@ namespace Restaurant
                             {
                                 Console.WriteLine("Invalid input. Please enter a valid number.");
                             }
-                        } 
+                        }
                         while (!validInput);
-                        
-                        // Display the details of the selected dish
-                        dishDetails(userInput);    
-                    }                
-                }
 
+                        // Display the details of the selected dish
+                        dishDetails(userInput);
+                    }
+                }
                 //vegatarian menu
                 if (input_.Key == ConsoleKey.D3)
                 {
@@ -163,7 +159,6 @@ namespace Restaurant
                         Console.Clear();
                         menushow.menuDisplay(3);
                         input = Console.ReadKey(true);
-                    
                     }
                     while (input.Key != ConsoleKey.D1);
 
@@ -186,11 +181,11 @@ namespace Restaurant
                             {
                                 Console.WriteLine("Invalid input. Please enter a valid number.");
                             }
-                        } 
+                        }
                         while (!validInput);
-                        
+
                         // Display the details of the selected dish
-                        dishDetails(userInput);    
+                        dishDetails(userInput);
                     }
                 }
 
@@ -201,8 +196,10 @@ namespace Restaurant
                 }
             }
             //exit the program completly
-            if (input.Key == ConsoleKey.Q){
-                Environment.Exit(0);
+            if (input.Key == ConsoleKey.Q)
+            {
+                Console.Clear();
+                MainMenu.Main();
             }
 
             //allows the code to go back to the screen before this one.
@@ -213,9 +210,11 @@ namespace Restaurant
         }
 
         //after using DishByID to get the dish, this methode prints out the details of the dish.
-        public void dishDetails(int Id){
+        public void dishDetails(int Id)
+        {
             ConsoleKeyInfo input;
-            do{
+            do
+            {
                 Dish dish = dishByID(Id);
                 if (dish == null)
                 {
@@ -225,42 +224,49 @@ namespace Restaurant
                         int ID = Convert.ToInt32(Console.ReadLine());
                         dish = dishByID(ID);
                     }
-                    while(dish == null);
+                    while (dish == null);
                 }
-                if (dish != null) {
+                if (dish != null)
+                {
                     Console.WriteLine($"{dish.Name}");
                     Console.WriteLine($"\n{dish.Description}");
-                    if (dish.isVegan){
-                        Console.WriteLine($"this dish is Vegan");}
-                    if (dish.isGlutenFree){
+                    if (dish.isVegan)
+                    {
+                        Console.WriteLine($"this dish is Vegan");
+                    }
+                    if (dish.isGlutenFree)
+                    {
                         Console.WriteLine($"This dish is gluten free");
                     }
-                    if (dish.hasFish){
+                    if (dish.hasFish)
+                    {
                         Console.WriteLine("This dish has fish in it");
                     }
-                    if (dish.hasMeat){
+                    if (dish.hasMeat)
+                    {
                         Console.WriteLine("this dish has meat in it");
                     }
                 }
-              
-                
                 Console.WriteLine("press escape to go back to the main menu");
                 input = Console.ReadKey();
             }
             while (input.Key != ConsoleKey.Escape);
-
-            if (input.Key == ConsoleKey.Escape){
+            if (input.Key == ConsoleKey.Escape)
+            {
                 var Menu = new Menu();
                 Menu.Show();
             }
         }
 
         // with the user input (id) this methode can use that to get the whole dish
-        public Dish dishByID(int Id){
-            List<Dish> dishes = Dish.LoadDishesFromJson(menuDis.Month); 
-            foreach (Dish dish in dishes){
-            if (dish.ID == Id){
-                return dish;
+        public Dish dishByID(int Id)
+        {
+            List<Dish> dishes = Dish.LoadDishesFromJson(menuDis.Month);
+            foreach (Dish dish in dishes)
+            {
+                if (dish.ID == Id)
+                {
+                    return dish;
                 }
             }
             return null;
