@@ -77,77 +77,125 @@ namespace Restaurant
 
             // Check if Email already exists in JSON file
             dynamic data = JsonConvert.DeserializeObject(json);
-            foreach (var item in data)
+            if (data != null)
             {
-                // Email already exists
-                if (item.Email == Email)
+                foreach (var item in data)
                 {
-                    Console.Write(@"
-An account using this email address already exists.
-Do you want to login instead?
-typ ""Y"" or ""N"": ");
-                    bool wrongInput = true;
-                    while (wrongInput)
+                    // Email already exists
+                    if (item.Email == Email)
                     {
-                        string userInput = Console.ReadLine().ToUpper();
-                        switch (userInput)
+                        Console.Write(@"
+    An account using this email address already exists.
+    Do you want to login instead?
+    typ ""Y"" or ""N"": ");
+                        bool wrongInput = true;
+                        while (wrongInput)
                         {
-                            case "Y":
-                                wrongInput = false;
-                                UserLogin userLogin = new UserLogin();
-                                userLogin.Login();
-                                break;
+                            string userInput = Console.ReadLine().ToUpper();
+                            switch (userInput)
+                            {
+                                case "Y":
+                                    wrongInput = false;
+                                    UserLogin userLogin = new UserLogin();
+                                    userLogin.Login();
+                                    break;
 
-                            case "N":
-                                wrongInput = false;
-                                Console.WriteLine(@"
-May you decide to continue with an account later on, please register with
-a different email address.");
-                                //MainMenu.Main();
-                                break;
+                                case "N":
+                                    wrongInput = false;
+                                    Console.WriteLine(@"
+    May you decide to continue with an account later on, please register with
+    a different email address.");
+                                    //MainMenu.Main();
+                                    break;
 
-                            default:
-                                Console.Write("\nInvalid input. Please typ \"Y\" or \"N\": ");
-                                break;
+                                default:
+                                    Console.Write("\nInvalid input. Please typ \"Y\" or \"N\": ");
+                                    break;
+                            }
                         }
                     }
-                }
-
-                // Email doesn't yet exist
-                else
-                {
-                    Console.Write("First name: ");
-                    base.FirstName = Console.ReadLine();
-                    Console.Write("Last name: ");
-                    base.LastName = Console.ReadLine();
-                    Console.Write("Username: ");
-                    base.UserName = Console.ReadLine();
-                    Console.Write("Phone number:");
-                    base.PhoneNumber = Console.ReadLine();
-
-                    Console.Write("City: ");
-                    string userAddressCity = Console.ReadLine();
-                    Console.Write("Street: ");
-                    string userAddressStreet = Console.ReadLine();
-                    Console.Write("Housenumber: ");
-                    string userAddressHousenumber = Console.ReadLine();
-                    Console.Write("Zipcode: ");
-                    string userAddressZipcode = Console.ReadLine();
-
-
-                    // create List object for address
-                    base.Address = new List<object>()
+                    // Email doesn't yet exist
+                    else
                     {
-                        new {City = userAddressCity, Street = userAddressStreet,
-                            HouseNumber = userAddressHousenumber, ZipCode = userAddressZipcode}
-                    };
+                        Console.Write("First name: ");
+                        base.FirstName = Console.ReadLine();
+                        Console.Write("Last name: ");
+                        base.LastName = Console.ReadLine();
+                        Console.Write("Username: ");
+                        base.UserName = Console.ReadLine();
+                        Console.Write("Phone number:");
+                        base.PhoneNumber = Console.ReadLine();
 
-                    // Write all user data to JSON file
-                    UpdateJson newUser = new UpdateJson();
-                    newUser.writeToJson(FirstName, LastName, UserName, PhoneNumber, PassWord, Email, Address, path);
+                        Console.Write("City: ");
+                        string userAddressCity = Console.ReadLine();
+                        Console.Write("Street: ");
+                        string userAddressStreet = Console.ReadLine();
+                        Console.Write("Housenumber: ");
+                        string userAddressHousenumber = Console.ReadLine();
+                        Console.Write("Zipcode: ");
+                        string userAddressZipcode = Console.ReadLine();
+
+
+                        // create List object for address
+                        List<Address> address = new List<Address>()
+                        {
+                            new Address
+                            {
+                                City = userAddressCity,
+                                Street = userAddressStreet,
+                                HouseNumber = userAddressHousenumber,
+                                ZipCode = userAddressZipcode
+                            }
+                        };
+
+                        // Write all user data to JSON file
+                        UpdateJson newUser = new UpdateJson();
+                        newUser.writeToJson(FirstName, LastName, UserName, PhoneNumber, PassWord, Email, address, path);
+                        break;
+                    }
                 }
-                break;
             }
+            
+
+            // empty json file
+            else
+            {
+                Console.Write("First name: ");
+                base.FirstName = Console.ReadLine();
+                Console.Write("Last name: ");
+                base.LastName = Console.ReadLine();
+                Console.Write("Username: ");
+                base.UserName = Console.ReadLine();
+                Console.Write("Phone number:");
+                base.PhoneNumber = Console.ReadLine();
+
+                Console.Write("City: ");
+                string userAddressCity = Console.ReadLine();
+                Console.Write("Street: ");
+                string userAddressStreet = Console.ReadLine();
+                Console.Write("Housenumber: ");
+                string userAddressHousenumber = Console.ReadLine();
+                Console.Write("Zipcode: ");
+                string userAddressZipcode = Console.ReadLine();
+
+
+                // create List object for address
+                List<Address> address = new List<Address>()
+                {
+                    new Address
+                    {
+                        City = userAddressCity,
+                        Street = userAddressStreet,
+                        HouseNumber = userAddressHousenumber,
+                        ZipCode = userAddressZipcode
+                    }
+                };
+                // Write all user data to JSON file
+                UpdateJson newUser = new UpdateJson();
+                newUser.writeToJson(FirstName, LastName, UserName, PhoneNumber, PassWord, Email, address, path);
+            }
+        UserLogin.userLoggedIn = true;
+        MainMenu.Main();
         }
     }
 }

@@ -1,0 +1,70 @@
+[
+  {
+    "UserID": 1,
+    "UserName": "KimL",
+    "PassWord": "MyPass123",
+    "FirstName": "Kim",
+    "LastName": "Leeters",
+    "Email": "kimleeters@gmail.com",
+    "PhoneNumber": "0622868023",
+    "Address": [
+      {
+        "City": "Berkel",
+        "Street": "Romenpad",
+        "HouseNumber": "133",
+        "ZipCode": "2652BZ"
+      }
+    ]
+  },
+  {
+    "UserID": 2,
+    "UserName": "KimL2",
+    "PassWord": "MyOtherPass123",
+    "FirstName": "Kim",
+    "LastName": "Leeters",
+    "Email": "kimleeters2@gmail.com",
+    "PhoneNumber": "0612345678",
+    "Address": [
+      {
+        "City": "Berkel en Rodenrijs",
+        "Street": "Romenpad",
+        "HouseNumber": "133",
+        "ZipCode": "2652BZ"
+      }
+    ]
+  },
+  {
+    "UserID": 3,
+    "UserName": "Uname",
+    "PassWord": "Examplepassword1",
+    "FirstName": "Fname",
+    "LastName": "Lname",
+    "Email": "example@email.com",
+    "PhoneNumber": "012345678",
+    "Address": [
+      {
+        "City": "Example City",
+        "Street": "Example Street",
+        "HouseNumber": "Example Housenumber",
+        "ZipCode": "Example Zipcode"
+      }
+    ]
+  },
+  {
+    "UserID": 4,
+    "UserName": "username",
+    "PassWord": "Password123",
+    "FirstName": "name",
+    "LastName": "lastname",
+    "Email": "email@email.com",
+    "PhoneNumber": "phonenumber",
+    "Address": [
+      {
+        "City": "city",
+        "Street": "street",
+        "HouseNumber": "housenumber",
+        "ZipCode": "zipcode"
+      }
+    ]
+  }
+]
