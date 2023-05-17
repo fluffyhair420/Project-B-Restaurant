@@ -10,7 +10,7 @@ namespace Restaurant
 
         }
         public void writeToJson(string firstName, string lastName, string userName, string phoneNumber,
-        string passWord, string email, List<object> address, string path)
+        string passWord, string email, List<Address> address, string path)
         {
             // check if json file is not empty
             if (File.Exists(path) && new FileInfo(path).Length > 0)
