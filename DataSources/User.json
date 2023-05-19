@@ -18,9 +18,9 @@
   },
   {
     "UserID": 2,
-    "UserName": "KimL2",
+    "UserName": "MyNewUsername",
     "PassWord": "MyOtherPass123",
-    "FirstName": "Kim",
+    "FirstName": "Kimmi",
     "LastName": "Leeters",
     "Email": "kimleeters2@gmail.com",
     "PhoneNumber": "0612345678",
@@ -64,6 +64,57 @@
         "Street": "street",
         "HouseNumber": "housenumber",
         "ZipCode": "zipcode"
+      }
+    ]
+  },
+  {
+    "UserID": 5,
+    "UserName": "Wowwie",
+    "PassWord": "SuperWow123",
+    "FirstName": "Wow",
+    "LastName": "Wie",
+    "Email": "wow@email.com",
+    "PhoneNumber": "0698765432",
+    "Address": [
+      {
+        "City": "WowCity",
+        "Street": "WowStreet",
+        "HouseNumber": "666",
+        "ZipCode": "1234AB"
+      }
+    ]
+  },
+  {
+    "UserID": 6,
+    "UserName": "myUserName",
+    "PassWord": "myPass123",
+    "FirstName": "myName",
+    "LastName": "myLastName",
+    "Email": "myemail@email.com",
+    "PhoneNumber": "0101234567",
+    "Address": [
+      {
+        "City": "myCity",
+        "Street": "myStreet",
+        "HouseNumber": "123",
+        "ZipCode": "1234AB"
+      }
+    ]
+  },
+  {
+    "UserID": 7,
+    "UserName": "emoboi",
+    "PassWord": "Lucypassword123",
+    "FirstName": "Lucy",
+    "LastName": "van DOngen",
+    "Email": "lucy@email.com",
+    "PhoneNumber": "0612345678",
+    "Address": [
+      {
+        "City": "de Lier",
+        "Street": "straatnaam",
+        "HouseNumber": "37",
+        "ZipCode": "1234AB"
       }
     ]
   }

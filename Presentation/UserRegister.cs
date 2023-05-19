@@ -1,19 +1,22 @@
 using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 
 
 namespace Restaurant
 {
     class UserRegister : UserInfo
     {
+        static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
+
         static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
         string json = File.ReadAllText(path);
 
         public void Register()
         {
             // Email
-            Console.WriteLine("=== Register ===");
-            Console.WriteLine("Email: ");
+            Console.WriteLine("\n=== Register ===");
+            Console.Write("Email: ");
             string userEmail = "";
             bool emailValid = false;
             while (emailValid == false)
@@ -105,7 +108,7 @@ namespace Restaurant
                                     Console.WriteLine(@"
     May you decide to continue with an account later on, please register with
     a different email address.");
-                                    //MainMenu.Main();
+                                    MainMenu.Main();
                                     break;
 
                                 default:
@@ -123,7 +126,7 @@ namespace Restaurant
                         base.LastName = Console.ReadLine();
                         Console.Write("Username: ");
                         base.UserName = Console.ReadLine();
-                        Console.Write("Phone number:");
+                        Console.Write("Phone number: ");
                         base.PhoneNumber = Console.ReadLine();
 
                         Console.Write("City: ");
@@ -148,14 +151,27 @@ namespace Restaurant
                             }
                         };
 
+                        // create object for the new user
+                        UserInfo newUser = new UserInfo
+                        {
+                            UserName = UserName,
+                            PassWord = PassWord,
+                            FirstName = FirstName,
+                            LastName = LastName,
+                            Email = Email,
+                            PhoneNumber = PhoneNumber,
+                            Address = address,
+                        };
+
                         // Write all user data to JSON file
-                        UpdateJson newUser = new UpdateJson();
-                        newUser.writeToJson(FirstName, LastName, UserName, PhoneNumber, PassWord, Email, address, path);
+                        UpdateJson newUserJson = new UpdateJson();
+                        newUserJson.writeToJson(FirstName, LastName, UserName, PhoneNumber, PassWord, Email, address, path);
+                        UpdateCurrentUser(newUser);
                         break;
                     }
                 }
             }
-            
+
 
             // empty json file
             else
@@ -166,7 +182,7 @@ namespace Restaurant
                 base.LastName = Console.ReadLine();
                 Console.Write("Username: ");
                 base.UserName = Console.ReadLine();
-                Console.Write("Phone number:");
+                Console.Write("Phone number: ");
                 base.PhoneNumber = Console.ReadLine();
 
                 Console.Write("City: ");
@@ -190,12 +206,47 @@ namespace Restaurant
                         ZipCode = userAddressZipcode
                     }
                 };
+
+                UserInfo newUser = new UserInfo
+                {
+                    UserName = UserName,
+                    PassWord = PassWord,
+                    FirstName = FirstName,
+                    LastName = LastName,
+                    Email = Email,
+                    PhoneNumber = PhoneNumber,
+                    Address = address,
+                };
+
                 // Write all user data to JSON file
-                UpdateJson newUser = new UpdateJson();
-                newUser.writeToJson(FirstName, LastName, UserName, PhoneNumber, PassWord, Email, address, path);
+                UpdateJson newUserJson = new UpdateJson();
+                newUserJson.writeToJson(FirstName, LastName, UserName, PhoneNumber, PassWord, Email, address, path);
+                UpdateCurrentUser(newUser);
             }
+        
+
         UserLogin.userLoggedIn = true;
         MainMenu.Main();
+        }
+
+        static void UpdateCurrentUser(UserInfo user)
+        {
+            // Update the CurrentUser.json file with the user's information
+            CurrentUserInfo currentUser = new CurrentUserInfo
+            {
+                // UserID = user.UserID,
+                UserName = user.UserName,
+                PassWord = user.PassWord,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address
+            };
+
+            string currentJson = JsonConvert.SerializeObject(currentUser, Formatting.Indented);
+
+            File.WriteAllText(currentUserPath, currentJson);
         }
     }
 }

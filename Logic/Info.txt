@@ -6,4 +6,7 @@ The Logic.
 
 For grouping purposes we’re going to connect this with the data layer.
 So, each section of the data will have its own place in this layer.
+
+
+
 No WriteLines or ReadLines are going to be in here!​

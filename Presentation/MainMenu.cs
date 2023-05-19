@@ -9,7 +9,6 @@ namespace Restaurant
 
         public static void Main()
         {
-
             Console.WriteLine(@"
 === Welcome ===
 1. My Account

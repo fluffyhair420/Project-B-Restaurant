@@ -17,11 +17,6 @@ namespace Restaurant
             
         }
 
-        // public static void SetUserLoggedIn(bool value)
-        // {
-        //     userLoggedIn = value;
-        // }
-
         // TO DO
         // Save which user is currently logged in
         // If JSON file is empty
@@ -34,6 +29,7 @@ namespace Restaurant
             }
             else
             {
+                Console.WriteLine("\n=== Login ===");
                 // Email
                 Console.Write("Email: ");
                 string userEmail = Console.ReadLine();
