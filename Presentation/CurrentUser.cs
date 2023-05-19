@@ -70,28 +70,28 @@ Zipcode: {ZipCode}");
             }
         }
 
-        public void ChangeInfo()
-        {
-            var olddata = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
-            string userEmailToUpdate = data.Email;
-            var userToUpdate = olddata.Find(user => user.Email == userEmailToUpdate);
+        // public void ChangeInfo()
+        // {
+        //     var olddata = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
+        //     string userEmailToUpdate = data.Email;
+        //     var userToUpdate = olddata.Find(user => user.Email == userEmailToUpdate);
 
-            if (userToUpdate != null)
-            {
-                Console.WriteLine("Current value: " + data.UserID);
-                Console.WriteLine("Enter a new value: ");
-                data.UserID = userToUpdate.UserID;
-                Console.WriteLine("New value: " + data.UserID);
+        //     if (userToUpdate != null)
+        //     {
+        //         Console.WriteLine("Current value: " + data.UserID);
+        //         Console.WriteLine("Enter a new value: ");
+        //         data.UserID = userToUpdate.UserID;
+        //         Console.WriteLine("New value: " + data.UserID);
 
-                string updatedJsonContents = JsonConvert.SerializeObject(data, Formatting.Indented);
-                File.WriteAllText(currentUserPath, updatedJsonContents);
-            }
-        }
+        //         string updatedJsonContents = JsonConvert.SerializeObject(data, Formatting.Indented);
+        //         File.WriteAllText(currentUserPath, updatedJsonContents);
+        //     }
+        // }
 
         public void PracticeJson()
         {
             // WORKS: updates information in User.json
-            // Next step > implement it correctly (let user decide what to update and put in their own values)
+            // Next step > also update in CurrentUser.json
             var olddata = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
             string userEmailToUpdate = data.Email;
             var userToUpdate = olddata.Find(user => user.Email == userEmailToUpdate);
@@ -166,13 +166,13 @@ Zipcode: {ZipCode}");
                             Info();
                             break;
                     }
+                    // Step 4: Write the modified list back to the JSON file
+                    string updatedJsonContents = JsonConvert.SerializeObject(olddata, Formatting.Indented);
+                    File.WriteAllText(userPath, updatedJsonContents);
+
+                    Console.WriteLine("User updated successfully.");
                 }
 
-                // Step 4: Write the modified list back to the JSON file
-                string updatedJsonContents = JsonConvert.SerializeObject(olddata, Formatting.Indented);
-                File.WriteAllText(userPath, updatedJsonContents);
-
-                Console.WriteLine("User updated successfully.");
             }    
             else
             {

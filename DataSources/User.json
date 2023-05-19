@@ -18,18 +18,18 @@
   },
   {
     "UserID": 2,
-    "UserName": "username",
+    "UserName": "newUserName",
     "PassWord": "Password123",
     "FirstName": "name",
     "LastName": "lastname",
-    "Email": "email@email.com",
+    "Email": "newemail@email.com",
     "PhoneNumber": "phonenumber",
     "Address": [
       {
         "City": "city",
         "Street": "street",
         "HouseNumber": "housenumber",
-        "ZipCode": "zipcode"
+        "ZipCode": "1234AB"
       }
     ]
   },
