@@ -8,9 +8,9 @@ namespace Restaurant
     class UserRegister : UserInfo
     {
         static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
-
+        static string currentUserJson = File.ReadAllText(currentUserPath);
         static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
-        string json = File.ReadAllText(path);
+        static string json = File.ReadAllText(path);
 
         public void Register()
         {
@@ -231,10 +231,11 @@ namespace Restaurant
 
         static void UpdateCurrentUser(UserInfo user)
         {
+
             // Update the CurrentUser.json file with the user's information
             CurrentUserInfo currentUser = new CurrentUserInfo
             {
-                // UserID = user.UserID,
+                UserID = user.UserID,
                 UserName = user.UserName,
                 PassWord = user.PassWord,
                 FirstName = user.FirstName,
@@ -245,8 +246,8 @@ namespace Restaurant
             };
 
             string currentJson = JsonConvert.SerializeObject(currentUser, Formatting.Indented);
-
             File.WriteAllText(currentUserPath, currentJson);
+
         }
     }
 }

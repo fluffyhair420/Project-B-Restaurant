@@ -1,40 +1,6 @@
 [
   {
     "UserID": 1,
-    "UserName": "KimL",
-    "PassWord": "MyPass123",
-    "FirstName": "Kim",
-    "LastName": "Leeters",
-    "Email": "kimleeters@gmail.com",
-    "PhoneNumber": "0622868023",
-    "Address": [
-      {
-        "City": "Berkel",
-        "Street": "Romenpad",
-        "HouseNumber": "133",
-        "ZipCode": "2652BZ"
-      }
-    ]
-  },
-  {
-    "UserID": 2,
-    "UserName": "MyNewUsername",
-    "PassWord": "MyOtherPass123",
-    "FirstName": "Kimmi",
-    "LastName": "Leeters",
-    "Email": "kimleeters2@gmail.com",
-    "PhoneNumber": "0612345678",
-    "Address": [
-      {
-        "City": "Berkel en Rodenrijs",
-        "Street": "Romenpad",
-        "HouseNumber": "133",
-        "ZipCode": "2652BZ"
-      }
-    ]
-  },
-  {
-    "UserID": 3,
     "UserName": "Uname",
     "PassWord": "Examplepassword1",
     "FirstName": "Fname",
@@ -51,7 +17,7 @@
     ]
   },
   {
-    "UserID": 4,
+    "UserID": 2,
     "UserName": "username",
     "PassWord": "Password123",
     "FirstName": "name",
@@ -68,7 +34,7 @@
     ]
   },
   {
-    "UserID": 5,
+    "UserID": 3,
     "UserName": "Wowwie",
     "PassWord": "SuperWow123",
     "FirstName": "Wow",
@@ -85,7 +51,7 @@
     ]
   },
   {
-    "UserID": 6,
+    "UserID": 4,
     "UserName": "myUserName",
     "PassWord": "myPass123",
     "FirstName": "myName",
@@ -97,23 +63,6 @@
         "City": "myCity",
         "Street": "myStreet",
         "HouseNumber": "123",
-        "ZipCode": "1234AB"
-      }
-    ]
-  },
-  {
-    "UserID": 7,
-    "UserName": "emoboi",
-    "PassWord": "Lucypassword123",
-    "FirstName": "Lucy",
-    "LastName": "van DOngen",
-    "Email": "lucy@email.com",
-    "PhoneNumber": "0612345678",
-    "Address": [
-      {
-        "City": "de Lier",
-        "Street": "straatnaam",
-        "HouseNumber": "37",
         "ZipCode": "1234AB"
       }
     ]

@@ -7,16 +7,27 @@ namespace Restaurant
         private string Street;
         private string HouseNumber;
         private string ZipCode;
+
         // path for json file that stores all user's information
         static string userPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
-        string userJson = File.ReadAllText(userPath);
+        static string userJson = File.ReadAllText(userPath);
         // path for currently logged in user
+        dynamic allData = JsonConvert.DeserializeObject(userJson);
         static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
         static string currentUserJson = File.ReadAllText(currentUserPath);
         dynamic data = JsonConvert.DeserializeObject(currentUserJson);
+
+
+        //
+        // BUG:
+        // When registering, the user is automatically logged in > works correctly
+        // UserID is always set to 0 in the currentUser.json.
+        // Does not happen when the user logs in themselves.
+        //
+
         public CurrentUser()
         {
-
+            
         }
 
         public void Info()
@@ -61,15 +72,20 @@ Zipcode: {ZipCode}");
 
         public void ChangeInfo()
         {
-            
-            Console.WriteLine("Current value: " + data.UserName);
-            Console.WriteLine("Enter a new value: ");
-            string newUsername = Console.ReadLine();
-            data.UserName = newUsername;
-            Console.WriteLine("New value: " + data.UserName);
+            var olddata = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
+            string userEmailToUpdate = data.Email;
+            var userToUpdate = olddata.Find(user => user.Email == userEmailToUpdate);
 
-            string updatedJsonContents = JsonConvert.SerializeObject(data, Formatting.Indented);
-            File.WriteAllText(currentUserPath, updatedJsonContents);
+            if (userToUpdate != null)
+            {
+                Console.WriteLine("Current value: " + data.UserID);
+                Console.WriteLine("Enter a new value: ");
+                data.UserID = userToUpdate.UserID;
+                Console.WriteLine("New value: " + data.UserID);
+
+                string updatedJsonContents = JsonConvert.SerializeObject(data, Formatting.Indented);
+                File.WriteAllText(currentUserPath, updatedJsonContents);
+            }
         }
 
         public void PracticeJson()
