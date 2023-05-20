@@ -10,7 +10,7 @@ namespace Restaurant
         public static void Main()
         {
             Console.WriteLine(@"
-=== Welcome ===
+=== Homepage ===
 1. My Account
 2. What's on the menu
 3. Book a table
@@ -50,6 +50,7 @@ namespace Restaurant
                                         // UserRegister userRegister = new UserRegister();
                                         // userRegister.Register();
                                         Console.WriteLine("=== My Bookings ===");
+                                        Console.WriteLine("Sorry! This part is still under construction.");
                                         break;
                                     case 3:
                                         UserLogout logout = new UserLogout();
@@ -70,10 +71,10 @@ namespace Restaurant
                 bool wrongInput = true;
                 while (wrongInput)
                 {
-                    int userChoice = Convert.ToInt32(Console.ReadLine());
+                    string userChoice = Console.ReadLine();
                     switch (userChoice)
                     {
-                        case 1:
+                        case "1":
                             wrongInput = false;
                             bool newInput = false;
                             while (newInput == false)
@@ -83,15 +84,15 @@ namespace Restaurant
 1. Login
 2. Register
 ");
-                                userChoice = Convert.ToInt32(Console.ReadLine());
+                                userChoice = Console.ReadLine();
                                 switch (userChoice)
                                 {
-                                    case 1:
+                                    case "1":
                                         newInput = true;
                                         UserLogin userLogin = new UserLogin();
                                         userLogin.Login();
                                         break;
-                                    case 2:
+                                    case "2":
                                         newInput = true;
                                         UserRegister userRegister = new UserRegister();
                                         userRegister.Register();
@@ -102,19 +103,19 @@ namespace Restaurant
                                 }
                             }
                             break;
-                        case 2:
+                        case "2":
                             wrongInput = false;
                             Menu menu = new Menu();
                             menu.Show();
                             break;
-                        case 3:
+                        case "3":
                             Reserve reserve = new Reserve();
                             reserve.MainReserve();
                             break;
-                        case 4:
+                        case "4":
                             Review.Start();
                             break;
-                        case 5:
+                        case "5":
                             wrongInput = false;
                             break;
                         default:

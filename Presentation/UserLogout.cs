@@ -15,12 +15,7 @@ namespace Restaurant
             {
                 case "Y":
                     UserLogin.userLoggedIn = false;
-                    // !! Maybe move these small lines of code for the json to a new class in the DataAccess folder !!
-                    string filePath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
-                    string jsonContent = File.ReadAllText(filePath);
-                    jsonContent = string.Empty;
-                    File.WriteAllText(filePath, jsonContent);
-                    // !!
+                    CurrentUserJson.CurrentUserLogout();
 
                     string logoutSuccesDot = "...";
                     foreach (char c in logoutSuccesDot)

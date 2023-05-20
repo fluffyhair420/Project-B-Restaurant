@@ -3,16 +3,11 @@ namespace Restaurant
 {
     class CurrentUser : UserInfo
     {
-        private string City;
-        private string Street;
-        private string HouseNumber;
-        private string ZipCode;
-
         // path for json file that stores all user's information
         static string userPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
         static string userJson = File.ReadAllText(userPath);
+
         // path for currently logged in user
-        dynamic allData = JsonConvert.DeserializeObject(userJson);
         static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
         static string currentUserJson = File.ReadAllText(currentUserPath);
         dynamic data = JsonConvert.DeserializeObject(currentUserJson);
@@ -24,6 +19,8 @@ namespace Restaurant
         // UserID is always set to 0 in the currentUser.json.
         // Does not happen when the user logs in themselves.
         //
+        // FIXED (for now??)
+        //
 
         public CurrentUser()
         {
@@ -32,13 +29,6 @@ namespace Restaurant
 
         public void Info()
         {
-            foreach (var addressItem in data.Address)
-            {
-                City = addressItem["City"];
-                Street = addressItem["Street"];
-                HouseNumber = addressItem["HouseNumber"];
-                ZipCode = addressItem["ZipCode"];
-            }
             Console.WriteLine("\n=== My Information ===");
             Console.WriteLine($@"
 Username: {data.UserName}
@@ -49,17 +39,17 @@ Email: {data.Email}
 Phonenumber: {data.PhoneNumber}
 
 Address:
-City: {City}
-Street: {Street}
-Housenumber: {HouseNumber}
-Zipcode: {ZipCode}");
+City: {data.Address[0].City}
+Street: {data.Address[0].Street}
+Housenumber: {data.Address[0].HouseNumber}
+Zipcode: {data.Address[0].ZipCode}");
 
             Console.WriteLine("\n1. Edit info\n2. Back\n");
             int userInput = Convert.ToInt32(Console.ReadLine());
             switch (userInput)
             {
                 case 1:
-                    PracticeJson();
+                    ChangeInfo();
                     break;
                 case 2:
                     MainMenu.Main();
@@ -70,31 +60,13 @@ Zipcode: {ZipCode}");
             }
         }
 
-        // public void ChangeInfo()
-        // {
-        //     var olddata = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
-        //     string userEmailToUpdate = data.Email;
-        //     var userToUpdate = olddata.Find(user => user.Email == userEmailToUpdate);
-
-        //     if (userToUpdate != null)
-        //     {
-        //         Console.WriteLine("Current value: " + data.UserID);
-        //         Console.WriteLine("Enter a new value: ");
-        //         data.UserID = userToUpdate.UserID;
-        //         Console.WriteLine("New value: " + data.UserID);
-
-        //         string updatedJsonContents = JsonConvert.SerializeObject(data, Formatting.Indented);
-        //         File.WriteAllText(currentUserPath, updatedJsonContents);
-        //     }
-        // }
-
-        public void PracticeJson()
+        public void ChangeInfo()
         {
             // WORKS: updates information in User.json
             // Next step > also update in CurrentUser.json
-            var olddata = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
+            var allData = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
             string userEmailToUpdate = data.Email;
-            var userToUpdate = olddata.Find(user => user.Email == userEmailToUpdate);
+            var userToUpdate = allData.Find(user => user.Email == userEmailToUpdate);
 
             if (userToUpdate != null)
             {
@@ -167,13 +139,13 @@ Zipcode: {ZipCode}");
                             break;
                     }
                     // Step 4: Write the modified list back to the JSON file
-                    string updatedJsonContents = JsonConvert.SerializeObject(olddata, Formatting.Indented);
+                    string updatedJsonContents = JsonConvert.SerializeObject(allData, Formatting.Indented);
                     File.WriteAllText(userPath, updatedJsonContents);
 
                     Console.WriteLine("User updated successfully.");
                 }
+            }
 
-            }    
             else
             {
                 Console.WriteLine("User not found.");

@@ -10,18 +10,15 @@ namespace Restaurant
         string userJson = File.ReadAllText(userPath);
         // path for json file that stores currently logged in user
         static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
-        string currentUserJson = File.ReadAllText(currentUserPath);
 
         public UserLogin()
         {
             
         }
 
-        // TO DO
-        // Save which user is currently logged in
-        // If JSON file is empty
         public void Login()
         {
+            // volgens mij kan dit weg
             if (userLoggedIn == true)
             {
                 Console.WriteLine("You're already logged in!");
@@ -48,38 +45,18 @@ namespace Restaurant
                         if (item.PassWord == userPassWord)
                         {
                             Console.WriteLine("Correct! That Password matches the email :)");
-                            Address tempCurrentUserAddress;
-                            foreach (var bloop in item.Address)
-                            {
-                                Address currentUserAddress = new Address{City = bloop["City"],
-                                                                            Street = bloop["Street"],
-                                                                            HouseNumber = bloop["HouseNumber"],
-                                                                            ZipCode = bloop["ZipCode"]};
-                                tempCurrentUserAddress = currentUserAddress;
-
-                                UserLogin currentUser = new UserLogin { UserID = item.UserID, UserName = item.UserName, 
-                                                                    PassWord = item.PassWord, FirstName = item.FirstName,
-                                                                    LastName = item.LastName, Email = item.Email,
-                                                                    PhoneNumber = item.PhoneNumber, Address = new List<Address> { tempCurrentUserAddress } };
-
-                            string currentUserJson = JsonConvert.SerializeObject(currentUser, Formatting.Indented);
-                            // write current user to CurrentUser json
-                            File.WriteAllText(currentUserPath, currentUserJson);
-                            // read current user from CurrentUser json
-                            // UserLogin currentUser1 = JsonConvert.DeserializeObject<UserLogin>(currentUserJson);
-                            // Console.WriteLine(currentUser1.Address[0].City);
+                            CurrentUserJson.WriteCurrentUserToJson(item);
                             userLoggedIn = true;
                             MainMenu.Main();
                             break;
-                            }
                         }
 
                         // Password doesn't match Email
                         else
                         {
                             Console.WriteLine(@"
-    Uh oh, did you forget your password, or are you trying to
-    break into someone else's account?");
+Uh oh, did you forget your password, or are you trying to
+break into someone else's account?");
 
                         }
                         break;
@@ -94,8 +71,8 @@ namespace Restaurant
                     else
                     {
                         Console.Write(@"
-    There's no account using this email address. Do you want to register instead?
-    Typ ""Y"" or ""N"": ");
+There's no account using this email address. Do you want to register instead?
+Typ ""Y"" or ""N"": ");
                         bool wrongInput = true;
                         while (wrongInput)
                         {

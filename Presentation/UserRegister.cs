@@ -39,7 +39,7 @@ namespace Restaurant
             bool emailVerification = false;
             while (emailVerification == false)
             {
-                Console.Write("\nEnter your email again to make sure you are using the correct email: ");
+                Console.Write("Enter your email again to make sure you are using the correct email: ");
                 userEmailCheck = Console.ReadLine();
                 if (userEmailCheck == userEmail)
                 {
@@ -69,7 +69,7 @@ namespace Restaurant
             bool passVerification = false;
             while (passVerification == false)
             {
-                Console.Write("\nEnter your password again to make sure you are using the correct password: ");
+                Console.Write("Enter your password again to make sure you are using the correct password: ");
                 userPassCheck = Console.ReadLine();
                 if (userPassCheck == userPassWord)
                 {
@@ -120,7 +120,7 @@ namespace Restaurant
                     // Email doesn't yet exist
                     else
                     {
-                        Console.Write("First name: ");
+                        Console.Write("\nFirst name: ");
                         base.FirstName = Console.ReadLine();
                         Console.Write("Last name: ");
                         base.LastName = Console.ReadLine();
@@ -138,19 +138,6 @@ namespace Restaurant
                         Console.Write("Zipcode: ");
                         string userAddressZipcode = Console.ReadLine();
 
-
-                        // create List object for address
-                        List<Address> address = new List<Address>()
-                        {
-                            new Address
-                            {
-                                City = userAddressCity,
-                                Street = userAddressStreet,
-                                HouseNumber = userAddressHousenumber,
-                                ZipCode = userAddressZipcode
-                            }
-                        };
-
                         // create object for the new user
                         UserInfo newUser = new UserInfo
                         {
@@ -160,23 +147,32 @@ namespace Restaurant
                             LastName = LastName,
                             Email = Email,
                             PhoneNumber = PhoneNumber,
-                            Address = address,
+                            // create List object for address
+                            Address = new List<Address>()
+                            {
+                                new Address
+                                {
+                                    City = userAddressCity,
+                                    Street = userAddressStreet,
+                                    HouseNumber = userAddressHousenumber,
+                                    ZipCode = userAddressZipcode
+                                }
+                            }
                         };
 
                         // Write all user data to JSON file
                         UpdateJson newUserJson = new UpdateJson();
-                        newUserJson.writeToJson(FirstName, LastName, UserName, PhoneNumber, PassWord, Email, address, path);
-                        UpdateCurrentUser(newUser);
+                        newUserJson.writeToJson(newUser, path);
+                        CurrentUserJson.WriteCurrentUserToJson(newUser);
                         break;
                     }
                 }
             }
 
-
             // empty json file
             else
             {
-                Console.Write("First name: ");
+                Console.Write("\nFirst name: ");
                 base.FirstName = Console.ReadLine();
                 Console.Write("Last name: ");
                 base.LastName = Console.ReadLine();
@@ -194,19 +190,7 @@ namespace Restaurant
                 Console.Write("Zipcode: ");
                 string userAddressZipcode = Console.ReadLine();
 
-
-                // create List object for address
-                List<Address> address = new List<Address>()
-                {
-                    new Address
-                    {
-                        City = userAddressCity,
-                        Street = userAddressStreet,
-                        HouseNumber = userAddressHousenumber,
-                        ZipCode = userAddressZipcode
-                    }
-                };
-
+                // create object for the new user
                 UserInfo newUser = new UserInfo
                 {
                     UserName = UserName,
@@ -215,39 +199,48 @@ namespace Restaurant
                     LastName = LastName,
                     Email = Email,
                     PhoneNumber = PhoneNumber,
-                    Address = address,
+                    // create List object for address
+                    Address = new List<Address>()
+                    {
+                        new Address
+                        {
+                            City = userAddressCity,
+                            Street = userAddressStreet,
+                            HouseNumber = userAddressHousenumber,
+                            ZipCode = userAddressZipcode
+                        }
+                    }
                 };
 
                 // Write all user data to JSON file
                 UpdateJson newUserJson = new UpdateJson();
-                newUserJson.writeToJson(FirstName, LastName, UserName, PhoneNumber, PassWord, Email, address, path);
-                UpdateCurrentUser(newUser);
+                newUserJson.writeToJson(newUser, path);
+                CurrentUserJson.WriteCurrentUserToJson(newUser);
             }
         
-
-        UserLogin.userLoggedIn = true;
-        MainMenu.Main();
+            UserLogin.userLoggedIn = true;
+            MainMenu.Main();
         }
 
-        static void UpdateCurrentUser(UserInfo user)
-        {
+        // static void UpdateCurrentUser(UserInfo user)
+        // {
 
-            // Update the CurrentUser.json file with the user's information
-            CurrentUserInfo currentUser = new CurrentUserInfo
-            {
-                UserID = user.UserID,
-                UserName = user.UserName,
-                PassWord = user.PassWord,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                Address = user.Address
-            };
+        //     // Update the CurrentUser.json file with the user's information
+        //     CurrentUserInfo currentUser = new CurrentUserInfo
+        //     {
+        //         UserID = user.UserID,
+        //         UserName = user.UserName,
+        //         PassWord = user.PassWord,
+        //         FirstName = user.FirstName,
+        //         LastName = user.LastName,
+        //         Email = user.Email,
+        //         PhoneNumber = user.PhoneNumber,
+        //         Address = user.Address
+        //     };
 
-            string currentJson = JsonConvert.SerializeObject(currentUser, Formatting.Indented);
-            File.WriteAllText(currentUserPath, currentJson);
+        //     string currentJson = JsonConvert.SerializeObject(currentUser, Formatting.Indented);
+        //     File.WriteAllText(currentUserPath, currentJson);
 
-        }
+        // }
     }
 }
