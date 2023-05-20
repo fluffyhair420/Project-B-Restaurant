@@ -22,10 +22,10 @@ namespace Restaurant
                 bool wrongInput = true;
                 while (wrongInput)
                 {
-                    int userChoice = Convert.ToInt32(Console.ReadLine());
+                    string userChoice = Console.ReadLine();
                     switch (userChoice)
                     {
-                        case 1:
+                        case "1":
                             wrongInput = false;
                             bool newInput = false;
                             while (newInput == false)
@@ -36,15 +36,15 @@ namespace Restaurant
 2. My Bookings
 3. Logout
 ");         
-                                userChoice = Convert.ToInt32(Console.ReadLine());
+                                userChoice = Console.ReadLine();
                                 switch (userChoice)
                                 {
-                                    case 1:
+                                    case "1":
                                         newInput = true;
                                         CurrentUser currUser = new CurrentUser();
                                         currUser.Info();
                                         break;
-                                    case 2:
+                                    case "2":
                                         // shae's code
                                         // newInput = true;
                                         // UserRegister userRegister = new UserRegister();
@@ -52,7 +52,7 @@ namespace Restaurant
                                         Console.WriteLine("=== My Bookings ===");
                                         Console.WriteLine("Sorry! This part is still under construction.");
                                         break;
-                                    case 3:
+                                    case "3":
                                         UserLogout logout = new UserLogout();
                                         logout.Logout();
                                         break;
