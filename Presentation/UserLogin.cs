@@ -18,86 +18,80 @@ namespace Restaurant
 
         public void Login()
         {
-            // volgens mij kan dit weg
-            if (userLoggedIn == true)
-            {
-                Console.WriteLine("You're already logged in!");
-                MainMenu.Main();
-            }
-            else
-            {
-                Console.WriteLine("\n=== Login ===");
-                // Email
-                Console.Write("Email: ");
-                string userEmail = Console.ReadLine();
-                // Password
-                Console.Write("Password: ");
-                string userPassWord = Console.ReadLine();
+            
+            Console.WriteLine("\n=== Login ===");
+            // Email
+            Console.Write("Email: ");
+            string userEmail = Console.ReadLine();
+            // Password
+            Console.Write("Password: ");
+            string userPassWord = Console.ReadLine();
 
-                dynamic data = JsonConvert.DeserializeObject(userJson);
-                bool emailInJson = true;
-                foreach (var item in data)
+            dynamic data = JsonConvert.DeserializeObject(userJson);
+            bool emailInJson = false;
+            foreach (var item in data)
+            {
+                
+                // Email in JSON file
+                if (item.Email == userEmail)
                 {
-                    // Email in JSON file
-                    if (item.Email == userEmail)
+                    emailInJson = true;
+                    // Password matches Email
+                    if (item.PassWord == userPassWord)
                     {
-                        // Password matches Email
-                        if (item.PassWord == userPassWord)
-                        {
-                            Console.WriteLine("Correct! That Password matches the email :)");
-                            CurrentUserJson.WriteCurrentUserToJson(item);
-                            userLoggedIn = true;
-                            MainMenu.Main();
-                            break;
-                        }
-
-                        // Password doesn't match Email
-                        else
-                        {
-                            Console.WriteLine(@"
-Uh oh, did you forget your password, or are you trying to
-break into someone else's account?");
-
-                        }
+                        Console.WriteLine($"\nWelcome, {item.UserName}");
+                        CurrentUserJson.WriteCurrentUserToJson(item);
+                        userLoggedIn = true;
+                        MainMenu.Main();
                         break;
-                    } 
-
-                    // Email not in JSON file
-                    else if (item.Email != userEmail)
-                    {
-                        emailInJson = false;
                     }
 
+                    // Password doesn't match Email
                     else
                     {
-                        Console.Write(@"
+                        Console.WriteLine(@"
+Uh oh, did you forget your password, or are you trying to
+break into someone else's account?");
+                        //userLoggedIn = false;
+                        MainMenu.Main();
+                        break;
+                    }
+                } 
+
+                // Email not in JSON file
+                // else if (item.Email != userEmail)
+                // {
+                //     continue;
+                // }
+            }
+            if (!emailInJson)
+            {
+                Console.Write(@"
 There's no account using this email address. Do you want to register instead?
 Typ ""Y"" or ""N"": ");
-                        bool wrongInput = true;
-                        while (wrongInput)
-                        {
-                            string userInput = Console.ReadLine().ToUpper();
-                            switch (userInput)
-                            {
-                                case "Y":
-                                    wrongInput = false;
-                                    UserRegister userRegister = new UserRegister();
-                                    userRegister.Register();
-                                    break;
+                bool wrongInput = true;
+                while (wrongInput)
+                {
+                    string userInput = Console.ReadLine().ToUpper();
+                    switch (userInput)
+                    {
+                        case "Y":
+                            wrongInput = false;
+                            UserRegister userRegister = new UserRegister();
+                            userRegister.Register();
+                            break;
 
-                                case "N":
-                                    wrongInput = false;
-                                    Console.WriteLine(@"
-    May you decide to continue with an account later on, please feel
-    free to register.");
-                                    //MainMenu.Main();
-                                    break;
+                        case "N":
+                            wrongInput = false;
+                            Console.WriteLine(@"
+May you decide to continue with an account later on, please feel
+free to register.");
+                            MainMenu.Main();
+                            break;
 
-                                default:
-                                    Console.Write("\nInvalid input. Please typ \"Y\" or \"N\": ");
-                                    break;
-                            }
-                        }
+                        default:
+                            Console.Write("\nInvalid input. Please typ \"Y\" or \"N\": ");
+                            break;
                     }
                 }
             }

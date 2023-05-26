@@ -14,7 +14,6 @@ namespace Restaurant
             switch (userInput)
             {
                 case "Y":
-                    UserLogin.userLoggedIn = false;
                     CurrentUserJson.CurrentUserLogout();
 
                     string logoutSuccesDot = "...";
@@ -37,6 +36,7 @@ namespace Restaurant
                         Console.Write(c);
                         Thread.Sleep(50);
                     }
+                    UserLogin.userLoggedIn = false;
                     MainMenu.Main();
                     break;
 

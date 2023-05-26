@@ -7,21 +7,6 @@ namespace Restaurant
         static string userPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
         static string userJson = File.ReadAllText(userPath);
 
-        // path for currently logged in user
-        static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
-        static string currentUserJson = File.ReadAllText(currentUserPath);
-        dynamic data = JsonConvert.DeserializeObject(currentUserJson);
-
-
-        //
-        // BUG:
-        // When registering, the user is automatically logged in > works correctly
-        // UserID is always set to 0 in the currentUser.json.
-        // Does not happen when the user logs in themselves.
-        //
-        // FIXED (for now??)
-        //
-
         public CurrentUser()
         {
             
@@ -29,6 +14,10 @@ namespace Restaurant
 
         public void Info()
         {
+            // path for currently logged in user
+            string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
+            string currentUserJson = File.ReadAllText(currentUserPath);
+            dynamic data = JsonConvert.DeserializeObject(currentUserJson);
             Console.WriteLine("\n=== My Information ===");
             Console.WriteLine($@"
 Username: {data.UserName}
@@ -62,9 +51,12 @@ Zipcode: {data.Address[0].ZipCode}");
 
         public void ChangeInfo()
         {
-            // WORKS: updates information in User.json
-            // Next step > also update in CurrentUser.json
+            string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
+            string currentUserJson = File.ReadAllText(currentUserPath);
+            dynamic data = JsonConvert.DeserializeObject(currentUserJson);
+
             var allData = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
+            
             string userEmailToUpdate = data.Email;
             var userToUpdate = allData.Find(user => user.Email == userEmailToUpdate);
 
@@ -84,7 +76,7 @@ Zipcode: {data.Address[0].ZipCode}");
 5. Email
 6. Phonenumber
 7. City
-8. Street:
+8. Street
 9. Housenumber
 10. Zipcode
 === Press any other button to quit ===
@@ -93,56 +85,134 @@ Zipcode: {data.Address[0].ZipCode}");
                     switch (userInput)
                     {
                         case "1":
+                        string usernameCheck = "";
+                        bool userInUse = true;
+                        while (userInUse == true)
+                        {
                             Console.Write("Enter a new username: ");
-                            userToUpdate.UserName = Console.ReadLine();
+                            usernameCheck = Console.ReadLine();
+                            userInUse = UserCheck.UsernameCheck(usernameCheck);
+                            if (userInUse == true)
+                            {
+                                Console.Write(@"
+This username is already in use. Please pick another username.
+");
+                            }
+                        }
+                            userToUpdate.UserName = usernameCheck;
+                            data.UserName = userToUpdate.UserName;
                             break;
                         case "2":
                             Console.Write("Enter a new password: ");
                             userToUpdate.PassWord = Console.ReadLine();
+                            data.PassWord = userToUpdate.PassWord;
                             break;
                         case "3":
                             Console.Write("Enter a new first name: ");
                             userToUpdate.FirstName = Console.ReadLine();
+                            data.FirstName = userToUpdate.FirstName;
                             break;
                         case "4":
                             Console.Write("Enter a new last name: ");
                             userToUpdate.LastName = Console.ReadLine();
+                            data.LastName = userToUpdate.LastName;
                             break;
                         case "5":
                             Console.Write("Enter a new email: ");
-                            userToUpdate.Email = Console.ReadLine();
+                            bool emailValid = false;
+                            string userEmail = "";
+                            while (emailValid == false)
+                            {
+                                userEmail = Console.ReadLine();
+                                emailValid = UserCheck.EmailCheck(userEmail);
+                                if (emailValid == false)
+                                {
+                                    Console.WriteLine(@"
+Email address should only contain:
+- Letters
+- Numbers
+- An @
+- Ends with .com or similar
+                                    ");
+                                }
+                            }
+                            //checkEmail(allData, userEmail);
+                            bool emailAlreadyExists = false;
+                            if (allData != null)
+                            {
+                                foreach (var item in allData)
+                                {
+                                    // Email already exists
+                                    if (item.Email == userEmail)
+                                    {
+                                        Console.Write(@"
+An account using this email address already exists.
+");
+                                        emailAlreadyExists = true;
+                                    }
+                                }
+                            }
+
+                            if (!emailAlreadyExists)
+                            {   
+                                userToUpdate.Email = userEmail;
+                                data.Email = userToUpdate.Email;
+                            }
                             break;
                         case "6":
                             Console.Write("Enter a new phonenumber: ");
                             userToUpdate.PhoneNumber = Console.ReadLine();
+                            data.PhoneNumber = userToUpdate.PhoneNumber;
                             break;
                         case "7":
                             Console.Write("Enter a new city: ");
                             userToUpdate.Address[0].City = Console.ReadLine();
+                            data.Address[0].City = userToUpdate.Address[0].City;
                             break;
                         case "8":
                             Console.Write("Enter a new street: ");
                             userToUpdate.Address[0].Street = Console.ReadLine();
+                            data.Address[0].Street = userToUpdate.Address[0].Street;
                             break;
                         case "9":
                             Console.Write("Enter a new housenumber: ");
                             userToUpdate.Address[0].HouseNumber = Console.ReadLine();
+                            data.Address[0].HouseNumber = userToUpdate.Address[0].HouseNumber;
                             break;
                         case "10":
                             Console.Write("Enter a new zipcode: ");
                             userToUpdate.Address[0].ZipCode = Console.ReadLine();
+                            data.Address[0].ZipCode = userToUpdate.Address[0].ZipCode;
                             break;
                         default:
-                            Console.WriteLine("Information updated.");
+                            string updateSuccesDot = "...";
+                            string updateSuccessfull = " Information updated.\n";
+                            foreach (char c in updateSuccesDot)
+                            {
+                                Console.Write(c);
+                                Thread.Sleep(50);
+                            }
+                            Thread.Sleep(1000);
+                            foreach (char c in updateSuccessfull)
+                            {
+                                Console.Write(c);
+                                Thread.Sleep(50);
+                            }
                             wrongInput = false;
                             Info();
                             break;
                     }
-                    // Step 4: Write the modified list back to the JSON file
+
+                    // Step 4: Write the modified list back to the User.JSON file
                     string updatedJsonContents = JsonConvert.SerializeObject(allData, Formatting.Indented);
                     File.WriteAllText(userPath, updatedJsonContents);
 
-                    Console.WriteLine("User updated successfully.");
+                    // Step 5: Write the modified list back to the CurrentUser.JSON file
+                    string updatedCurrentJsonContents = JsonConvert.SerializeObject(data, Formatting.Indented);
+                    File.WriteAllText(currentUserPath, updatedCurrentJsonContents);
+
+                    //Console.WriteLine("User updated successfully.");
+
                 }
             }
 
@@ -150,6 +220,27 @@ Zipcode: {data.Address[0].ZipCode}");
             {
                 Console.WriteLine("User not found.");
             }    
+        }
+
+        public bool checkEmail(dynamic allData, string email)
+        {
+            bool emailAlreadyExists = false;
+            if (allData != null)
+            {
+                foreach (var item in allData)
+                {
+                    // Email already exists
+                    if (item.Email == email)
+                    {
+                        Console.Write(@"
+An account using this email address already exists.
+Do you want to login instead?
+typ ""Y"" or ""N"": ");
+                        emailAlreadyExists = true;
+                    }
+                }
+            }
+            return emailAlreadyExists;
         }
     }
 }
