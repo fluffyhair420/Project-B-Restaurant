@@ -32,6 +32,7 @@ public class WriteToJson
         using (StreamWriter file = File.CreateText(path))
         using (JsonTextWriter writer = new JsonTextWriter(file))
         {
+            writer.Formatting = Formatting.Indented;
             allReviews.WriteTo(writer);
         }
     }
@@ -43,6 +44,7 @@ public class WriteToJson
         using (StreamWriter file = File.CreateText(path))
         using (JsonTextWriter writer = new JsonTextWriter(file))
         {
+            writer.Formatting = Formatting.Indented;
             allReviews.WriteTo(writer);
         }
 

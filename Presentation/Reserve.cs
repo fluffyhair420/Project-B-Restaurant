@@ -264,7 +264,7 @@ Sunday:     17:00-21:00");
             }
             else
             {
-                return;
+                MainMenu.Main();
             }
         }
     }

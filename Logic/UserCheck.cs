@@ -1,5 +1,7 @@
 using System;
 using System.Net.Mail;
+using Newtonsoft.Json;
+
 
 namespace Restaurant
 {
@@ -70,7 +72,21 @@ namespace Restaurant
                 return false;
             }
         }
-
-
+    
+        public static bool UsernameCheck(string username)
+        {
+            string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
+            string json = File.ReadAllText(path);
+            dynamic data = JsonConvert.DeserializeObject(json);
+            foreach (var item in data)
+            {
+                // Email already exists
+                if (item.UserName == username)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }
