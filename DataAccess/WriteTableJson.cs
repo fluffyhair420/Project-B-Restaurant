@@ -12,45 +12,25 @@ namespace Restaurant
 
         /*
         * WriteTableJson.WriteJson() method takes in:
-        * The tableNumber: is the number of the table that the user wants to reserve
         * The reservationName: is the name that the user wants the table to be reserved for
         * The reservationDate: is the date that the user wants to reserve the table for
         * === === === ===
         * Made the method private, should not be used outside the Reserve class
         */
-        public void WriteJson(int tableNumber, string reservationName, string reservationDate, int reservationID)
+        public void WriteJson(int partySize, string reservationDate, string reservationName, string reservationEmail, string reservationPhoneNumber, string reservationID)
         {
-            try
+            Table reservation = new Table()
             {
-                var readVar = new ReadTableJson();
-                List<Table> tables = readVar.LoadJson();
+                PartySize = partySize,
+                ReservationDate = reservationDate,
+                ReservationName = reservationName,
+                ReservationEmail = reservationEmail,
+                ReservationPhoneNumber = reservationPhoneNumber,
+                ReservationID = reservationID
+            };
 
-                Table table = tables.FirstOrDefault(t => t.TableNumber == tableNumber);
-
-                Reservation newReservation = new Reservation
-                {
-                    Name = reservationName,
-                    Date = reservationDate,
-                    ID = reservationID
-                };
-
-                table.Reservation.Add(newReservation);
-                var sortedReservations = table.Reservation.OrderBy(r => DateTime.ParseExact(r.Date, "dd/MM/yyyy HH:mm", null)).ToList();
-
-                table.Reservation = sortedReservations;
-
-                string jsonObject = JsonConvert.SerializeObject(tables, Formatting.Indented);
-                using (StreamWriter writer = new StreamWriter(jsonFile))
-                {
-                    writer.Write(jsonObject);
-                }
-
-                Console.WriteLine($"Table {tableNumber} has been reserved for {reservationName} on {reservationDate}");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine($"ERROR: Something went wrong. Please check Reserve.ReserveTable() method. {e.Message}.");
-            }
+            string json = JsonConvert.SerializeObject(reservation);
+            File.WriteAllText(jsonFile, json);
         }
     }
 }
