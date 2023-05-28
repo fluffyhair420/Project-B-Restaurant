@@ -80,6 +80,7 @@ namespace Restaurant
 
             // Check if Email already exists in JSON file
             dynamic data = JsonConvert.DeserializeObject(json);
+            bool emailAlreadyExists = false;
             if (data != null)
             {
                 foreach (var item in data)
@@ -91,6 +92,7 @@ namespace Restaurant
     An account using this email address already exists.
     Do you want to login instead?
     typ ""Y"" or ""N"": ");
+                        emailAlreadyExists = true;
                         bool wrongInput = true;
                         while (wrongInput)
                         {
@@ -116,56 +118,74 @@ namespace Restaurant
                                     break;
                             }
                         }
-                    }
-                    // Email doesn't yet exist
-                    else
-                    {
-                        Console.Write("\nFirst name: ");
-                        base.FirstName = Console.ReadLine();
-                        Console.Write("Last name: ");
-                        base.LastName = Console.ReadLine();
-                        Console.Write("Username: ");
-                        base.UserName = Console.ReadLine();
-                        Console.Write("Phone number: ");
-                        base.PhoneNumber = Console.ReadLine();
-
-                        Console.Write("City: ");
-                        string userAddressCity = Console.ReadLine();
-                        Console.Write("Street: ");
-                        string userAddressStreet = Console.ReadLine();
-                        Console.Write("Housenumber: ");
-                        string userAddressHousenumber = Console.ReadLine();
-                        Console.Write("Zipcode: ");
-                        string userAddressZipcode = Console.ReadLine();
-
-                        // create object for the new user
-                        UserInfo newUser = new UserInfo
-                        {
-                            UserName = UserName,
-                            PassWord = PassWord,
-                            FirstName = FirstName,
-                            LastName = LastName,
-                            Email = Email,
-                            PhoneNumber = PhoneNumber,
-                            // create List object for address
-                            Address = new List<Address>()
-                            {
-                                new Address
-                                {
-                                    City = userAddressCity,
-                                    Street = userAddressStreet,
-                                    HouseNumber = userAddressHousenumber,
-                                    ZipCode = userAddressZipcode
-                                }
-                            }
-                        };
-
-                        // Write all user data to JSON file
-                        UpdateJson newUserJson = new UpdateJson();
-                        newUserJson.writeToJson(newUser, path);
-                        CurrentUserJson.WriteCurrentUserToJson(newUser);
                         break;
                     }
+                }
+
+                // Email doesn't yet exist
+                if (!emailAlreadyExists)
+                {
+                    Console.Write("\nFirst name: ");
+                    base.FirstName = Console.ReadLine();
+                    Console.Write("Last name: ");
+                    base.LastName = Console.ReadLine();
+
+                    string usernameCheck = "";
+                    bool userInUse = true;
+                    while (userInUse == true)
+                    {
+                        Console.Write("Username: ");
+                        usernameCheck = Console.ReadLine();
+                        userInUse = UserCheck.UsernameCheck(usernameCheck);
+                        if (userInUse == true)
+                        {
+                            Console.Write(@"
+This username is already in use. Please pick another username.
+");
+                        }
+                    }
+                    base.UserName = usernameCheck;
+
+                    Console.Write("Phone number: ");
+                    base.PhoneNumber = Console.ReadLine();
+
+                    Console.Write("City: ");
+                    string userAddressCity = Console.ReadLine();
+                    Console.Write("Street: ");
+                    string userAddressStreet = Console.ReadLine();
+                    Console.Write("Housenumber: ");
+                    string userAddressHousenumber = Console.ReadLine();
+                    Console.Write("Zipcode: ");
+                    string userAddressZipcode = Console.ReadLine();
+
+                    // create object for the new user
+                    UserInfo newUser = new UserInfo
+                    {
+                        UserName = UserName,
+                        PassWord = PassWord,
+                        FirstName = FirstName,
+                        LastName = LastName,
+                        Email = Email,
+                        PhoneNumber = PhoneNumber,
+                        // create List object for address
+                        Address = new List<Address>()
+                        {
+                            new Address
+                            {
+                                City = userAddressCity,
+                                Street = userAddressStreet,
+                                HouseNumber = userAddressHousenumber,
+                                ZipCode = userAddressZipcode
+                            }
+                        }
+                    };
+
+                    // Write all user data to JSON file
+                    UpdateJson newUserJson = new UpdateJson();
+                    newUserJson.writeToJson(newUser, path);
+                    CurrentUserJson.WriteCurrentUserToJson(newUser);
+                    UserLogin.userLoggedIn = true;
+                    Console.WriteLine("Successfully created account!");
                 }
             }
 
@@ -176,8 +196,22 @@ namespace Restaurant
                 base.FirstName = Console.ReadLine();
                 Console.Write("Last name: ");
                 base.LastName = Console.ReadLine();
-                Console.Write("Username: ");
-                base.UserName = Console.ReadLine();
+
+                string usernameCheck = "";
+                bool userInUse = true;
+                while (userInUse == true)
+                {
+                    Console.Write("Username: ");
+                    usernameCheck = Console.ReadLine();
+                    userInUse = UserCheck.UsernameCheck(usernameCheck);
+                    if (userInUse == true)
+                    {
+                        Console.Write(@"
+This username is already in use. Please pick another username.
+");
+                    }
+                }
+                base.UserName = usernameCheck;
                 Console.Write("Phone number: ");
                 base.PhoneNumber = Console.ReadLine();
 
@@ -216,9 +250,9 @@ namespace Restaurant
                 UpdateJson newUserJson = new UpdateJson();
                 newUserJson.writeToJson(newUser, path);
                 CurrentUserJson.WriteCurrentUserToJson(newUser);
+                UserLogin.userLoggedIn = true;
+                Console.WriteLine("Successfully created account!");
             }
-        
-            UserLogin.userLoggedIn = true;
             MainMenu.Main();
         }
 

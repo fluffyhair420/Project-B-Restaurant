@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 static class Review
 {
     public static void Start()
@@ -51,7 +53,12 @@ static class Review
     }
 
 
-    public static void WriteReview(){
+    public static void WriteReview()
+    {
+        string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
+        string currentUserJson = File.ReadAllText(currentUserPath);
+        dynamic data = JsonConvert.DeserializeObject(currentUserJson);
+        Console.WriteLine($"Username: {data.UserName}");
 
         // TODO    Add check if given ID belongs to a valid reservation
         Console.WriteLine("Enter your reservation code");
@@ -81,7 +88,7 @@ static class Review
             if (userInput == "1")
             {
                 Console.WriteLine("Review posted!");
-                string userName = "testusername"; // TODO take username from user account
+                string userName = data.UserName; // TODO take username from user account
                 WriteToJson.WriteReviewToFile( reservationID, userName, reviewText);
                 Start();
             }

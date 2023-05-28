@@ -1,7 +1,3 @@
-// TO DO
-// 1. Successfully created account
-// 2. Successfully logged in
-
 namespace Restaurant
 {
     class MainMenu
@@ -9,16 +5,17 @@ namespace Restaurant
 
         public static void Main()
         {
-            Console.WriteLine(@"
+
+            if (UserLogin.userLoggedIn)
+            {
+                Console.WriteLine(@"
 === Homepage ===
 1. My Account
 2. What's on the menu
 3. Book a table
 4. Reviews
-5. Contact
+5. About/Contact
 ");
-            if (UserLogin.userLoggedIn)
-            {
                 bool wrongInput = true;
                 while (wrongInput)
                 {
@@ -62,12 +59,41 @@ namespace Restaurant
                                 }
                             }
                             break;
+                        case "2":
+                            wrongInput = false;
+                            Menu menu = new Menu();
+                            menu.Show();
+                            break;
+                        case "3":
+                            Reserve reserve = new Reserve();
+                            reserve.MainReserve();
+                            break;
+                        case "4":
+                            Review.Start();
+                            break;
+                        case "5":
+                            wrongInput = false;
+                            Console.WriteLine("This part is under construction.");
+                            MainMenu.Main();
+                            break;
+                        default:
+                            Console.WriteLine("Invalid input. Please enter a number between and including 1-5.\n");
+                            break;
                     }
                 }
             }
 
             else
             {
+                            Console.WriteLine(@"
+=== Homepage ===
+1. My Account
+2. What's on the menu
+3. Book a table
+4. Reviews
+5. About/Contact
+6. Admin login
+");
                 bool wrongInput = true;
                 while (wrongInput)
                 {
@@ -117,9 +143,14 @@ namespace Restaurant
                             break;
                         case "5":
                             wrongInput = false;
+                            RestaurantContact.Info();
+                            break;
+                        case "6":
+                            wrongInput = false;
+                            AdminMainMenu.Login();
                             break;
                         default:
-                            Console.WriteLine("Invalid input. Please enter a number between and including 1-5.\n");
+                            Console.WriteLine("Invalid input. Please enter a number between and including 1-6.\n");
                             break;
                     }
                 }
