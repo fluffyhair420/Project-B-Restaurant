@@ -7,8 +7,11 @@ namespace Restaurant
 {
     public class Table
     {
-        public int TableNumber { get; set; }
-        public int Seats { get; set; }
-        public List<Reservation> Reservation { get; set; }
+        public int PartySize { get; set; }
+        public string ReservationDate { get; set; }
+        public string ReservationName { get; set; }
+        public string ReservationEmail { get; set; }
+        public string ReservationPhoneNumber { get; set; }
+        public string ReservationID { get; set; }
     }
 }

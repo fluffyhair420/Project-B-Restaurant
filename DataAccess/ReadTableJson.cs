@@ -30,11 +30,11 @@ namespace Restaurant
             }
             catch (FileNotFoundException e)
             {
-                Console.WriteLine($"ERROR: File not found. Please check Reserve.LoadJson() method. {e.Message}.");
+                Console.WriteLine($"ERROR: File not found. Please check ReadTableJson.LoadJson() method. {e.Message}.");
             }
             catch (Exception e)
             {
-                Console.WriteLine($"ERROR: Something went wrong. Please check Reserve.LoadJson() method. {e.Message}.");
+                Console.WriteLine($"ERROR: Something went wrong. Please check ReadTableJson.LoadJson() method. {e.Message}.");
             }
             return tables;
         }
