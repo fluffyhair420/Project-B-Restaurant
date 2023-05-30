@@ -46,8 +46,9 @@ namespace Restaurant
                                         // newInput = true;
                                         // UserRegister userRegister = new UserRegister();
                                         // userRegister.Register();
-                                        Console.WriteLine("=== My Bookings ===");
-                                        Console.WriteLine("Sorry! This part is still under construction.");
+                                        // Console.WriteLine("=== My Bookings ===");
+                                        // Console.WriteLine("Sorry! This part is still under construction.");
+                                        MyBookings.MyBooking();
                                         break;
                                     case "3":
                                         UserLogout logout = new UserLogout();

@@ -1,7 +1,7 @@
 using System;
 using System.Net.Mail;
 using Newtonsoft.Json;
-
+using System.Text.RegularExpressions;
 
 namespace Restaurant
 {
@@ -23,7 +23,11 @@ namespace Restaurant
             }
             catch (FormatException)
             {
-                // The user input is not a valid email format
+                Console.WriteLine("Invalid email format.");
+            }
+            catch (ArgumentException)
+            {
+                Console.WriteLine("Email address cannot be empty.");
             }
 
             if (isValidEmail)
@@ -33,7 +37,6 @@ namespace Restaurant
 
             else
             {
-                Console.WriteLine("Invalid email address.");
                 return false;
             }
         }
@@ -78,15 +81,96 @@ namespace Restaurant
             string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
             string json = File.ReadAllText(path);
             dynamic data = JsonConvert.DeserializeObject(json);
-            foreach (var item in data)
+            bool userExist = false;
+            if (data != null)
             {
-                // Email already exists
-                if (item.UserName == username)
+                foreach (var item in data)
                 {
-                    return true;
+                    // UserName already exists
+                    if (item.UserName == username)
+                    {
+                        Console.WriteLine("This username is already in use. Please pick another username.");
+                        userExist = true;
+                        return false;
+                    }
                 }
             }
-            return false;
+            // username doesn't yet exist and is valid
+            if (!userExist)
+            {
+                return true;
+            }
+
+            // json file is empty so username can't exist > is valid
+            else
+            {
+                return true;
+            }
+            
+        }
+
+        public static bool IsUsernameValid(string username)
+        {
+            Regex regex = new Regex("^[a-zA-Z0-9]+$");
+            if (regex.IsMatch(username))
+            {
+                return UserCheck.UsernameCheck(username);
+            }
+            else
+            {
+                Console.WriteLine("Please only use letters and numbers in your username.");
+                return false;
+            }
+        }
+
+        public static bool IsAlphabetic(string input)
+        {
+            Regex regex = new Regex(@"^[a-zA-Z\s]+$");
+            return regex.IsMatch(input);
+        }
+
+        public static bool isNameAlphabetic(string input)
+        {
+            Regex regex = new Regex(@"^[a-zA-Z-\s]+$");
+            return regex.IsMatch(input);
+        }
+
+        public static bool isCityAlphabetic(string input)
+        {
+            Regex regex = new Regex(@"^[a-zA-Z/\s]+$");
+            return regex.IsMatch(input);
+        }
+
+        public static bool IsNumeric(string input)
+        {
+            Regex regex = new Regex(@"^[0-9\s]+$");
+            return regex.IsMatch(input);
+        }
+
+        public static bool IsZipCodeValid(string input)
+        {
+            Regex regex = new Regex(@"^\d{4}[a-zA-Z]{2}$");
+            return regex.IsMatch(input);
+        }
+
+        public static string GetValidInput(string prompt, Func<string, bool> validationFunc, string errorMessage)
+        {
+            string userInput = "";
+            bool isValidInput = false;
+            while (!isValidInput)
+            {
+                Console.Write(prompt);
+                userInput = Console.ReadLine();
+                if (validationFunc(userInput))
+                {
+                    isValidInput = true;
+                }
+                else
+                {
+                    Console.WriteLine(errorMessage);
+                }
+            }
+            return userInput;
         }
     }
 }
