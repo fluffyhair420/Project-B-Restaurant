@@ -16,11 +16,11 @@ namespace Restaurant
         {
             // Email
             Console.WriteLine("\n=== Register ===");
-            Console.Write("Email: ");
             string userEmail = "";
             bool emailValid = false;
             while (emailValid == false)
             {
+                Console.Write("Email: ");
                 userEmail = Console.ReadLine();
                 emailValid = UserCheck.EmailCheck(userEmail);
                 if (emailValid == false)
@@ -50,16 +50,17 @@ namespace Restaurant
 
 
             // Password
-            Console.WriteLine("\nPassword: ");
             string userPassWord = "";
             bool passwordValid = false;
             while (passwordValid == false)
             {
-                Console.WriteLine(@"Password should contain at least
+                Console.WriteLine(@"
+Password should contain at least
 - 8 characters
 - 1 capital letter
 - 1 number
 ");
+                Console.Write("Password: ");
                 userPassWord = Console.ReadLine();
                 passwordValid = UserCheck.PasswordCheck(userPassWord);
             }
@@ -89,9 +90,9 @@ namespace Restaurant
                     if (item.Email == Email)
                     {
                         Console.Write(@"
-    An account using this email address already exists.
-    Do you want to login instead?
-    typ ""Y"" or ""N"": ");
+An account using this email address already exists.
+Do you want to login instead?
+typ ""Y"" or ""N"": ");
                         emailAlreadyExists = true;
                         bool wrongInput = true;
                         while (wrongInput)
@@ -108,8 +109,8 @@ namespace Restaurant
                                 case "N":
                                     wrongInput = false;
                                     Console.WriteLine(@"
-    May you decide to continue with an account later on, please register with
-    a different email address.");
+May you decide to continue with an account later on, please register with
+a different email address.");
                                     MainMenu.Main();
                                     break;
 
@@ -121,110 +122,28 @@ namespace Restaurant
                         break;
                     }
                 }
-
-                // Email doesn't yet exist
-                if (!emailAlreadyExists)
-                {
-                    Console.Write("\nFirst name: ");
-                    base.FirstName = Console.ReadLine();
-                    Console.Write("Last name: ");
-                    base.LastName = Console.ReadLine();
-
-                    string usernameCheck = "";
-                    bool userInUse = true;
-                    while (userInUse == true)
-                    {
-                        Console.Write("Username: ");
-                        usernameCheck = Console.ReadLine();
-                        userInUse = UserCheck.UsernameCheck(usernameCheck);
-                        if (userInUse == true)
-                        {
-                            Console.Write(@"
-This username is already in use. Please pick another username.
-");
-                        }
-                    }
-                    base.UserName = usernameCheck;
-
-                    Console.Write("Phone number: ");
-                    base.PhoneNumber = Console.ReadLine();
-
-                    Console.Write("City: ");
-                    string userAddressCity = Console.ReadLine();
-                    Console.Write("Street: ");
-                    string userAddressStreet = Console.ReadLine();
-                    Console.Write("Housenumber: ");
-                    string userAddressHousenumber = Console.ReadLine();
-                    Console.Write("Zipcode: ");
-                    string userAddressZipcode = Console.ReadLine();
-
-                    // create object for the new user
-                    UserInfo newUser = new UserInfo
-                    {
-                        UserName = UserName,
-                        PassWord = PassWord,
-                        FirstName = FirstName,
-                        LastName = LastName,
-                        Email = Email,
-                        PhoneNumber = PhoneNumber,
-                        // create List object for address
-                        Address = new List<Address>()
-                        {
-                            new Address
-                            {
-                                City = userAddressCity,
-                                Street = userAddressStreet,
-                                HouseNumber = userAddressHousenumber,
-                                ZipCode = userAddressZipcode
-                            }
-                        }
-                    };
-
-                    // Write all user data to JSON file
-                    UpdateJson newUserJson = new UpdateJson();
-                    newUserJson.writeToJson(newUser, path);
-                    CurrentUserJson.WriteCurrentUserToJson(newUser);
-                    UserLogin.userLoggedIn = true;
-                    Console.WriteLine("Successfully created account!");
-                }
             }
+        
 
-            // empty json file
-            else
+            if (!emailAlreadyExists)
             {
-                Console.Write("\nFirst name: ");
-                base.FirstName = Console.ReadLine();
-                Console.Write("Last name: ");
-                base.LastName = Console.ReadLine();
+                string userFirst = UserCheck.GetValidInput("\nFirst name: ", UserCheck.isNameAlphabetic, "Invalid input. Please enter a first name containing only letters.");
+                base.FirstName = userFirst;
 
-                string usernameCheck = "";
-                bool userInUse = true;
-                while (userInUse == true)
-                {
-                    Console.Write("Username: ");
-                    usernameCheck = Console.ReadLine();
-                    userInUse = UserCheck.UsernameCheck(usernameCheck);
-                    if (userInUse == true)
-                    {
-                        Console.Write(@"
-This username is already in use. Please pick another username.
-");
-                    }
-                }
+                string userLast = UserCheck.GetValidInput("Last name: ", UserCheck.isNameAlphabetic, "Invalid input. Please enter a last name containing only letters.\n");
+                base.LastName = userLast;
+
+                string usernameCheck = UserCheck.GetValidInput("Username: ", UserCheck.IsUsernameValid, "");
                 base.UserName = usernameCheck;
-                Console.Write("Phone number: ");
-                base.PhoneNumber = Console.ReadLine();
 
-                Console.Write("City: ");
-                string userAddressCity = Console.ReadLine();
-                Console.Write("Street: ");
-                string userAddressStreet = Console.ReadLine();
-                Console.Write("Housenumber: ");
-                string userAddressHousenumber = Console.ReadLine();
-                Console.Write("Zipcode: ");
-                string userAddressZipcode = Console.ReadLine();
+                string userPhoneNumber = UserCheck.GetValidInput("Phonenumber: ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n");
+                base.PhoneNumber = userPhoneNumber;
 
-                // create object for the new user
+                string userAddressCity = UserCheck.GetValidInput("City: ", UserCheck.isCityAlphabetic, "Invalid input. Please enter a city containing only letters.\n");
+                string userAddressStreet = UserCheck.GetValidInput("Street: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n");
+                string userAddressHousenumber = UserCheck.GetValidInput("Housenumber: ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n");
+                string userAddressZipcode = UserCheck.GetValidInput("Zipcode: ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n");
+
                 UserInfo newUser = new UserInfo
                 {
                     UserName = UserName,
@@ -233,7 +152,7 @@ This username is already in use. Please pick another username.
                     LastName = LastName,
                     Email = Email,
                     PhoneNumber = PhoneNumber,
-                    // create List object for address
+                    // Create List object for address
                     Address = new List<Address>()
                     {
                         new Address
@@ -251,30 +170,9 @@ This username is already in use. Please pick another username.
                 newUserJson.writeToJson(newUser, path);
                 CurrentUserJson.WriteCurrentUserToJson(newUser);
                 UserLogin.userLoggedIn = true;
-                Console.WriteLine("Successfully created account!");
+                Console.WriteLine("\n- Successfully created account! -");
             }
             MainMenu.Main();
         }
-
-        // static void UpdateCurrentUser(UserInfo user)
-        // {
-
-        //     // Update the CurrentUser.json file with the user's information
-        //     CurrentUserInfo currentUser = new CurrentUserInfo
-        //     {
-        //         UserID = user.UserID,
-        //         UserName = user.UserName,
-        //         PassWord = user.PassWord,
-        //         FirstName = user.FirstName,
-        //         LastName = user.LastName,
-        //         Email = user.Email,
-        //         PhoneNumber = user.PhoneNumber,
-        //         Address = user.Address
-        //     };
-
-        //     string currentJson = JsonConvert.SerializeObject(currentUser, Formatting.Indented);
-        //     File.WriteAllText(currentUserPath, currentJson);
-
-        // }
     }
 }

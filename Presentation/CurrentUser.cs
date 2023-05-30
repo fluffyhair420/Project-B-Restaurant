@@ -33,19 +33,25 @@ Street: {data.Address[0].Street}
 Housenumber: {data.Address[0].HouseNumber}
 Zipcode: {data.Address[0].ZipCode}");
 
-            Console.WriteLine("\n1. Edit info\n2. Back\n");
-            int userInput = Convert.ToInt32(Console.ReadLine());
-            switch (userInput)
+            bool newInput = false;
+            while (newInput == false)
             {
-                case 1:
-                    ChangeInfo();
-                    break;
-                case 2:
-                    MainMenu.Main();
-                    break;
-                default:
-                    Console.WriteLine("\nInvalid input.");
-                    break;
+                Console.WriteLine("\n1. Edit info\n2. Back");
+                string userInput = Console.ReadLine();
+                switch (userInput)
+                {
+                    case "1":
+                        newInput = true;
+                        ChangeInfo();
+                        break;
+                    case "2":
+                        newInput = true;
+                        MainMenu.Main();
+                        break;
+                    default:
+                        Console.WriteLine("\nInvalid input.");
+                        break;
+                }
             }
         }
 
@@ -86,13 +92,13 @@ Zipcode: {data.Address[0].ZipCode}");
                     {
                         case "1":
                         string usernameCheck = "";
-                        bool userInUse = true;
-                        while (userInUse == true)
+                        bool userInUse = false;
+                        while (userInUse == false)
                         {
                             Console.Write("Enter a new username: ");
                             usernameCheck = Console.ReadLine();
                             userInUse = UserCheck.UsernameCheck(usernameCheck);
-                            if (userInUse == true)
+                            if (userInUse == false)
                             {
                                 Console.Write(@"
 This username is already in use. Please pick another username.
@@ -102,21 +108,37 @@ This username is already in use. Please pick another username.
                             userToUpdate.UserName = usernameCheck;
                             data.UserName = userToUpdate.UserName;
                             break;
+
                         case "2":
-                            Console.Write("Enter a new password: ");
-                            userToUpdate.PassWord = Console.ReadLine();
+                            string userPassWord = "";
+                            bool passwordValid = false;
+                            while (passwordValid == false)
+                            {
+                                Console.WriteLine(@"
+Password should contain at least
+- 8 characters
+- 1 capital letter
+- 1 number
+");
+                                Console.Write("Enter a new password: ");
+                                userPassWord = Console.ReadLine();
+                                passwordValid = UserCheck.PasswordCheck(userPassWord);
+                            }
+                            userToUpdate.PassWord = userPassWord;
                             data.PassWord = userToUpdate.PassWord;
                             break;
+
                         case "3":
-                            Console.Write("Enter a new first name: ");
-                            userToUpdate.FirstName = Console.ReadLine();
+                            string userFirst = UserCheck.GetValidInput("Enter a new first name: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a first name containing only letters.");
+                            userToUpdate.FirstName = userFirst;
                             data.FirstName = userToUpdate.FirstName;
                             break;
                         case "4":
-                            Console.Write("Enter a new last name: ");
-                            userToUpdate.LastName = Console.ReadLine();
+                            string userLast = UserCheck.GetValidInput("Enter a new last name: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a last name containing only letters.\n");
+                            userToUpdate.LastName = userLast;
                             data.LastName = userToUpdate.LastName;
                             break;
+
                         case "5":
                             Console.Write("Enter a new email: ");
                             bool emailValid = false;
@@ -159,29 +181,30 @@ An account using this email address already exists.
                                 data.Email = userToUpdate.Email;
                             }
                             break;
+
                         case "6":
-                            Console.Write("Enter a new phonenumber: ");
-                            userToUpdate.PhoneNumber = Console.ReadLine();
+                            string userPhoneNumber = UserCheck.GetValidInput("Enter a new phonenumber: ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n");
+                            userToUpdate.PhoneNumber = userPhoneNumber;
                             data.PhoneNumber = userToUpdate.PhoneNumber;
                             break;
                         case "7":
-                            Console.Write("Enter a new city: ");
-                            userToUpdate.Address[0].City = Console.ReadLine();
+                            string userAddressCity = UserCheck.GetValidInput("Enter a new city: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a city containing only letters.\n");
+                            userToUpdate.Address[0].City = userAddressCity;
                             data.Address[0].City = userToUpdate.Address[0].City;
                             break;
                         case "8":
-                            Console.Write("Enter a new street: ");
-                            userToUpdate.Address[0].Street = Console.ReadLine();
+                            string userAddressStreet = UserCheck.GetValidInput("Enter a new street: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n");
+                            userToUpdate.Address[0].Street = userAddressStreet;
                             data.Address[0].Street = userToUpdate.Address[0].Street;
                             break;
                         case "9":
-                            Console.Write("Enter a new housenumber: ");
-                            userToUpdate.Address[0].HouseNumber = Console.ReadLine();
+                            string userAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber: ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n");
+                            userToUpdate.Address[0].HouseNumber = userAddressHousenumber;
                             data.Address[0].HouseNumber = userToUpdate.Address[0].HouseNumber;
                             break;
                         case "10":
-                            Console.Write("Enter a new zipcode: ");
-                            userToUpdate.Address[0].ZipCode = Console.ReadLine();
+                            string userAddressZipcode = UserCheck.GetValidInput("Enter a new zipcode: ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n");
+                            userToUpdate.Address[0].ZipCode = userAddressZipcode;
                             data.Address[0].ZipCode = userToUpdate.Address[0].ZipCode;
                             break;
                         default:
@@ -220,27 +243,6 @@ An account using this email address already exists.
             {
                 Console.WriteLine("User not found.");
             }    
-        }
-
-        public bool checkEmail(dynamic allData, string email)
-        {
-            bool emailAlreadyExists = false;
-            if (allData != null)
-            {
-                foreach (var item in allData)
-                {
-                    // Email already exists
-                    if (item.Email == email)
-                    {
-                        Console.Write(@"
-An account using this email address already exists.
-Do you want to login instead?
-typ ""Y"" or ""N"": ");
-                        emailAlreadyExists = true;
-                    }
-                }
-            }
-            return emailAlreadyExists;
         }
     }
 }

@@ -137,6 +137,7 @@ Sunday:       CLOSED
 
             var writeToJson = new WriteTableJson();
             writeToJson.WriteJson(Convert.ToInt16(partySize), reservationDate, reservationName, reservationEmail, reservationPhoneNumber, reservationID);
+            Email.Info();
             Console.Clear();
             MainMenu.Main();
         }
@@ -160,12 +161,11 @@ Sunday:       CLOSED
             * - Ask user if they want to change reservation name
             * - Ask user if they want to delete reservation
             */
-
+            
             CurrentUserInfo currentUser = GetCurrentUserInfo();
             reservationName = !string.IsNullOrEmpty(currentUser.FirstName) && !string.IsNullOrEmpty(currentUser.LastName) ? $"{currentUser.FirstName} {currentUser.LastName}" : null;
             reservationEmail = !string.IsNullOrEmpty(currentUser.Email) ? $"{currentUser.Email}" : null;
             reservationPhoneNumber = !string.IsNullOrEmpty(currentUser.PhoneNumber) ? $"{currentUser.PhoneNumber}" : null;
-
             Console.Clear();
             while (true)
             {
