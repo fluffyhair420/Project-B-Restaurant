@@ -23,8 +23,10 @@ namespace Restaurant
                 Console.WriteLine(menu);
                 Console.WriteLine("For information on dishes/drinks press 1 and then input the number assosiated with it.");
                 Console.WriteLine("To filter (for vegan/glutenfree/vegetarian/sorting options) press 9");
-                Console.WriteLine("input 8 to change the month for the menu");
-                Console.WriteLine("Input 7 to change something about a dish");
+                if (AdminMainMenu.adminLoggedIn && !UserLogin.userLoggedIn){
+                    Console.WriteLine("input 8 to change the month for the menu");
+                    Console.WriteLine("Input 7 to change something about a dish");
+                }
                 Console.WriteLine("Press Q to go back to the main menu");
             }
 
