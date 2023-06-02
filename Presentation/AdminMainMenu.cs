@@ -32,8 +32,8 @@ namespace Restaurant
                             break;
                         case "2": // VIEW / CHANGE MENU GOES HERE
                             wrongInput = false;
-                            // Menu menu = new Menu();
-                            // menu.Show();
+                            Menu menu = new Menu();
+                            menu.Show();
                             break;
 
                         case "3": // ADMIN BOOK A TABLE GOES HERE

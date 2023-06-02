@@ -56,7 +56,7 @@ namespace Restaurant
             }
 
             //CHANGE SOMETHING ABOUT A DISH THIS IS HIGHLY NEW  
-            if(input.Key == ConsoleKey.D7){
+            if(input.Key == ConsoleKey.D7 && AdminMainMenu.adminLoggedIn && !UserLogin.userLoggedIn){
                 Console.Clear();
                 Console.WriteLine("Give the Month of what menu you want to change");
                 string month = Console.ReadLine();
@@ -111,9 +111,13 @@ namespace Restaurant
                     Menu.Show();
                 }            
             }
+            else if(input.Key == ConsoleKey.D7 && !AdminMainMenu.adminLoggedIn || UserLogin.userLoggedIn){
+                var Menu = new Menu();
+                Menu.Show();
+            }
 
             //IT WORKSSSSSSSS
-            if(input.Key == ConsoleKey.D8){
+            if(input.Key == ConsoleKey.D8 && AdminMainMenu.adminLoggedIn && !UserLogin.userLoggedIn){
                 Console.Clear();
                 Console.WriteLine("input the month");
                 string month = Console.ReadLine();
@@ -129,6 +133,10 @@ namespace Restaurant
                     var Menu = new Menu();
                     Menu.Show();
                 }            
+            }
+            else if(input.Key == ConsoleKey.D7 && !AdminMainMenu.adminLoggedIn || UserLogin.userLoggedIn){
+                var Menu = new Menu();
+                Menu.Show();
             }
 
             if (input.Key == ConsoleKey.D9)

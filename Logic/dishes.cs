@@ -37,7 +37,7 @@ namespace Restaurant
 
         public static List<Dish> LoadDishesFromJson(string Month)
         {
-            using (StreamReader r = new StreamReader(@"C:\Users\ikben\Desktop\Project_B_local_file\DataSources\Dishes.json"))
+            using (StreamReader r = new StreamReader(@"DataSources/Dishes.json"))
                 {
                     string json = r.ReadToEnd();
                     //List<Dish> dishes = JsonConvert.DeserializeObject<List<Dish>>(json);
@@ -93,7 +93,7 @@ namespace Restaurant
             var jsonValue = "\"" + change + "\"";
             List<string> keys = new List<string>() { "Name", "Price", "Description", "hasFish", "hasShellFish", "hasMeat", "isVegan", "isGlutenFree" };
             // Load the dishes from the JSON file
-            string json = File.ReadAllText(@"C:\Users\ikben\Desktop\Project_B_local_file\DataSources\Dishes.json");
+            string json = File.ReadAllText(@"DataSources/Dishes.json");
             JObject menuData = JObject.Parse(json);
             JArray dishesArray = (JArray)menuData[Month];
             
@@ -137,7 +137,7 @@ namespace Restaurant
                     dishToUpdate[key] = JToken.Parse(jsonValue);
                 }
                 // Save the modified dishes back to the JSON file
-                File.WriteAllText(@"C:\Users\ikben\Desktop\Project_B_local_file\DataSources\Dishes.json", JsonConvert.SerializeObject(menuData, Formatting.Indented));
+                File.WriteAllText(@"DataSources/Dishes.json", JsonConvert.SerializeObject(menuData, Formatting.Indented));
 
                 // Print the updated value
                 Console.WriteLine($"Updated {key}: {dishToUpdate[key]}, this was {before}");
