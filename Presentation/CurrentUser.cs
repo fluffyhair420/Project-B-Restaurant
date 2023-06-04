@@ -4,8 +4,9 @@ namespace Restaurant
     class CurrentUser : UserInfo
     {
         // path for json file that stores all user's information
-        static string userPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
-        static string userJson = File.ReadAllText(userPath);
+        
+        private static string bookingPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Table.json"));
+
 
         public CurrentUser()
         {
@@ -61,14 +62,20 @@ Zipcode: {data.Address[0].ZipCode}");
             string currentUserJson = File.ReadAllText(currentUserPath);
             dynamic data = JsonConvert.DeserializeObject(currentUserJson);
 
+            string readBookingPath = File.ReadAllText(bookingPath);
+            dynamic bookingData = JsonConvert.DeserializeObject(readBookingPath);
+
+            string userPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
+            string userJson = File.ReadAllText(userPath);
             var allData = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
+            
             
             string userEmailToUpdate = data.Email;
             var userToUpdate = allData.Find(user => user.Email == userEmailToUpdate);
 
             if (userToUpdate != null)
             {
-                // Step 3: Update the properties of the found object
+                // Update the properties of the found object
                 bool wrongInput = true;
                 while (wrongInput)
                 {
@@ -85,7 +92,7 @@ Zipcode: {data.Address[0].ZipCode}");
 8. Street
 9. Housenumber
 10. Zipcode
-=== Press any other button to quit ===
+=== Press Enter to quit ===
 ");
                     string userInput = Console.ReadLine();
                     switch (userInput)
@@ -95,19 +102,27 @@ Zipcode: {data.Address[0].ZipCode}");
                         bool userInUse = false;
                         while (userInUse == false)
                         {
-                            Console.Write("Enter a new username: ");
+                            Console.Write("Enter a new username (or press Enter to cancel): ");
                             usernameCheck = Console.ReadLine();
-                            userInUse = UserCheck.UsernameCheck(usernameCheck);
+                            // Check if the user pressed Enter without entering any text
+                            if (string.IsNullOrEmpty(usernameCheck))
+                            {
+                                break; // Exit the loop without updating variables
+                            }
+                            
+                            userInUse = UserCheck.IsUsernameValid(usernameCheck);
                             if (userInUse == false)
                             {
-                                Console.Write(@"
-This username is already in use. Please pick another username.
-");
+                                
                             }
+                            
                         }
+                        if (!string.IsNullOrEmpty(usernameCheck))
+                        {
                             userToUpdate.UserName = usernameCheck;
                             data.UserName = userToUpdate.UserName;
-                            break;
+                        }
+                        break;
 
                         case "2":
                             string userPassWord = "";
@@ -117,35 +132,60 @@ This username is already in use. Please pick another username.
                                 Console.WriteLine(@"
 Password should contain at least
 - 8 characters
+- 1 lower case letter
 - 1 capital letter
 - 1 number
 ");
-                                Console.Write("Enter a new password: ");
+                                Console.Write("Enter a new password (or press Enter to cancel): ");
                                 userPassWord = Console.ReadLine();
+                                if (string.IsNullOrEmpty(userPassWord))
+                                {
+                                    break; 
+                                }
+                                
                                 passwordValid = UserCheck.PasswordCheck(userPassWord);
+                                if (passwordValid == false)
+                                {
+                                    
+                                }
+                                
                             }
-                            userToUpdate.PassWord = userPassWord;
-                            data.PassWord = userToUpdate.PassWord;
+                            if (!string.IsNullOrEmpty(userPassWord))
+                            {
+                                userToUpdate.UserName = userPassWord;
+                                data.UserName = userToUpdate.UserName;
+                            }
                             break;
 
                         case "3":
-                            string userFirst = UserCheck.GetValidInput("Enter a new first name: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a first name containing only letters.");
-                            userToUpdate.FirstName = userFirst;
-                            data.FirstName = userToUpdate.FirstName;
+                            string userFirst = UserCheck.GetValidInput("Enter a new first name (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a first name containing only letters.");
+                            if (!string.IsNullOrEmpty(userFirst))
+                            {
+                                userToUpdate.FirstName = userFirst;
+                                data.FirstName = userToUpdate.FirstName;
+                            }
                             break;
+
                         case "4":
-                            string userLast = UserCheck.GetValidInput("Enter a new last name: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a last name containing only letters.\n");
-                            userToUpdate.LastName = userLast;
-                            data.LastName = userToUpdate.LastName;
+                            string userLast = UserCheck.GetValidInput("Enter a new last name (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a last name containing only letters.\n");
+                            if (!string.IsNullOrEmpty(userLast))
+                            {
+                                userToUpdate.LastName = userLast;
+                                data.LastName = userToUpdate.LastName;
+                            }
                             break;
 
                         case "5":
-                            Console.Write("Enter a new email: ");
+                            Console.Write("Enter a new email (or press Enter to cancel): ");
                             bool emailValid = false;
                             string userEmail = "";
                             while (emailValid == false)
                             {
                                 userEmail = Console.ReadLine();
+                                if (string.IsNullOrEmpty(userEmail))
+                                {
+                                    break; 
+                                }
                                 emailValid = UserCheck.EmailCheck(userEmail);
                                 if (emailValid == false)
                                 {
@@ -158,54 +198,99 @@ Email address should only contain:
                                     ");
                                 }
                             }
-                            //checkEmail(allData, userEmail);
-                            bool emailAlreadyExists = false;
-                            if (allData != null)
+                            // Only update email if it's not empty
+                            if (!string.IsNullOrEmpty(userEmail))
                             {
-                                foreach (var item in allData)
+                                bool emailAlreadyExists = false;
+                                if (allData != null)
                                 {
-                                    // Email already exists
-                                    if (item.Email == userEmail)
+                                    foreach (var item in allData)
                                     {
-                                        Console.Write(@"
+                                        // Email already exists
+                                        if (item.Email == userEmail)
+                                        {
+                                            Console.Write(@"
 An account using this email address already exists.
-");
-                                        emailAlreadyExists = true;
+                        ");
+                                            emailAlreadyExists = true;
+                                        }
                                     }
                                 }
-                            }
 
-                            if (!emailAlreadyExists)
-                            {   
-                                userToUpdate.Email = userEmail;
-                                data.Email = userToUpdate.Email;
+                                if (!emailAlreadyExists)
+                                {  
+                                    userToUpdate.Email = userEmail;
+                                    if (bookingData != null)
+                                    {
+                                        foreach (var booking in bookingData)
+                                        {
+                                            if (data.Email == booking.ReservationEmail)
+                                            {
+                                                booking.ReservationEmail = userToUpdate.Email;
+                                            }
+                                        }
+                                    }
+                                    data.Email = userToUpdate.Email;
+                                }
                             }
                             break;
 
                         case "6":
-                            string userPhoneNumber = UserCheck.GetValidInput("Enter a new phonenumber: ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n");
+                            string userPhoneNumber = UserCheck.GetValidInput("Enter a new phonenumber (or press Enter to cancel): ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n");
+                            if (string.IsNullOrEmpty(userPhoneNumber))
+                            {
+                                break; // Exit the loop without updating variables
+                            }
+                            
                             userToUpdate.PhoneNumber = userPhoneNumber;
+                            
+                            if (bookingData != null)
+                            {
+                                foreach (var booking in bookingData)
+                                {
+                                    if (data.PhoneNumber == booking.ReservationPhoneNumber && data.Email == booking.ReservationEmail)
+                                    {
+                                        booking.ReservationPhoneNumber = userToUpdate.PhoneNumber;
+                                    }
+                                }
+                            }
                             data.PhoneNumber = userToUpdate.PhoneNumber;
                             break;
+
+
+
+
                         case "7":
-                            string userAddressCity = UserCheck.GetValidInput("Enter a new city: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a city containing only letters.\n");
-                            userToUpdate.Address[0].City = userAddressCity;
-                            data.Address[0].City = userToUpdate.Address[0].City;
+                            string userAddressCity = UserCheck.GetValidInput("Enter a new city (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a city containing only letters.\n");
+                            if (!string.IsNullOrEmpty(userAddressCity))
+                            {
+                                userToUpdate.Address[0].City = userAddressCity;
+                                data.Address[0].City = userToUpdate.Address[0].City;
+                            }
                             break;
                         case "8":
-                            string userAddressStreet = UserCheck.GetValidInput("Enter a new street: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n");
-                            userToUpdate.Address[0].Street = userAddressStreet;
-                            data.Address[0].Street = userToUpdate.Address[0].Street;
+                            string userAddressStreet = UserCheck.GetValidInput("Enter a new street (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n");
+                            if (!string.IsNullOrEmpty(userAddressStreet))
+                            {
+                                userToUpdate.Address[0].Street = userAddressStreet;
+                                data.Address[0].Street = userToUpdate.Address[0].Street;
+                            }
                             break;
                         case "9":
-                            string userAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber: ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n");
-                            userToUpdate.Address[0].HouseNumber = userAddressHousenumber;
-                            data.Address[0].HouseNumber = userToUpdate.Address[0].HouseNumber;
+                            string userAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber (or press Enter to cancel): ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n");
+                            if (!string.IsNullOrEmpty(userAddressHousenumber))
+                            {
+                                userToUpdate.Address[0].HouseNumber = userAddressHousenumber;
+                                data.Address[0].HouseNumber = userToUpdate.Address[0].HouseNumber;
+                            }
                             break;
                         case "10":
-                            string userAddressZipcode = UserCheck.GetValidInput("Enter a new zipcode: ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n");
-                            userToUpdate.Address[0].ZipCode = userAddressZipcode;
-                            data.Address[0].ZipCode = userToUpdate.Address[0].ZipCode;
+                            string userAddressZipcode = UserCheck.GetValidInput("Enter a new zipcode (or press Enter to cancel): ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n");
+                            if (!string.IsNullOrEmpty(userAddressZipcode))
+                            {
+                                userToUpdate.Address[0].ZipCode = userAddressZipcode;
+                                data.Address[0].ZipCode = userToUpdate.Address[0].ZipCode;
+                            }
                             break;
                         default:
                             string updateSuccesDot = "...";
@@ -226,14 +311,19 @@ An account using this email address already exists.
                             break;
                     }
 
-                    // Step 4: Write the modified list back to the User.JSON file
+                    int index = allData.IndexOf(userToUpdate);
+                    allData[index] = userToUpdate;
+
+                    // Step 5: Write the modified list back to the User.JSON file
                     string updatedJsonContents = JsonConvert.SerializeObject(allData, Formatting.Indented);
                     File.WriteAllText(userPath, updatedJsonContents);
 
-                    // Step 5: Write the modified list back to the CurrentUser.JSON file
+                    // Step 6: Write the modified list back to the CurrentUser.JSON file
                     string updatedCurrentJsonContents = JsonConvert.SerializeObject(data, Formatting.Indented);
                     File.WriteAllText(currentUserPath, updatedCurrentJsonContents);
 
+                    string updatedBookingJsonContents = JsonConvert.SerializeObject(bookingData, Formatting.Indented);
+                    File.WriteAllText(bookingPath, updatedBookingJsonContents);
                     //Console.WriteLine("User updated successfully.");
 
                 }
@@ -246,3 +336,6 @@ An account using this email address already exists.
         }
     }
 }
+
+
+

@@ -137,8 +137,11 @@ Sunday:       CLOSED
 
             var writeToJson = new WriteTableJson();
             writeToJson.WriteJson(Convert.ToInt16(partySize), reservationDate, reservationName, reservationEmail, reservationPhoneNumber, reservationID);
-            Email.Info();
+            Email.ConfirmationEmail();
             Console.Clear();
+            Console.WriteLine(@$"
+A confirmation e-mail has been sent to {reservationEmail}.
+Please check your inbox and spam.");
             MainMenu.Main();
         }
 
