@@ -39,5 +39,12 @@ namespace Restaurant
             string currentUserJson = JsonConvert.SerializeObject(currentUser, Formatting.Indented);
             File.WriteAllText(currentUserPath, currentUserJson);
         }
+
+        // public static void ReadCurrentUserFromJson()
+        // {
+        //     string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
+        //     string currentUserJson = File.ReadAllText(currentUserPath);
+            
+        // }
     }
 }

@@ -46,6 +46,7 @@ namespace Restaurant
             UserPassword = userpassword;
             bool containsNumber = false;
             bool containsCapital = false;
+            bool containsLower = false;
 
             if (UserPassword == null || UserPassword.Length < 8)
             {
@@ -63,9 +64,14 @@ namespace Restaurant
                 {
                     containsCapital = true;
                 }
+
+                if (char.IsLower(character))
+                {
+                    containsLower = true;
+                }
             }
 
-            if (containsNumber == true && containsCapital == true)
+            if (containsNumber == true && containsCapital == true && containsLower == true)
             {
                 return true;
             }
@@ -161,6 +167,10 @@ namespace Restaurant
             {
                 Console.Write(prompt);
                 userInput = Console.ReadLine();
+                if (string.IsNullOrEmpty(userInput))
+                {
+                    return userInput;
+                }
                 if (validationFunc(userInput))
                 {
                     isValidInput = true;

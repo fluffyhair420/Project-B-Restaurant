@@ -30,7 +30,7 @@ namespace Restaurant
                         Thread.Sleep(50);
                     }
                     Thread.Sleep(1000);
-                    string logoutSuccessfull = " Succesfully logged out.\n";
+                    string logoutSuccessfull = " Successfully logged out.\n";
                     foreach (char c in logoutSuccessfull)
                     {
                         Console.Write(c);

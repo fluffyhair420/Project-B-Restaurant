@@ -57,6 +57,7 @@ namespace Restaurant
                 Console.WriteLine(@"
 Password should contain at least
 - 8 characters
+- 1 lower case letter
 - 1 capital letter
 - 1 number
 ");
