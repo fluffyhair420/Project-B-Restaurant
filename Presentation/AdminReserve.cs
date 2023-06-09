@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Restaurant
 {
-    public class Reserve
+    public class AdminReserve
     {
         string filePath = "DataSources/CurrentUser.json";
         string partySize;
@@ -46,18 +46,9 @@ Sunday:       CLOSED
             {
                 Console.WriteLine($"Party Size *: ");
                 Console.WriteLine($"Reservation Date *: ");
-                if (!UserLogin.userLoggedIn)
-                {
-                    Console.WriteLine($"Reservation Name *: ");
-                    Console.WriteLine($"Reservation Email *: ");
-                    Console.WriteLine($"Reservation Phone Number *: ");
-                }
-                else
-                {
-                    Console.WriteLine($"Reservation Name *: {reservationName}");
-                    Console.WriteLine($"Reservation Email *: {reservationEmail}");
-                    Console.WriteLine($"Reservation Phone Number *: {reservationPhoneNumber}");
-                }
+                Console.WriteLine($"Reservation Name *: ");
+                Console.WriteLine($"Reservation Email *: ");
+                Console.WriteLine($"Reservation Phone Number *: ");
                 Console.WriteLine($"Reservation ID: {reservationID}");
                 Console.WriteLine("* You can't leave this field empty.");
 
@@ -65,29 +56,22 @@ Sunday:       CLOSED
                 partySize = GetPartySize();
                 Console.SetCursorPosition("Reservation Date *: ".Length, Console.CursorTop);
                 reservationDate = GetDate();
-
-                if (!UserLogin.userLoggedIn)
-                {
-                    Console.SetCursorPosition("Reservation Name *: ".Length, Console.CursorTop);
-                    reservationName = GetName();
-                    Console.SetCursorPosition("Reservation Email *: ".Length, Console.CursorTop);
-                    reservationEmail = GetEmail();
-                    Console.SetCursorPosition("Reservation Phone Number *: ".Length, Console.CursorTop);
-                    reservationPhoneNumber = GetPhoneNumber();
-                }
+                Console.SetCursorPosition("Reservation Name *: ".Length, Console.CursorTop);
+                reservationName = GetName();
+                Console.SetCursorPosition("Reservation Email *: ".Length, Console.CursorTop);
+                reservationEmail = GetEmail();
+                Console.SetCursorPosition("Reservation Phone Number *: ".Length, Console.CursorTop);
+                reservationPhoneNumber = GetPhoneNumber();
 
                 break;
             }
 
-<<<<<<< Updated upstream
-            var writeToJson = new WriteTableJson();
-            writeToJson.WriteJson(Convert.ToInt16(partySize), reservationDate, reservationName, reservationEmail, reservationPhoneNumber, reservationID);
-            Email.Info();
-=======
             WriteTableJson.WriteJson(Convert.ToInt16(partySize), reservationDate, reservationName, reservationEmail, reservationPhoneNumber, reservationID);
             Email.ConfirmationEmail();
->>>>>>> Stashed changes
             Console.Clear();
+            Console.WriteLine(@$"
+A confirmation e-mail has been sent to {reservationEmail}.
+Please check your inbox and spam.");
             MainMenu.Main();
         }
 
@@ -109,10 +93,10 @@ Sunday:       CLOSED
                     Console.WriteLine("Please enter a number.");
                     PromptRetryOrQuit();
                 }
-                else if (Convert.ToInt16(input) > 6)
+                else if (Convert.ToInt16(input) > 48)
                 {
                     Console.Clear();
-                    Console.WriteLine("Please keep in mind party sizes over 6 need to call to make a reservation.");
+                    Console.WriteLine("Party Size can't be over 48");
                     PromptRetryOrQuit();
                 }
                 else
@@ -249,7 +233,7 @@ Sunday:       CLOSED
         ! UNDER CONSTRUCTION
         ! DO NOT TOUCH WITHOUT CONSULTING SHAE
         */
-        public void MainReserve()
+        public void AdminMainReserve()
         {
             /*
             TODO:
@@ -262,18 +246,10 @@ Sunday:       CLOSED
             * - Ask user if they want to change reservation name
             * - Ask user if they want to delete reservation
             */
-
-            CurrentUserInfo currentUser = ReadCurrentUserJson.GetCurrentUserInfo();
-            reservationName = !string.IsNullOrEmpty(currentUser.FirstName) && !string.IsNullOrEmpty(currentUser.LastName) ? $"{currentUser.FirstName} {currentUser.LastName}" : null;
-            reservationEmail = !string.IsNullOrEmpty(currentUser.Email) ? $"{currentUser.Email}" : null;
-            reservationPhoneNumber = !string.IsNullOrEmpty(currentUser.PhoneNumber) ? $"{currentUser.PhoneNumber}" : null;
             Console.Clear();
             while (true)
             {
-                Console.WriteLine(@"Keep in mind:
-Party sizes over 6 need to call to make a reservation.
-
-Continue to reservation form? Y/N");
+                Console.WriteLine("Continue to reservation form? Y/N");
                 string tempInput = Console.ReadLine();
 
                 if ((tempInput == "Y") || (tempInput == "y"))

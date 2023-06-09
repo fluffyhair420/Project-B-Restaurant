@@ -6,9 +6,9 @@ using Newtonsoft.Json;
 
 namespace Restaurant
 {
-    public class WriteTableJson
+    public static class WriteTableJson
     {
-        string jsonFile = "DataSources/Table.json";
+        static string jsonFile = "DataSources/Table.json";
 
         /*
         * WriteTableJson.WriteJson() method takes in:
@@ -17,7 +17,7 @@ namespace Restaurant
         * === === === ===
         * Made the method private, should not be used outside the Reserve class
         */
-        public void WriteJson(int partySize, string reservationDate, string reservationName, string reservationEmail, string reservationPhoneNumber, string reservationID)
+        public static void WriteJson(int partySize, string reservationDate, string reservationName, string reservationEmail, string reservationPhoneNumber, string reservationID)
         {
             Table reservation = new Table()
             {

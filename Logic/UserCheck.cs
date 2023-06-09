@@ -18,8 +18,12 @@ namespace Restaurant
 
             try
             {
-                MailAddress mailAddress = new MailAddress(UserEmail);
-                isValidEmail = true;
+                // checks if email address starts with lower/uppercase letters and/or numbers
+                // checks if it's followed by "@"
+                // checks if "@" is followed by lower/uppercase letters, numbers or "-"
+                // checks if the email address ends with ".", followed by lower/uppercase letters
+                string emailPattern = @"^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+$";
+                isValidEmail = Regex.IsMatch(UserEmail, emailPattern);
             }
             catch (FormatException)
             {
@@ -40,6 +44,7 @@ namespace Restaurant
                 return false;
             }
         }
+
 
         public static bool PasswordCheck(string userpassword)
         {
@@ -75,7 +80,7 @@ namespace Restaurant
                 return false;
             }
         }
-    
+
         public static bool UsernameCheck(string username)
         {
             string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
@@ -106,7 +111,7 @@ namespace Restaurant
             {
                 return true;
             }
-            
+
         }
 
         public static bool IsUsernameValid(string username)
