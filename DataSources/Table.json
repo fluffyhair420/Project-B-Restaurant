@@ -1,0 +1,26 @@
+[
+  {
+    "PartySize": 2,
+    "ReservationDate": "1",
+    "ReservationName": "2",
+    "ReservationEmail": "a@b",
+    "ReservationPhoneNumber": "2",
+    "ReservationID": "8081875"
+  },
+  {
+    "PartySize": 3,
+    "ReservationDate": "1",
+    "ReservationName": "2",
+    "ReservationEmail": "c@d",
+    "ReservationPhoneNumber": "2",
+    "ReservationID": "8081875"
+  },
+  {
+    "PartySize": 1,
+    "ReservationDate": "1",
+    "ReservationName": "fn1 ln1",
+    "ReservationEmail": "e@f",
+    "ReservationPhoneNumber": "123456789",
+    "ReservationID": "7356854"
+  }
+]

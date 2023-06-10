@@ -1,0 +1,12 @@
+This layer contains all code dealing with the logic.
+Calculating stuff, checking stuff, transforming data, etc...
+
+
+The Logic.
+
+For grouping purposes we’re going to connect this with the data layer.
+So, each section of the data will have its own place in this layer.
+
+
+
+No WriteLines or ReadLines are going to be in here!​

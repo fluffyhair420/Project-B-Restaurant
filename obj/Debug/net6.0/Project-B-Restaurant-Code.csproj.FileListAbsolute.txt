@@ -1,0 +1,17 @@
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\bin\Debug\net6.0\Project-B-Restaurant-Code.exe
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\bin\Debug\net6.0\Project-B-Restaurant-Code.deps.json
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\bin\Debug\net6.0\Project-B-Restaurant-Code.runtimeconfig.json
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\bin\Debug\net6.0\Project-B-Restaurant-Code.dll
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\bin\Debug\net6.0\Project-B-Restaurant-Code.pdb
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\Project-B-Restaurant-Code.csproj.AssemblyReference.cache
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\Project-B-Restaurant-Code.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\Project-B-Restaurant-Code.AssemblyInfoInputs.cache
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\Project-B-Restaurant-Code.AssemblyInfo.cs
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\Project-B-Restaurant-Code.csproj.CoreCompileInputs.cache
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\Project-B-Restaurant-Code.csproj.CopyComplete
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\Project-B-Restaurant-Code.dll
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\refint\Project-B-Restaurant-Code.dll
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\Project-B-Restaurant-Code.pdb
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\Project-B-Restaurant-Code.genruntimeconfig.cache
+C:\Users\Lorenzo\Documents\GitHub\Project-B-Restaurant\obj\Debug\net6.0\ref\Project-B-Restaurant-Code.dll

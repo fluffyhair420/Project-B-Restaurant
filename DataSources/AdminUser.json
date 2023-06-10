@@ -1,0 +1,17 @@
+[
+  {
+    "UserID": 1,
+    "UserName": "RestaurantAdmin01",
+    "PassWord": "Welcome01!",
+    "Email": "email@email.com",
+    "PhoneNumber": "0101234567",
+    "Address": [
+      {
+        "City": "Rotterdam",
+        "Street": "Wijnhaven",
+        "HouseNumber": "107",
+        "ZipCode": "3011 WN"
+      }
+    ]
+  }
+]

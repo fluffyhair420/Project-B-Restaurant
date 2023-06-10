@@ -1,0 +1,950 @@
+{
+  "January": [
+    {
+      "ID": 1,
+      "Name": "Steak",
+      "Description": "a thick cut of meat generally sliced across the muscle fibers, grilled by our top chef",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 2,
+      "Name": "Tomato Soup",
+      "Description": "soup containing tomato, spinach and paprika powder",
+      "Price": 30.75,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 3,
+      "Name": "Spanakopita",
+      "Description": "Spanakopita is a Greek spinach pie. This pie is filled with spinach and goats cheese.",
+      "Price": 44.5,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 4,
+      "Name": "Matsutake Mushrooms Salad",
+      "Description": "This salad contains matsuke mushrooms, tomato's and lettuce. Tricholoma matsutake, is a species of choice edible mycorrhizal mushroom that grows in East Asia, northern Europe, and North America. It is prized in Japanese cuisine for its distinct spicy-aromatic odor.",
+      "Price": 45.5,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 5,
+      "Name": "Oysters",
+      "Description": "A bivalve mollusk, which is eaten raw or cooked. This is a shellfish",
+      "Price": 45.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "hasShellFish": true,
+      "isVegan": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 6,
+      "Name": "Bluefin Tuna",
+      "Description": "Cooked tuna",
+      "Price": 48.0,
+      "hasFish": true,
+      "hasShellFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 7,
+      "Name": "‘Bacon’ Wrapped Vegan Scallops",
+      "Description": "Vegan scallops wrapped in vegan 'bacon', with Paprika Sauce",
+      "Price": 50.5,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "isGlutenFree": true
+    }
+  ],
+  "February": [
+    {
+      "ID": 1,
+      "Name": "Steak",
+      "Description": "a thick cut of meat generally sliced across the muscle fibers, grilled by our top chef",
+      "Price": 35.5,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 2,
+      "Name": "Deluxe Hamburger",
+      "Description": "a Hambuger with lettuce, tomato and gluten free bread",
+      "Price": 30.75,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 3,
+      "Name": "Tomato Soup",
+      "Description": "soup containing tomato, spinach and paprika powder",
+      "Price": 30.75,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 4,
+      "Name": "Onion Soup",
+      "Description": "a blend of mellow, slowly cooked, caramelised onions in a broth laced with white wine and cognac.",
+      "Price": 25.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 5,
+      "Name": "Gua bao",
+      "Description": "A type of lotus leaf bun originating from Fujian cuisine, a traditional gua bao consists of slices of pork belly meat dressed with pickled mustard greens, coriander and ground peanuts.",
+      "Price": 32.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 6,
+      "Name": "Chicken and Waffels",
+      "Price": 35.5,
+      "Description": "A sweet and savory mix, waffels served with sirup.",
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 7,
+      "Name": "Bacon wrapped chicken",
+      "Description": "Chicken wrapped in bacon",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    }
+  ],
+  "March": [
+    {
+      "ID": 1,
+      "Name": "Chicken and Shrimp Laksa",
+      "Description": "a refreshing and brothy noodle dish popular throughout Southeast Asia",
+      "Price": 40.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 2,
+      "Name": "Emperor's Pork",
+      "Description": "pork belly in a sweet and savory sauce laced with warm notes of cinnamon and rock sugar, along with soy and MSG",
+      "Price": 40.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 3,
+      "Name": "Beet and Pear Salad",
+      "Description": "This crunchy, refreshing salad studded with purple beets, Asian pear, and hazelnuts is complemented by a fragrant dressing of ginger and white miso.",
+      "Price": 30.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 4,
+      "Name": "Poul Nan Sos",
+      "Description": "The meat is marinated overnight with onions, garlic, thyme, and chiles along with citrus, and then rubbed forcefully onto the chicken to access the fragrant oils. After the meat takes on all that flavor, it's stewed with the marinade and loads of bell peppers for a satisfying, thrilling stew. This dish is haiti.",
+      "Price": 42.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 5,
+      "Name": "Deluxe Hamburger",
+      "Description": "a Hambuger with lettuce, tomato and gluten free bread",
+      "Price": 30.75,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 6,
+      "Name": "Garlic Butter Shrimp",
+      "Description": "The shrimp are marinated in a mixture of Italian dressing, mayonnaise, calamansi juice, and salt, then grilled and tossed in roasted garlic butter",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 7,
+      "Name": "Lentil Soup",
+      "Description": "savoury and has a flavour boost from a hint of spices. There's an undertone of natural sweetness from the soffrito flavour base of onion, carrot and celery",
+      "Price": 32.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    }
+  ],
+  "April": [
+    {
+      "ID": 1,
+      "Name": "Sweet Spareribs",
+      "Description": "Spareribs that were slow roasted in the oven till tender, then on the grill with a sweet sauces",
+      "Price": 40.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 2,
+      "Name": "Kai Jeow Moo Sab",
+      "Description": "Fried omelet with pork",
+      "Price": 33.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 3,
+      "Name": "lasagne",
+      "Description": "A rich and creamy whole-wheat pasta dish filled layer by layer with refreshingly fresh onions and garlic, lathered in a succulent sauce and topped with imported, premium quality mozzarella.",
+      "Price": 37.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 4,
+      "Name": "Clams",
+      "Description": "Steamed clams in Garlic Sorrel Cream ",
+      "Price": 35.0,
+      "hasFish": true,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 5,
+      "Name": "Clams",
+      "Description": "Steamed clams in Garlic Sorrel Cream ",
+      "Price": 35.0,
+      "hasFish": true,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 6,
+      "Name": "Grilled Snapper",
+      "Description": "Grilled Snapper with Four-Herb Gremolata.",
+      "Price": 35.5,
+      "hasFish": true,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 7,
+      "Name": "Grilled Garden",
+      "Description": "Grilled vegetable salad",
+      "Price": 36.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    }
+  ],
+  "May": [
+    {
+      "ID": 1,
+      "Name": "Spicy noodle shakshuka",
+      "Description": "Spicy noodles with onion, garlic and chlly flakes.",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 2,
+      "Name": "French chicken soup",
+      "Description": "chicken soup with pasta and mushrooms",
+      "Price": 30.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 3,
+      "Name": "Fried Chicken",
+      "Description": "The finest chicken fried and seasoned with chiliflakes. Served with hot sauce",
+      "Price": 32.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 4,
+      "Name": "One-pan pasta",
+      "Description": "One-pan chorizo, tomato and basil pasta",
+      "Price": 29.9,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 5,
+      "Name": "Spagetti",
+      "Description": "spagetti wth bolognese sauce",
+      "Price": 40.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 6,
+      "Name": "Cooked salmon",
+      "Description": "Salmon that is cooked",
+      "Price": 35.0,
+      "hasFish": true,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 7,
+      "Name": "Stuffed Shells",
+      "Description": "pasta shells are stuffed with cheese sauce, covered in marinara, and topped with even more cheese!",
+      "Price": 30.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    }
+  ],
+  "June": [
+    {
+      "ID": 1,
+      "Name": "Shrimp rice",
+      "Description": "medium grain rice with shrimps and various veggies",
+      "Price": 32.0,
+      "hasFish": "true",
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 2,
+      "Name": "Veggie burger",
+      "Description": " hamburger made out of vegetables",
+      "Price": 40.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 3,
+      "Name": "Seafood Salad",
+      "Description": "Salad with shrimps, crab and praprika",
+      "Price": 42.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 4,
+      "Name": "Steak",
+      "Description": "a thick cut of meat generally sliced across the muscle fibers, grilled by our top chef",
+      "Price": 35.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 5,
+      "Name": "Pizza margarita",
+      "Description": "Pizza with cheese and no topings",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 6,
+      "Name": "Rosemary Salmon",
+      "Description": "Rosemary Salmon with sliced zucchini, small cauliflower florets or fresh green beans",
+      "Price": 40.75,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 7,
+      "Name": "Cheese Tortellini",
+      "Description": "Cheese Tortellini with tomatoes and corn. Fresh corn and basil make this dish taste like summer",
+      "Price": 45.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    }
+  ],
+  "July": [
+    {
+      "ID": 1,
+      "Name": "Shrimp Laksa",
+      "Description": "a refreshing and brothy noodle dish popular throughout Southeast Asia",
+      "Price": 40.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 2,
+      "Name": "‘Bacon’ Wrapped Vegan Scallops",
+      "Description": "Vegan scallops wrapped in vegan 'bacon', with Paprika Sauce",
+      "Price": 50.5,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 3,
+      "Name": "Beet and Pear Salad",
+      "Description": "This crunchy, refreshing salad studded with purple beets, Asian pear, and hazelnuts is complemented by a fragrant dressing of ginger and white miso.",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 4,
+      "Name": "Poul Nan Sos",
+      "Description": "The meat is marinated overnight with onions, garlic, thyme, and chiles along with citrus, and then rubbed forcefully onto the chicken to access the fragrant oils. After the meat takes on all that flavor, it's stewed with the marinade and loads of bell peppers for a satisfying, thrilling stew. This dish is haiti.",
+      "Price": 35.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 5,
+      "Name": "Deluxe Hamburger",
+      "Description": "a Hambuger with lettuce, tomato and gluten free bread",
+      "Price": 30.75,
+      "hasFish": false,
+      "hasShellFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 6,
+      "Name": "Lentil Soup",
+      "Description": "savoury and has a flavour boost from a hint of spices. There's an undertone of natural sweetness from the soffrito flavour base of onion, carrot and celery",
+      "Price": 30.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 7,
+      "Name": "Garlic Butter Shrimp",
+      "Description": "The shrimp are marinated in a mixture of Italian dressing, mayonnaise, calamansi juice, and salt, then grilled and tossed in roasted garlic butter",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": true
+    }
+  ],
+  "August": [
+    {
+      "ID": 1,
+      "Name": "Chilli con carne",
+      "Description": "Stew with beef and chilli flakes",
+      "Price": 30.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 2,
+      "Name": "Bean Burritos",
+      "Description": "Cheesy burritos with beans",
+      "Price": 32.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 3,
+      "Name": "Chicken Rice Bowl",
+      "Description": "Rice with chicken strips, peas and corn",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 4,
+      "Name": "Mexican Pizza",
+      "Description": "Pizza with cheese, paprika, onion and tomato",
+      "Price": 25.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 5,
+      "Name": "Chicken Potpie",
+      "Description": "Potpei with chicken, peas and pieces of paprika",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 6,
+      "Name": "Rosemary Salmon",
+      "Description": "Rosemary Salmon with sliced zucchini, small cauliflower florets or fresh green beans",
+      "Price": 40.75,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 7,
+      "Name": "Emperor's Pork",
+      "Description": "pork belly in a sweet and savory sauce laced with warm notes of cinnamon and rock sugar, along with soy and MSG",
+      "Price": 40.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    }
+  ],
+  "September": [
+    {
+      "ID": 1,
+      "Name": "Red Beans and Rice",
+      "Description": "Red beans and rice cooked in a dutch oven",
+      "Price": 32.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 2,
+      "Name": "Sweet 'n' Spicy Chicken",
+      "Description": "Chicken with sweet 'n' spicy sauce ontop of rice",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 3,
+      "Name": "Seafood Salad",
+      "Description": "Salad with shrimps, crab and praprika",
+      "Price": 42.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 4,
+      "Name": "Lentil Soup",
+      "Description": "savoury and has a flavour boost from a hint of spices. There's an undertone of natural sweetness from the soffrito flavour base of onion, carrot and celery",
+      "Price": 32.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 5,
+      "Name": "Cheese Tortellini",
+      "Description": "Cheese Tortellini with tomatoes and corn. Fresh corn and basil make this dish taste like summer",
+      "Price": 45.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 6,
+      "Name": "Deluxe Hamburger",
+      "Description": "a Hambuger with lettuce, tomato and gluten free bread",
+      "Price": 30.75,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 7,
+      "Name": "Gua bao",
+      "Description": "A type of lotus leaf bun originating from Fujian cuisine, a traditional gua bao consists of slices of pork belly meat dressed with pickled mustard greens, coriander and ground peanuts.",
+      "Price": 32.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    }
+  ],
+  "October": [
+    {
+      "ID": 1,
+      "Name": "Cooked salmon",
+      "Description": "Salmon that is cooked",
+      "Price": 35.0,
+      "hasFish": true,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 2,
+      "Name": "Garlic Butter Shrimp",
+      "Description": "The shrimp are marinated in a mixture of Italian dressing, mayonnaise, calamansi juice, and salt, then grilled and tossed in roasted garlic butter",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 3,
+      "Name": "Oysters",
+      "Description": "A bivalve mollusk, which is eaten raw or cooked. This is a shellfish",
+      "Price": 45.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "hasShellFish": true,
+      "isVegan": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 4,
+      "Name": "Chicken and Shrimp Laksa",
+      "Description": "a refreshing and brothy noodle dish popular throughout Southeast Asia",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 5,
+      "Name": "Emperor's Pork",
+      "Description": "pork belly in a sweet and savory sauce laced with warm notes of cinnamon and rock sugar, along with soy and MSG",
+      "Price": 40.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 6,
+      "Name": "Sweet Spareribs",
+      "Description": "Spareribs that were slow roasted in the oven till tender, then on the grill with a sweet sauces",
+      "Price": 40.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 7,
+      "Name": "Vegan lasagne",
+      "Description": "A rich and creamy whole-wheat pasta dish filled layer by layer with refreshingly fresh onions and garlic, lathered in a succulent sauce and topped with imported, premium quality mozzarella.",
+      "Price": 37.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    }
+  ],
+  "November": [
+    {
+      "ID": 1,
+      "Name": "Vegan lasagne",
+      "Description": "A rich and creamy whole-wheat pasta dish filled layer by layer with refreshingly fresh onions and garlic, lathered in a succulent sauce and topped with imported, premium quality mozzarella.",
+      "Price": 37.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 2,
+      "Name": "Garlic BBQ Chicken",
+      "Description": "Crockpot garlic BBQ chicken in a bun, topped off with cheese.",
+      "Price": 29.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 3,
+      "Name": "Collard And Fennel Salad",
+      "Description": "Collard And Fennel Salad with Crispy Plantain. twice-fried plantains act as croutons in this fresh winter salad. The two-step frying process allows the unripe green plantains to evenly cook through and develop their fruity sweetness. ",
+      "Price": 25.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 4,
+      "Name": "Steak",
+      "Description": "a thick cut of meat generally sliced across the muscle fibers, grilled by our top chef",
+      "Price": 35.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 5,
+      "Name": "Onion Soup",
+      "Description": "a blend of mellow, slowly cooked, caramelised onions in a broth laced with white wine and cognac.",
+      "Price": 25.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 6,
+      "Name": "One-pan pasta",
+      "Description": "One-pan chorizo, tomato and basil pasta",
+      "Price": 29.9,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 7,
+      "Name": "Poul Nan Sos",
+      "Description": "The meat is marinated overnight with onions, garlic, thyme, and chiles along with citrus, and then rubbed forcefully onto the chicken to access the fragrant oils. After the meat takes on all that flavor, it's stewed with the marinade and loads of bell peppers for a satisfying, thrilling stew. This dish is haiti.",
+      "Price": 35.5,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    }
+  ],
+  "December": [
+    {
+      "ID": 1,
+      "Name": "Vegan Sloppy joes",
+      "Description": "Sandwitch with round beef, tossed with a sweet, tomato-rich sauce, and piled on a squishy white bun",
+      "Price": 30.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 2,
+      "Name": "Veggie burger",
+      "Description": " hamburger made out of vegetables",
+      "Price": 40.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 3,
+      "Name": "Chicken Potpie",
+      "Description": "Potpie with chicken, peas and pieces of paprika",
+      "Price": 0.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 4,
+      "Name": "Sweet 'n' Spicy Chicken",
+      "Description": "Chicken with sweet 'n' spicy sauce ontop of rice",
+      "Price": 35.0,
+      "hasFish": false,
+      "hasMeat": true,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    },
+    {
+      "ID": 5,
+      "Name": "Grilled Garden",
+      "Description": "Grilled vegetable salad",
+      "Price": 36.0,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": true,
+      "hasShellFish": false,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 6,
+      "Name": "Seafood Salad",
+      "Description": "Salad with shrimps, crab and praprika",
+      "Price": 42.5,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": true,
+      "isGlutenFree": true
+    },
+    {
+      "ID": 7,
+      "Name": "Rosemary Salmon",
+      "Description": "Rosemary Salmon with sliced zucchini, small cauliflower florets or fresh green beans",
+      "Price": 40.75,
+      "hasFish": false,
+      "hasMeat": false,
+      "isVegan": false,
+      "hasShellFish": false,
+      "isGlutenFree": false
+    }
+  ]
+}
