@@ -142,7 +142,7 @@
 //             Console.WriteLine(@$"
 // A confirmation e-mail has been sent to {reservationEmail}.
 // Please check your inbox and spam.");
-//             MainMenu.Main();
+//             Program.Main();
 //         }
 
 //         /*
@@ -185,7 +185,7 @@
 //                 else if ((tempInput == "N") || (tempInput == "n"))
 //                 {
 //                     Console.Clear();
-//                     MainMenu.Main();
+//                     Program.Main();
 //                 }
 //                 else
 //                 {
@@ -283,7 +283,7 @@ Sunday:       CLOSED
             Console.WriteLine(@$"
 A confirmation e-mail has been sent to {reservationEmail}.
 Please check your inbox and spam.");
-            MainMenu.Main();
+            Program.Main();
         }
 
         private string GetPartySize()
@@ -429,7 +429,7 @@ Please check your inbox and spam.");
                 }
                 else if (choice == "Q" || choice == "q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                 }
                 else
                 {
@@ -485,7 +485,7 @@ Continue to reservation form? Y/N");
                 else if ((tempInput == "N") || (tempInput == "n"))
                 {
                     Console.Clear();
-                    MainMenu.Main();
+                    Program.Main();
                 }
                 else
                 {

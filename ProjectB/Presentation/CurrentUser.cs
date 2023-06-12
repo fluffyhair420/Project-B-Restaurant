@@ -53,7 +53,7 @@ Zipcode: {data.Address[0].ZipCode}");
                         break;
                     case "2":
                         newInput = true;
-                        MainMenu.Main();
+                        Program.Main();
                         break;
                     default:
                         Console.WriteLine("\nInvalid input.");

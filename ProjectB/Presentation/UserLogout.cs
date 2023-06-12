@@ -37,11 +37,11 @@ namespace Restaurant
                         Thread.Sleep(50);
                     }
                     UserLogin.userLoggedIn = false;
-                    MainMenu.Main();
+                    Program.Main();
                     break;
 
                 case "N":
-                    MainMenu.Main();
+                    Program.Main();
                     break;
 
                 default:

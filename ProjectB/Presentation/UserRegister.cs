@@ -25,7 +25,7 @@ namespace Restaurant
                 userEmail = Console.ReadLine();
                 if (userEmail == "q" || userEmail == "Q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                     break;
                 }
                 emailValid = UserCheck.EmailCheck(userEmail);
@@ -49,7 +49,7 @@ namespace Restaurant
                 userEmailCheck = Console.ReadLine();
                 if (userEmailCheck == "q" || userEmailCheck == "Q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                     break;
                 }
 
@@ -77,7 +77,7 @@ Password should contain at least
                 userPassWord = Console.ReadLine();
                 if (userPassWord == "q" || userPassWord == "Q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                     break;
                 }
                 passwordValid = UserCheck.PasswordCheck(userPassWord);
@@ -92,7 +92,7 @@ Password should contain at least
                 userPassCheck = Console.ReadLine();
                 if (userPassCheck == "q" || userPassCheck == "Q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                     break;
                 }
                 if (userPassCheck == userPassWord)
@@ -134,7 +134,7 @@ typ ""Y"" or ""N"": ");
                                     Console.WriteLine(@"
 May you decide to continue with an account later on, please register with
 a different email address.");
-                                    MainMenu.Main();
+                                    Program.Main();
                                     break;
 
                                 default:
@@ -195,7 +195,7 @@ a different email address.");
                 UserLogin.userLoggedIn = true;
                 Console.WriteLine("\n- Successfully created account! -");
             }
-            MainMenu.Main();
+            Program.Main();
         }
     }
 }

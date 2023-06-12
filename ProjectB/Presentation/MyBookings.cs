@@ -23,7 +23,7 @@ namespace Restaurant
             {
                 foundBooking = false;
                 Console.WriteLine("There's no booking yet!");
-                MainMenu.Main();
+                Program.Main();
                 return foundBooking;
             }
 
@@ -65,7 +65,7 @@ Reservation ID: {booking.ReservationID}
                             break;
                         case "3":
                             newInput = true;
-                            MainMenu.Main();
+                            Program.Main();
                             break;
                         default:
                             Console.WriteLine("\nInvalid input. Please type 1-3.");
@@ -78,7 +78,7 @@ Reservation ID: {booking.ReservationID}
             {
                 foundBooking = false;
                 Console.WriteLine("You haven't made any bookings with us yet!");
-                MainMenu.Main();
+                Program.Main();
                 return foundBooking;
             }
 

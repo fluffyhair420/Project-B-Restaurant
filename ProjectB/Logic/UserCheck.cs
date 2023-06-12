@@ -172,7 +172,7 @@ namespace Restaurant
                 userInput = Console.ReadLine();
                 if (userInput == "q" || userInput == "Q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                 }
                 else if (string.IsNullOrEmpty(userInput))
                 {

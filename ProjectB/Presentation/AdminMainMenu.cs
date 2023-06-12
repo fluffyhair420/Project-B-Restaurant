@@ -68,7 +68,7 @@ namespace Restaurant
                                 Console.Write(c);
                                 Thread.Sleep(50);
                             }
-                            MainMenu.Main();
+                            Program.Main();
                             break;
                         default:
                             Console.WriteLine("Invalid input. Please enter a number between and including 1-5.\n");
@@ -102,7 +102,7 @@ namespace Restaurant
                         Console.WriteLine($"\nWelcome, {item.UserName}");
                         //CurrentUserJson.WriteCurrentUserToJson(item);
                         adminLoggedIn = true;
-                        //MainMenu.Main();
+                        //Program.Main();
                         AdminMainMenu.Menu();
                         break;
                     }
@@ -113,7 +113,7 @@ namespace Restaurant
                         Console.WriteLine(@"
 Invalid password.");
                         //userLoggedIn = false;
-                        MainMenu.Main();
+                        Program.Main();
                         break;
                     }
                 } 
@@ -133,7 +133,7 @@ Go back to homepage? Y/N: ");
                     {
                         case "Y":
                             wrongInput = false;
-                            MainMenu.Main();
+                            Program.Main();
                             break;
 
                         case "N":

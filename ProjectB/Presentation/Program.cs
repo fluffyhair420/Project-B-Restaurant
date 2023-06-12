@@ -1,6 +1,6 @@
 namespace Restaurant
 {
-    class MainMenu
+    class Program
     {
 
         public static void Main()

@@ -46,7 +46,7 @@ namespace Restaurant
                     case "q":
                     case "Q":
                         wrongInput = false;
-                        MainMenu.Main();
+                        Program.Main();
                         break;
                     default:
                         Console.WriteLine("Invalid input. Please enter Q to go back to the Homepage.");

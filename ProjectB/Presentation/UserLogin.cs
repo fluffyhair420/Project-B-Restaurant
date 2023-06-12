@@ -26,14 +26,14 @@ namespace Restaurant
             string userEmail = Console.ReadLine();
             if (userEmail == "")
             {
-                MainMenu.Main();
+                Program.Main();
             }
             // Password
             Console.Write("Password: ");
             string userPassWord = Console.ReadLine();
             if (userPassWord == "")
             {
-                MainMenu.Main();
+                Program.Main();
             }
 
             dynamic data = JsonConvert.DeserializeObject(userJson);
@@ -53,7 +53,7 @@ namespace Restaurant
                             Console.WriteLine($"\nWelcome, {item.UserName}");
                             CurrentUserJson.WriteCurrentUserToJson(item);
                             userLoggedIn = true;
-                            MainMenu.Main();
+                            Program.Main();
                             break;
                         }
 
@@ -63,7 +63,7 @@ namespace Restaurant
                             Console.WriteLine(@"
 Incorrect password.");
                             //userLoggedIn = false;
-                            MainMenu.Main();
+                            Program.Main();
                             break;
                         }
                     } 
@@ -96,7 +96,7 @@ Typ ""Y"" or ""N"": ");
                                 Console.WriteLine(@"
 May you decide to continue with an account later on, please feel
 free to register.");
-                                MainMenu.Main();
+                                Program.Main();
                                 break;
 
                             default:
@@ -128,7 +128,7 @@ Typ ""Y"" or ""N"": ");
                             Console.WriteLine(@"
 May you decide to continue with an account later on, please feel
 free to register.");
-                            MainMenu.Main();
+                            Program.Main();
                             break;
 
                         default:
