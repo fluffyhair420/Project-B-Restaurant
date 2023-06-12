@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace Restaurant
 {
-    public static class Email
+    public class Email
     {
         private static string bookingPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Table.json"));
         private static string readBookingPath = File.ReadAllText(bookingPath);
@@ -14,6 +14,12 @@ namespace Restaurant
         private static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
         private static string currentUserJson = File.ReadAllText(currentUserPath);
         static dynamic currentUserData = JsonConvert.DeserializeObject(currentUserJson);
+        private Table Booking;
+
+        public Email(Table booking)
+        {
+            Booking = booking;
+        }
 
         public static void ConfirmationEmail()
         {
@@ -49,7 +55,7 @@ We look forward to welcome you in our restaurant!";
             }
         }
 
-        public static void DateChangedEmail(Table booking)
+        public void DateChangedEmail()
         {
             readBookingPath = File.ReadAllText(bookingPath);
             data = JsonConvert.DeserializeObject(readBookingPath);
@@ -57,53 +63,53 @@ We look forward to welcome you in our restaurant!";
             currentUserData = JsonConvert.DeserializeObject(currentUserJson);
 
             //Console.WriteLine(booking.ReservationDate);
-            if (booking != null)
+            if (Booking != null)
             {
-                string recipientEmail = booking.ReservationEmail;
+                string recipientEmail = Booking.ReservationEmail;
                 string subject = "Booking date changed";
-                string body = @$"Dear {booking.ReservationName},
+                string body = @$"Dear {Booking.ReservationName},
 
-We would like to inform you that the date of your booking with reference number {booking.ReservationID} has successfully been changed to {booking.ReservationDate}.
+We would like to inform you that the date of your booking with reference number {Booking.ReservationID} has successfully been changed to {Booking.ReservationDate}.
 We look forward to welcome you in our restaurant!";
-                SendEmail(recipientEmail, booking, subject, body);
+                SendEmail(recipientEmail, Booking, subject, body);
             }
         }
 
-        public static void PartySizeChangedEmail(Table booking)
+        public void PartySizeChangedEmail()
         {
             readBookingPath = File.ReadAllText(bookingPath);
             data = JsonConvert.DeserializeObject(readBookingPath);
             currentUserJson = File.ReadAllText(currentUserPath);
             currentUserData = JsonConvert.DeserializeObject(currentUserJson);
 
-            if (booking != null)
+            if (Booking != null)
             {
-                string recipientEmail = booking.ReservationEmail;
+                string recipientEmail = Booking.ReservationEmail;
                 string subject = "Party size changed";
-                string body = @$"Dear {booking.ReservationName},
+                string body = @$"Dear {Booking.ReservationName},
 
-We would like to inform you that the party size of your booking with reference number {booking.ReservationID} for {booking.ReservationDate} has successfully been changed to {booking.PartySize}.
+We would like to inform you that the party size of your booking with reference number {Booking.ReservationID} for {Booking.ReservationDate} has successfully been changed to {Booking.PartySize}.
 We look forward to welcome you in our restaurant!";
-                SendEmail(recipientEmail, booking, subject, body);
+                SendEmail(recipientEmail, Booking, subject, body);
             }
         }
 
-        public static void BookingCancelation(Table booking)
+        public void BookingCancelation()
         {
             readBookingPath = File.ReadAllText(bookingPath);
             data = JsonConvert.DeserializeObject(readBookingPath);
             currentUserJson = File.ReadAllText(currentUserPath);
             currentUserData = JsonConvert.DeserializeObject(currentUserJson);
 
-            if (booking != null)
+            if (Booking != null)
             {
-                string recipientEmail = booking.ReservationEmail;
+                string recipientEmail = Booking.ReservationEmail;
                 string subject = "Reservation canceled";
-                string body = @$"Dear {booking.ReservationName},
+                string body = @$"Dear {Booking.ReservationName},
 
-We would like to inform you that your booking with reference number {booking.ReservationID} for {booking.ReservationDate} for {booking.PartySize} people has successfully been canceled.
+We would like to inform you that your booking with reference number {Booking.ReservationID} for {Booking.ReservationDate} for {Booking.PartySize} people has successfully been canceled.
 We look forward to welcome you in our restaurant some other time!";
-                SendEmail(recipientEmail, booking, subject, body);
+                SendEmail(recipientEmail, Booking, subject, body);
             }
         }
 

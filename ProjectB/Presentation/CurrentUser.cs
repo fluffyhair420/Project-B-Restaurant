@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 namespace Restaurant
 {
-    class CurrentUser : UserInfo
+    class CurrentUser //: UserInfo
     {
         
             static string userPath = "DataSources/User.json"; // Path to the json files
@@ -53,7 +53,7 @@ Zipcode: {data.Address[0].ZipCode}");
                         break;
                     case "2":
                         newInput = true;
-                        MainMenu.Main();
+                        Program.Main();
                         break;
                     default:
                         Console.WriteLine("\nInvalid input.");
@@ -93,31 +93,31 @@ Zipcode: {data.Address[0].ZipCode}");
                     switch (userInput)
                     {
                         case "1":
-                        string usernameCheck = "";
-                        bool userInUse = false;
-                        while (userInUse == false)
-                        {
-                            Console.Write("Enter a new username (or press Enter to cancel): ");
-                            usernameCheck = Console.ReadLine();
-                            // Check if the user pressed Enter without entering any text
-                            if (string.IsNullOrEmpty(usernameCheck))
+                            string usernameCheck = "";
+                            bool userInUse = false;
+                            while (userInUse == false)
                             {
-                                break; // Exit the loop without updating variables
-                            }
-                            
-                            userInUse = UserCheck.IsUsernameValid(usernameCheck);
-                            if (userInUse == false)
-                            {
+                                Console.Write("Enter a new username (or press Enter to cancel): ");
+                                usernameCheck = Console.ReadLine();
+                                // Check if the user pressed Enter without entering any text
+                                if (string.IsNullOrEmpty(usernameCheck))
+                                {
+                                    break; // Exit the loop without updating variables
+                                }
+                                
+                                userInUse = UserCheck.IsUsernameValid(usernameCheck);
+                                if (userInUse == false)
+                                {
+                                    
+                                }
                                 
                             }
-                            
-                        }
-                        if (!string.IsNullOrEmpty(usernameCheck))
-                        {
-                            userToUpdate.UserName = usernameCheck;
-                            data.UserName = userToUpdate.UserName;
-                        }
-                        break;
+                            if (!string.IsNullOrEmpty(usernameCheck))
+                            {
+                                userToUpdate.UserName = usernameCheck;
+                                data.UserName = userToUpdate.UserName;
+                            }
+                            break;
 
                         case "2":
                             string userPassWord = "";
@@ -147,13 +147,13 @@ Password should contain at least
                             }
                             if (!string.IsNullOrEmpty(userPassWord))
                             {
-                                userToUpdate.UserName = userPassWord;
-                                data.UserName = userToUpdate.UserName;
+                                userToUpdate.PassWord = userPassWord;
+                                data.PassWord = userToUpdate.PassWord;
                             }
                             break;
 
                         case "3":
-                            string userFirst = UserCheck.GetValidInput("Enter a new first name (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a first name containing only letters.");
+                            string userFirst = UserCheck.GetValidInput("Enter a new first name (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a first name containing only letters.", true);
                             if (!string.IsNullOrEmpty(userFirst))
                             {
                                 userToUpdate.FirstName = userFirst;
@@ -162,7 +162,7 @@ Password should contain at least
                             break;
 
                         case "4":
-                            string userLast = UserCheck.GetValidInput("Enter a new last name (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a last name containing only letters.\n");
+                            string userLast = UserCheck.GetValidInput("Enter a new last name (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a last name containing only letters.\n", true);
                             if (!string.IsNullOrEmpty(userLast))
                             {
                                 userToUpdate.LastName = userLast;
@@ -231,7 +231,7 @@ An account using this email address already exists.
                             break;
 
                         case "6":
-                            string userPhoneNumber = UserCheck.GetValidInput("Enter a new phonenumber (or press Enter to cancel): ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n");
+                            string userPhoneNumber = UserCheck.GetValidInput("Enter a new phonenumber (or press Enter to cancel): ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n", true);
                             if (string.IsNullOrEmpty(userPhoneNumber))
                             {
                                 break; // Exit the loop without updating variables
@@ -253,10 +253,8 @@ An account using this email address already exists.
                             break;
 
 
-
-
                         case "7":
-                            string userAddressCity = UserCheck.GetValidInput("Enter a new city (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a city containing only letters.\n");
+                            string userAddressCity = UserCheck.GetValidInput("Enter a new city (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a city containing only letters.\n", true);
                             if (!string.IsNullOrEmpty(userAddressCity))
                             {
                                 userToUpdate.Address[0].City = userAddressCity;
@@ -264,7 +262,7 @@ An account using this email address already exists.
                             }
                             break;
                         case "8":
-                            string userAddressStreet = UserCheck.GetValidInput("Enter a new street (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n");
+                            string userAddressStreet = UserCheck.GetValidInput("Enter a new street (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n", true);
                             if (!string.IsNullOrEmpty(userAddressStreet))
                             {
                                 userToUpdate.Address[0].Street = userAddressStreet;
@@ -272,7 +270,7 @@ An account using this email address already exists.
                             }
                             break;
                         case "9":
-                            string userAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber (or press Enter to cancel): ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n");
+                            string userAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber (or press Enter to cancel): ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n", true);
                             if (!string.IsNullOrEmpty(userAddressHousenumber))
                             {
                                 userToUpdate.Address[0].HouseNumber = userAddressHousenumber;
@@ -280,7 +278,7 @@ An account using this email address already exists.
                             }
                             break;
                         case "10":
-                            string userAddressZipcode = UserCheck.GetValidInput("Enter a new zipcode (or press Enter to cancel): ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n");
+                            string userAddressZipcode = UserCheck.GetValidInput("Enter a new zipcode (or press Enter to cancel): ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n", true);
                             if (!string.IsNullOrEmpty(userAddressZipcode))
                             {
                                 userToUpdate.Address[0].ZipCode = userAddressZipcode;

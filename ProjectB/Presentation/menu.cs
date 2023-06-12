@@ -362,7 +362,7 @@ namespace Restaurant
             //exit the program completly
             if (input.Key == ConsoleKey.Q){
                 Console.Clear();
-                MainMenu.Main();
+                Program.Main();
             }
         }
     }

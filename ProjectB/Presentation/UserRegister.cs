@@ -8,7 +8,7 @@ namespace Restaurant
     class UserRegister : UserInfo
     {
         static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
-        static string currentUserJson = File.ReadAllText(currentUserPath);
+        //static string currentUserJson = File.ReadAllText(currentUserPath);
         static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
         static string json = File.ReadAllText(path);
 
@@ -17,15 +17,16 @@ namespace Restaurant
             // Email
             Console.WriteLine("\n=== Register ===");
             Console.WriteLine("Press Q, followed by Enter to go back to the Homepage at any given time.\n");
+            Console.WriteLine("* Required field.");
             string userEmail = "";
             bool emailValid = false;
             while (emailValid == false)
             {
-                Console.Write("Email: ");
+                Console.Write("Email*: ");
                 userEmail = Console.ReadLine();
                 if (userEmail == "q" || userEmail == "Q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                     break;
                 }
                 emailValid = UserCheck.EmailCheck(userEmail);
@@ -45,11 +46,11 @@ namespace Restaurant
             bool emailVerification = false;
             while (emailVerification == false)
             {
-                Console.Write("Enter your email again to make sure you are using the correct email: ");
+                Console.Write("Enter your email again to make sure you are using the correct email*: ");
                 userEmailCheck = Console.ReadLine();
                 if (userEmailCheck == "q" || userEmailCheck == "Q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                     break;
                 }
 
@@ -73,11 +74,11 @@ Password should contain at least
 - 1 capital letter
 - 1 number
 ");
-                Console.Write("Password: ");
+                Console.Write("Password*: ");
                 userPassWord = Console.ReadLine();
                 if (userPassWord == "q" || userPassWord == "Q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                     break;
                 }
                 passwordValid = UserCheck.PasswordCheck(userPassWord);
@@ -88,11 +89,11 @@ Password should contain at least
             bool passVerification = false;
             while (passVerification == false)
             {
-                Console.Write("Enter your password again to make sure you are using the correct password: ");
+                Console.Write("Enter your password again to make sure you are using the correct password*: ");
                 userPassCheck = Console.ReadLine();
                 if (userPassCheck == "q" || userPassCheck == "Q")
                 {
-                    MainMenu.Main();
+                    Program.Main();
                     break;
                 }
                 if (userPassCheck == userPassWord)
@@ -134,7 +135,7 @@ typ ""Y"" or ""N"": ");
                                     Console.WriteLine(@"
 May you decide to continue with an account later on, please register with
 a different email address.");
-                                    MainMenu.Main();
+                                    Program.Main();
                                     break;
 
                                 default:
@@ -150,22 +151,22 @@ a different email address.");
 
             if (!emailAlreadyExists)
             {
-                string userFirst = UserCheck.GetValidInput("\nFirst name: ", UserCheck.isNameAlphabetic, "Invalid input. Please enter a first name containing only letters.");
+                string userFirst = UserCheck.GetValidInput("\nFirst name*: ", UserCheck.isNameAlphabetic, "Invalid input. Please enter a first name containing only letters.", false);
                 base.FirstName = userFirst;
 
-                string userLast = UserCheck.GetValidInput("Last name: ", UserCheck.isNameAlphabetic, "Invalid input. Please enter a last name containing only letters.\n");
+                string userLast = UserCheck.GetValidInput("Last name*: ", UserCheck.isNameAlphabetic, "Invalid input. Please enter a last name containing only letters.\n", false);
                 base.LastName = userLast;
 
-                string usernameCheck = UserCheck.GetValidInput("Username: ", UserCheck.IsUsernameValid, "");
+                string usernameCheck = UserCheck.GetValidInput("Username*: ", UserCheck.IsUsernameValid, "", false);
                 base.UserName = usernameCheck;
 
-                string userPhoneNumber = UserCheck.GetValidInput("Phonenumber: ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n");
+                string userPhoneNumber = UserCheck.GetValidInput("Phonenumber*: ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n", false);
                 base.PhoneNumber = userPhoneNumber;
 
-                string userAddressCity = UserCheck.GetValidInput("City: ", UserCheck.isCityAlphabetic, "Invalid input. Please enter a city containing only letters.\n");
-                string userAddressStreet = UserCheck.GetValidInput("Street: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n");
-                string userAddressHousenumber = UserCheck.GetValidInput("Housenumber: ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n");
-                string userAddressZipcode = UserCheck.GetValidInput("Zipcode: ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n");
+                string userAddressCity = UserCheck.GetValidInput("City*: ", UserCheck.isCityAlphabetic, "Invalid input. Please enter a city containing only letters.\n", false);
+                string userAddressStreet = UserCheck.GetValidInput("Street*: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n", false);
+                string userAddressHousenumber = UserCheck.GetValidInput("Housenumber*: ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n", false);
+                string userAddressZipcode = UserCheck.GetValidInput("Zipcode*: ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n", false);
 
                 UserInfo newUser = new UserInfo
                 {
@@ -195,7 +196,7 @@ a different email address.");
                 UserLogin.userLoggedIn = true;
                 Console.WriteLine("\n- Successfully created account! -");
             }
-            MainMenu.Main();
+            Program.Main();
         }
     }
 }
