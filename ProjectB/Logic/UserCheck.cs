@@ -132,6 +132,20 @@ namespace Restaurant
             }
         }
 
+        public static bool IsUsernameValid(string username, bool allowMultiple)
+        {
+            Regex regex = new Regex("^[a-zA-Z0-9]+$");
+            if (regex.IsMatch(username) && allowMultiple == true)
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Please only use letters and numbers in your username.");
+                return false;
+            }
+        }
+
         public static bool IsAlphabetic(string input)
         {
             Regex regex = new Regex(@"^[a-zA-Z\s]+$");
@@ -140,8 +154,32 @@ namespace Restaurant
 
         public static bool isNameAlphabetic(string input)
         {
+            bool containsLetter = false;
+
             Regex regex = new Regex(@"^[a-zA-Z-\s]+$");
-            return regex.IsMatch(input);
+            if (regex.IsMatch(input))
+            {
+                foreach (char character in input)
+                {
+                    if (char.IsUpper(character))
+                    {
+                        containsLetter = true;
+                    }
+
+                    if (char.IsLower(character))
+                    {
+                        containsLetter = true;
+                    }
+                }
+            }
+            if (containsLetter && input.Length >= 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public static bool isCityAlphabetic(string input)
@@ -162,7 +200,7 @@ namespace Restaurant
             return regex.IsMatch(input);
         }
 
-        public static string GetValidInput(string prompt, Func<string, bool> validationFunc, string errorMessage)
+        public static string GetValidInput(string prompt, Func<string, bool> validationFunc, string errorMessage, bool allowEmptyInput)
         {
             string userInput = "";
             bool isValidInput = false;
@@ -176,7 +214,15 @@ namespace Restaurant
                 }
                 else if (string.IsNullOrEmpty(userInput))
                 {
-                    return userInput;
+                    if (allowEmptyInput)
+                    {
+                        isValidInput = true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Invalid input. Input cannot be empty.\n");
+                    }
+                    continue;
                 }
                 if (validationFunc(userInput))
                 {

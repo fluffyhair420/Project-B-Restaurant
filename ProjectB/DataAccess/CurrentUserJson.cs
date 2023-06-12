@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 namespace Restaurant
 {
-    public static class CurrentUserJson
+    public  class CurrentUserJson
     {
         private static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
         private static string currentUserJson = File.ReadAllText(currentUserPath);

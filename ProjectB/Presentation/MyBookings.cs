@@ -222,7 +222,8 @@ Please make sure you filled in the correct Reservation ID.
                     File.WriteAllText(bookingPath, updatedBookingJsonContents);
 
                     Console.WriteLine($"Booking with ID {removeBooking.ReservationID} has been removed.");
-                    Email.BookingCancelation(removeBooking);
+                    Email bookingCanceled = new Email(removeBooking);
+                    bookingCanceled.BookingCancelation();
                 }
 
                 else
@@ -237,12 +238,18 @@ Please make sure you made a reservation with us and filled in the correct Reserv
 
         public static void ChangeDate(Table booking, dynamic currentuserdata)
         {
+            Console.WriteLine("=== Change booking date ===");
+            Console.WriteLine("Press Enter in an empty field to go back.");
             string newBookDate = "";
             bool validDate = false;
             while (!validDate)
             {
                 Console.Write("Enter new booking date (DD/MM/YYYY 00:00): ");
                 newBookDate = Console.ReadLine();
+                if (newBookDate == "")
+                {
+                    MyBooking();
+                }
 
                 string format = "dd/MM/yyyy HH:mm";
                 DateTime parsedDateTime;
@@ -257,37 +264,43 @@ Please make sure you made a reservation with us and filled in the correct Reserv
                 if (parsedDateTime.Day <= currentDate.Day || parsedDateTime.DayOfWeek == DayOfWeek.Sunday)
                 {
                     Console.WriteLine("Invalid DateTime format.");
+                    validDate = false; // Set validDate to false when the date is invalid
                 }
-
-                // Set the opening and closing hours for the restaurant
-                TimeSpan openingTime = new TimeSpan(16, 0, 0); // 16:00 (4:00 PM)
-                TimeSpan closingTime = new TimeSpan(21, 0, 0); // 21:00 (9:00 PM)
-
-                // For future dates, check if the reservation time is within the opening and closing hours
-                if (parsedDateTime.TimeOfDay < openingTime || parsedDateTime.TimeOfDay > closingTime)
-                {
-                    Console.WriteLine("Invalid DateTime format.");
-                }
-
                 else
                 {
-                    validDate = true;
+                    // Set the opening and closing hours for the restaurant
+                    TimeSpan openingTime = new TimeSpan(16, 0, 0); // 16:00 (4:00 PM)
+                    TimeSpan closingTime = new TimeSpan(21, 0, 0); // 21:00 (9:00 PM)
+
+                    // For future dates, check if the reservation time is within the opening and closing hours
+                    if (parsedDateTime.TimeOfDay < openingTime || parsedDateTime.TimeOfDay > closingTime)
+                    {
+                        Console.WriteLine("Invalid DateTime format.");
+                        validDate = false; // Set validDate to false when the date is invalid
+                    }
+                    else
+                    {
+                        validDate = true;
+                    }
                 }
             }
 
             if (validDate)
             {
                 booking.ReservationDate = newBookDate;
+                string updatedBookingJsonContents = JsonConvert.SerializeObject(bookingData, Formatting.Indented);
+                File.WriteAllText(bookingPath, updatedBookingJsonContents);
+                Console.WriteLine("Reservation date updated.\n");
+                
+                Email dateChanged = new Email(booking);
+                dateChanged.DateChangedEmail();
             }
-            string updatedBookingJsonContents = JsonConvert.SerializeObject(bookingData, Formatting.Indented);
-            File.WriteAllText(bookingPath, updatedBookingJsonContents);
-            Console.WriteLine("Reservation date updated.\n");
-            Email.DateChangedEmail(booking);
-            
         }
 
         public static void ChangePartySize(Table booking, dynamic currentuserdata)
         {
+            Console.WriteLine("=== Change party size ===");
+            Console.WriteLine("Press Enter in an empty field to go back.");
             Console.WriteLine(@"
 Keep in mind, if you want to invite more people than originally planned,
 you'll have to contact Vari Flavors directly.
@@ -299,6 +312,10 @@ you'll have to contact Vari Flavors directly.
 
                 Console.Write("Enter new party size: ");
                 newPartySize = Console.ReadLine();
+                if (newPartySize == "")
+                {
+                    MyBooking();
+                }
 
                 if (Convert.ToInt32(newPartySize) <= booking.PartySize && Convert.ToInt32(newPartySize) >= 1)
                 {
@@ -321,7 +338,8 @@ Please contact us directly if you want to invite more people.
             string updatedBookingJsonContents = JsonConvert.SerializeObject(bookingData, Formatting.Indented);
             File.WriteAllText(bookingPath, updatedBookingJsonContents);
             Console.WriteLine("Party size updated.\n");
-            Email.PartySizeChangedEmail(booking);
+            Email partyChanged = new Email(booking);
+            partyChanged.PartySizeChangedEmail();
         }
     }
 }

@@ -82,10 +82,10 @@ namespace Restaurant
             Console.WriteLine("\n=== Admin Login ===");
             // Email
             Console.Write("Email: ");
-            string userEmail = Console.ReadLine();
+            string adminEmail = Console.ReadLine();
             // Password
             Console.Write("Password: ");
-            string userPassWord = Console.ReadLine();
+            string adminPassword = Console.ReadLine();
 
             dynamic data = JsonConvert.DeserializeObject(adminJson);
             bool emailInJson = false;
@@ -93,11 +93,11 @@ namespace Restaurant
             {
                 
                 // Email in JSON file
-                if (item.Email == userEmail)
+                if (item.Email == adminEmail)
                 {
                     emailInJson = true;
                     // Password matches Email
-                    if (item.PassWord == userPassWord)
+                    if (item.PassWord == adminPassword)
                     {
                         Console.WriteLine($"\nWelcome, {item.UserName}");
                         //CurrentUserJson.WriteCurrentUserToJson(item);
@@ -229,81 +229,145 @@ Zipcode: {item.Address[0].ZipCode}");
                         {
                             case "1":
                                 string usernameCheck = "";
-                                Console.Write("Enter a new username: ");
-                                usernameCheck = Console.ReadLine();
-                                adminToUpdate.UserName = usernameCheck;
-                                item.UserName = adminToUpdate.UserName;
+                                bool userValid = false;
+                                while (userValid == false)
+                                {
+                                    Console.Write("Enter a new username (or press Enter to cancel): ");
+                                    usernameCheck = Console.ReadLine();
+
+                                    if (string.IsNullOrEmpty(usernameCheck))
+                                    {
+                                        break; // Exit the loop without updating variables
+                                    }
+                                    userValid = UserCheck.IsUsernameValid(usernameCheck, true);
+                                }
+                                if (!string.IsNullOrEmpty(usernameCheck))
+                                {
+                                    adminToUpdate.UserName = usernameCheck;
+                                    item.UserName = adminToUpdate.UserName;
+                                }
                                 break;
                             case "2":
-                                Console.Write("Enter a new password: ");
-                                adminToUpdate.PassWord = Console.ReadLine();
-                                item.PassWord = adminToUpdate.PassWord;
+                                string adminPassword = "";
+                                bool passwordValid = false;
+                                while (passwordValid == false)
+                                {
+                                    Console.WriteLine(@"
+Password should contain at least
+- 8 characters
+- 1 lower case letter
+- 1 capital letter
+- 1 number
+");
+                                    Console.Write("Enter a new password (or press Enter to cancel): ");
+                                    adminPassword = Console.ReadLine();
+                                    if (string.IsNullOrEmpty(adminPassword))
+                                    {
+                                        break; 
+                                    }
+                                    
+                                    passwordValid = UserCheck.PasswordCheck(adminPassword);
+                                    // if (passwordValid == false)
+                                    // {
+                                        
+                                    // }
+                                    
+                                }
+                                if (!string.IsNullOrEmpty(adminPassword))
+                                {
+                                    adminToUpdate.PassWord = adminPassword;
+                                    item.PassWord = adminToUpdate.PassWord;
+                                }
                                 break;
                             case "3":
-                                Console.Write("Enter a new email: ");
+                                Console.Write("Enter a new email (or press Enter to cancel): ");
                                 bool emailValid = false;
-                                string userEmail = "";
+                                string adminEmail = "";
                                 while (emailValid == false)
                                 {
-                                    userEmail = Console.ReadLine();
-                                    emailValid = UserCheck.EmailCheck(userEmail);
+                                    adminEmail = Console.ReadLine();
+                                    if (string.IsNullOrEmpty(adminEmail))
+                                    {
+                                        break; 
+                                    }
+                                    emailValid = UserCheck.EmailCheck(adminEmail);
                                     if (emailValid == false)
                                     {
                                         Console.WriteLine(@"
-    Email address should only contain:
-    - Letters
-    - Numbers
-    - An @
-    - Ends with .com or similar
+Email address should only contain:
+- Letters
+- Numbers
+- An @
+- Ends with .com or similar
                                         ");
                                     }
                                 }
-                                bool emailAlreadyExists = false;
-                                if (admins != null)
+                                // Only update email if it's not empty
+                                if (!string.IsNullOrEmpty(adminEmail))
                                 {
-                                    foreach (var items in admins)
+                                    bool emailAlreadyExists = false;
+                                    if (admins != null)
                                     {
-                                        // Email already exists
-                                        if (items.Email == userEmail)
+                                        foreach (var items in admins)
                                         {
-                                            Console.Write(@"
-    An account using this email address already exists.
-    ");
-                                            emailAlreadyExists = true;
+                                            // Email already exists
+                                            if (items.Email == adminEmail)
+                                            {
+                                                Console.Write(@"
+An account using this email address already exists.
+");
+                                                emailAlreadyExists = true;
+                                            }
                                         }
                                     }
-                                }
 
-                                if (!emailAlreadyExists)
-                                {   
-                                    adminToUpdate.Email = userEmail;
-                                    item.Email = adminToUpdate.Email;
+                                    if (!emailAlreadyExists)
+                                    {   
+                                        adminToUpdate.Email = adminEmail;
+                                        item.Email = adminToUpdate.Email;
+                                    }
                                 }
                                 break;
                             case "4":
-                                Console.Write("Enter a new phonenumber: ");
-                                adminToUpdate.PhoneNumber = Console.ReadLine();
+                                string adminPhoneNumber = UserCheck.GetValidInput("Enter a new phonenumber (or press Enter to cancel): ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n", true);
+                                if (string.IsNullOrEmpty(adminPhoneNumber))
+                                {
+                                    break; // Exit the loop without updating variables
+                                }
+                                adminToUpdate.PhoneNumber = adminPhoneNumber;
                                 item.PhoneNumber = adminToUpdate.PhoneNumber;
                                 break;
                             case "5":
-                                Console.Write("Enter a new city: ");
-                                adminToUpdate.Address[0].City = Console.ReadLine();
-                                item.Address[0].City = adminToUpdate.Address[0].City;
+                                string adminAddressCity = UserCheck.GetValidInput("Enter a new city (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a city containing only letters.\n", true);
+                                if (!string.IsNullOrEmpty(adminAddressCity))
+                                {
+                                    adminToUpdate.Address[0].City = adminAddressCity;
+                                    item.Address[0].City = adminToUpdate.Address[0].City;
+                                }
                                 break;
                             case "6":
-                                Console.Write("Enter a new street: ");
-                                adminToUpdate.Address[0].Street = Console.ReadLine();
-                                item.Address[0].Street = adminToUpdate.Address[0].Street;
+                                string adminAddressStreet = UserCheck.GetValidInput("Enter a new street (or press Enter to cancel): ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n", true);
+                                if (!string.IsNullOrEmpty(adminAddressStreet))
+                                {
+                                    adminToUpdate.Address[0].Street = adminAddressStreet;
+                                    item.Address[0].Street = adminToUpdate.Address[0].Street;
+                                }
                                 break;
                             case "7":
-                                Console.Write("Enter a new housenumber: ");
-                                adminToUpdate.Address[0].HouseNumber = Console.ReadLine();
-                                item.Address[0].HouseNumber = adminToUpdate.Address[0].HouseNumber;
+                                string adminAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber (or press Enter to cancel): ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n", true);
+                                if (!string.IsNullOrEmpty(adminAddressHousenumber))
+                                {
+                                    adminToUpdate.Address[0].HouseNumber = adminAddressHousenumber;
+                                    item.Address[0].HouseNumber = adminToUpdate.Address[0].HouseNumber;
+                                }
                                 break;
                             case "8":
-                                Console.Write("Enter a new zipcode: ");
-                                adminToUpdate.Address[0].ZipCode = Console.ReadLine();
-                                item.Address[0].ZipCode = adminToUpdate.Address[0].ZipCode;
+                                string adminAddressZipcode = UserCheck.GetValidInput("Enter a new zipcode (or press Enter to cancel): ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n", true);
+                                if (!string.IsNullOrEmpty(adminAddressZipcode))
+                                {
+                                    adminToUpdate.Address[0].ZipCode = adminAddressZipcode;
+                                    item.Address[0].ZipCode = adminToUpdate.Address[0].ZipCode;
+                                }
                                 break;
                             default:
                                 string updateSuccesDot = "...";

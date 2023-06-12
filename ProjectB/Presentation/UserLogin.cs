@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace Restaurant
 {
-    class UserLogin : UserInfo
+    class UserLogin
     {
         public static bool userLoggedIn { get; set; }
         // path for json file that stores all user's information
@@ -68,11 +68,6 @@ Incorrect password.");
                         }
                     } 
 
-                    // Email not in JSON file
-                    // else if (item.Email != userEmail)
-                    // {
-                    //     continue;
-                    // }
                 }
                 if (!emailInJson)
                 {

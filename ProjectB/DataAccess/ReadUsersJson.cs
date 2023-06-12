@@ -8,7 +8,7 @@ namespace Restaurant
 
         public static List<UserInfo> LoadUsersList()
         {
-            List<UserInfo> users = new List<UserInfo>(); // Create a new list of Table objects
+            List<UserInfo> users = new List<UserInfo>(); // Create a new list of UserInfo objects
             try
             {
                 if (!File.Exists(userPath))
