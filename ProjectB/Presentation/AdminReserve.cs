@@ -12,12 +12,12 @@ namespace Restaurant
     public class AdminReserve
     {
         string filePath = "DataSources/CurrentUser.json";
-        string partySize;
-        string reservationDate;
-        string reservationName;
-        string reservationEmail;
-        string reservationPhoneNumber;
-        string reservationID = ReserveLogic.GenReservationID();
+        public string partySize;
+        public string reservationDate;
+        public string reservationName;
+        public string reservationEmail;
+        public string reservationPhoneNumber;
+        public string reservationID = ReserveLogic.GenReservationID();
 
         /*
         * ReservationForm
@@ -485,14 +485,14 @@ Reservation ID: {reservations.ReservationID}
                                     Console.WriteLine("New Reservation Phone Number (or press 'q' to quit): ");
                                     reservationPhoneNumber = Console.ReadLine();
 
-                                    if (reservationPhoneNumber == "q" || reservationPhoneNumber == "Q")
+                                    if (reservationPhoneNumber == "q")
                                     {
                                         Console.WriteLine("Quitting...");
                                         break;
                                     }
                                     else if (string.IsNullOrEmpty(reservationPhoneNumber))
                                     {
-                                        Console.WriteLine("You can't leave the \"Reservation Phone Number *:\" field empty.");
+                                        Console.WriteLine("You can't leave empty.");
                                     }
                                     else if (!UserCheck.IsNumeric(reservationPhoneNumber) || reservationPhoneNumber.Length < 10)
                                     {
@@ -504,7 +504,6 @@ Reservation ID: {reservations.ReservationID}
                                         break;
                                     }
                                 }
-
                                 break;
                             }
                         default:
@@ -611,7 +610,6 @@ Reservation ID: {reservations.ReservationID}
                         }
                     case "5":
                         {
-                            Console.Clear();
                             AdminMainMenu.Menu();
                             break;
                         }
