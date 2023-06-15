@@ -1,12 +1,12 @@
 using Newtonsoft.Json;
 namespace Restaurant
 {
-    class CurrentUser //: UserInfo
+    class CurrentUser
     {
         
-            static string userPath = "DataSources/User.json"; // Path to the json files
-            static string currentUserPath = "DataSources/CurrentUser.json";
-            static string tablePath = "DataSources/Table.json";
+            static string userPath = "DataSources/User.json"; // Path to the user json
+            static string currentUserPath = "DataSources/CurrentUser.json"; // Path to the currentUser json
+            static string tablePath = "DataSources/Table.json"; // Path to the Table json
             // path for json file that contains currently logged in user
             dynamic data = ReadCurrentUser.LoadCurrentUser();
 
@@ -24,7 +24,6 @@ namespace Restaurant
         public void Info()
         {
             // path for currently logged in user
-            //dynamic data = ReadCurrentUser.LoadCurrentUser();
             Console.WriteLine("\n=== My Information ===");
             Console.WriteLine($@"
 Username: {data.UserName}
@@ -62,7 +61,7 @@ Zipcode: {data.Address[0].ZipCode}");
             }
         }
 
-        public void ChangeInfo()
+        public void ChangeInfo() // Let's user update their info in both User.Json, CurrntUser.Json, and Table.Json (if they have made a booking)
         {
             
             string userEmailToUpdate = data.Email;
@@ -270,7 +269,7 @@ An account using this email address already exists.
                             }
                             break;
                         case "9":
-                            string userAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber (or press Enter to cancel): ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n", true);
+                            string userAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber (or press Enter to cancel): ", UserCheck.IsNumericAlphabetic, "Invalid input. Please enter a housenumber containing only numbers.\n", true);
                             if (!string.IsNullOrEmpty(userAddressHousenumber))
                             {
                                 userToUpdate.Address[0].HouseNumber = userAddressHousenumber;
@@ -307,17 +306,16 @@ An account using this email address already exists.
                     int index = allData.IndexOf(userToUpdate);
                     allData[index] = userToUpdate;
 
-                    // Step 5: Write the modified list back to the User.JSON file
+                    // Write the modified list back to the User.JSON file
                     string updatedJsonContents = JsonConvert.SerializeObject(allData, Formatting.Indented);
                     File.WriteAllText(userPath, updatedJsonContents);
 
-                    // Step 6: Write the modified list back to the CurrentUser.JSON file
+                    // Write the modified list back to the CurrentUser.JSON file
                     string updatedCurrentJsonContents = JsonConvert.SerializeObject(data, Formatting.Indented);
                     File.WriteAllText(currentUserPath, updatedCurrentJsonContents);
 
                     string updatedBookingJsonContents = JsonConvert.SerializeObject(bookingData, Formatting.Indented);
                     File.WriteAllText(tablePath, updatedBookingJsonContents);
-                    //Console.WriteLine("User updated successfully.");
 
                 }
             }

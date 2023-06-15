@@ -25,12 +25,10 @@ namespace Restaurant
         TODO: add check using ReservationDateValid() to check the date input
         TODO: add check to see if party size is over 6
         TODO: make it so that the user that's logged in can see their reservations
-        TODO: go to sleep (i'm tired)
         * === === ===
-        * if broken, ask shae,
-        * if still broken, shae will cry
+        * if broken, ask shae
         */
-        private void ReservationForm()
+        public void ReservationForm()
         {
             Console.Clear();
             Console.WriteLine(@$"Restaurant Open Hours:
@@ -44,24 +42,39 @@ Sunday:       CLOSED
 ");
             while (true)
             {
-                Console.WriteLine($"Party Size *: ");
-                Console.WriteLine($"Reservation Date *: ");
-                Console.WriteLine($"Reservation Name *: ");
-                Console.WriteLine($"Reservation Email *: ");
-                Console.WriteLine($"Reservation Phone Number *: ");
+                Console.WriteLine($"Party Size *: {partySize}");
+                Console.WriteLine($"Reservation Date & Time (DD/MM/YYYY HH:MM)*: {reservationDate}");
+                Console.WriteLine($"Reservation Name *: {reservationName}");
+                Console.WriteLine($"Reservation Email *: {reservationEmail}");
+                Console.WriteLine($"Reservation Phone Number *: {reservationPhoneNumber}");
                 Console.WriteLine($"Reservation ID: {reservationID}");
                 Console.WriteLine("* You can't leave this field empty.");
 
-                Console.SetCursorPosition("Party Size *: ".Length, Console.CursorTop - 7);
-                partySize = GetPartySize();
-                Console.SetCursorPosition("Reservation Date *: ".Length, Console.CursorTop);
-                reservationDate = GetDate();
-                Console.SetCursorPosition("Reservation Name *: ".Length, Console.CursorTop);
-                reservationName = GetName();
-                Console.SetCursorPosition("Reservation Email *: ".Length, Console.CursorTop);
-                reservationEmail = GetEmail();
-                Console.SetCursorPosition("Reservation Phone Number *: ".Length, Console.CursorTop);
-                reservationPhoneNumber = GetPhoneNumber();
+                if (string.IsNullOrEmpty(partySize))
+                {
+                    Console.SetCursorPosition("Party Size *: ".Length, 9);
+                    partySize = GetPartySize();
+                }
+                if (string.IsNullOrEmpty(reservationDate))
+                {
+                    Console.SetCursorPosition("Reservation Date & Time (DD/MM/YYYY HH:MM) *: ".Length, 10);
+                    reservationDate = GetDate();
+                }
+                if (string.IsNullOrEmpty(reservationName))
+                {
+                    Console.SetCursorPosition("Reservation Name *: ".Length, 11);
+                    reservationName = GetName();
+                }
+                if (string.IsNullOrEmpty(reservationEmail))
+                {
+                    Console.SetCursorPosition("Reservation Email *: ".Length, 12);
+                    reservationEmail = GetEmail();
+                }
+                if (string.IsNullOrEmpty(reservationPhoneNumber))
+                {
+                    Console.SetCursorPosition("Reservation Phone Number *: ".Length, 13);
+                    reservationPhoneNumber = GetPhoneNumber();
+                }
 
                 break;
             }
@@ -75,28 +88,34 @@ Please check your inbox and spam.");
             AdminMainMenu.Menu();
         }
 
-        private string GetPartySize()
+        public string GetPartySize() //*ALL THE CHECKS FOR THE PARTY SIZE
         {
             while (true)
             {
                 string input = Console.ReadLine();
 
-                if (string.IsNullOrEmpty(input))
+                if (string.IsNullOrEmpty(input)) //*Checks if field is empty
                 {
                     Console.Clear();
                     Console.WriteLine("You can't leave the \"Party Size *:\" field empty.");
                     PromptRetryOrQuit();
                 }
-                else if (!int.TryParse(input, out int n))
+                else if (!int.TryParse(input, out int n)) //*Checks if input is not a number
                 {
                     Console.Clear();
                     Console.WriteLine("Please enter a number.");
                     PromptRetryOrQuit();
                 }
-                else if (Convert.ToInt16(input) > 48)
+                else if (Convert.ToInt16(input) > 48) //*Checks if input is > 48
                 {
                     Console.Clear();
                     Console.WriteLine("Party Size can't be over 48");
+                    PromptRetryOrQuit();
+                }
+                else if (Convert.ToInt32(input) <= 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Party Size can't be less that 1");
                     PromptRetryOrQuit();
                 }
                 else
@@ -106,7 +125,7 @@ Please check your inbox and spam.");
             }
         }
 
-        private string GetDate()
+        public string GetDate()
         {
             while (true)
             {
@@ -121,7 +140,7 @@ Please check your inbox and spam.");
                 else if (!ReserveLogic.IsDateValid(input))
                 {
                     Console.Clear();
-                    Console.WriteLine("Please enter a valid date and time. (dd/MM/yyyy HH:mm)");
+                    Console.WriteLine("Please enter a valid date and time. (DD/MM/YYYY HH:MM)");
                     PromptRetryOrQuit();
                 }
                 else
@@ -131,7 +150,7 @@ Please check your inbox and spam.");
             }
         }
 
-        private string GetName()
+        public string GetName()
         {
             while (true)
             {
@@ -156,7 +175,7 @@ Please check your inbox and spam.");
             }
         }
 
-        private string GetEmail()
+        public string GetEmail()
         {
             while (true)
             {
@@ -181,7 +200,7 @@ Please check your inbox and spam.");
             }
         }
 
-        private string GetPhoneNumber()
+        public string GetPhoneNumber()
         {
             while (true)
             {
@@ -193,7 +212,7 @@ Please check your inbox and spam.");
                     Console.WriteLine("You can't leave the \"Reservation Phone Number *:\" field empty.");
                     PromptRetryOrQuit();
                 }
-                else if (!UserCheck.IsNumeric(input))
+                else if (!UserCheck.IsNumeric(input) && input.Length < 10)
                 {
                     Console.Clear();
                     Console.WriteLine("Please enter a valid phone number.");
@@ -206,7 +225,7 @@ Please check your inbox and spam.");
             }
         }
 
-        private void PromptRetryOrQuit()
+        public void PromptRetryOrQuit()
         {
             Console.WriteLine("Press Y to continue or press Q to quit.");
             while (true)
@@ -227,9 +246,320 @@ Please check your inbox and spam.");
             }
         }
 
+        public void SeeReservation()
+        {
+            Console.Clear();
+            while (true)
+            {
+                dynamic currentReservations = ReadTableJson.LoadTableJson();
+                Console.WriteLine(@"1. See all reservations
+2. See user reservations
+3. Exit
+");
+                string tempInput = Console.ReadLine();
+
+                switch (tempInput)
+                {
+                    case "1":
+                        {
+                            Console.Clear();
+                            if (currentReservations != null)
+                            {
+                                Console.WriteLine("All current reservations:");
+                                foreach (var reservations in currentReservations)
+                                {
+                                    Console.WriteLine(@$"Party Size: {reservations.PartySize}
+Reservation Date: {reservations.ReservationDate}
+Reservation Name: {reservations.ReservationName}
+Reservation Email: {reservations.ReservationEmail}
+Reservation Phone Number: {reservations.ReservationPhoneNumber}
+Reservation ID: {reservations.ReservationID}
+");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No current reservations.");
+                            }
+                            break;
+                        }
+                    case "2":
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Enter Reservation Email:");
+                            string emailInput = Console.ReadLine();
+
+                            if (currentReservations != null)
+                            {
+                                var filteredReservations = ((IEnumerable<dynamic>)currentReservations).Where(r => r.ReservationEmail == emailInput);
+                                if (filteredReservations.Any())
+                                {
+                                    Console.WriteLine($"Reservations for {emailInput}");
+                                    foreach (var reservations in filteredReservations)
+                                    {
+                                        Console.WriteLine(@$"Party Size: {reservations.PartySize}
+Reservation Date: {reservations.ReservationDate}
+Reservation Name: {reservations.ReservationName}
+Reservation Email: {reservations.ReservationEmail}
+Reservation Phone Number: {reservations.ReservationPhoneNumber}
+Reservation ID: {reservations.ReservationID}
+");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine($"No reservations for {emailInput}");
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("No current reservations");
+                            }
+                            break;
+                        }
+                    case "3":
+                        {
+                            AdminMainReserve();
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine("Please enter 1-3.");
+                            continue;
+                        }
+                }
+            }
+        }
+
+        public void ChangeReservation()
+        {
+            dynamic currentReservations = ReadTableJson.LoadTableJson();
+            Console.Clear();
+            Console.WriteLine("Enter Reservation ID: ");
+            string reservationId = Console.ReadLine();
+
+            if (currentReservations != null)
+            {
+                var reservationToChange = ((IEnumerable<dynamic>)currentReservations).FirstOrDefault(r => r.ReservationID == reservationId);
+                if (reservationToChange != null)
+                {
+                    Console.WriteLine(@$"Current reservation details:
+1. Party Size: {reservationToChange.PartySize}
+2. Reservation Date: {reservationToChange.ReservationDate}
+3. Reservation Name: {reservationToChange.ReservationName}
+4. Reservation Email: {reservationToChange.ReservationEmail}
+5. Reservation Phone Number: {reservationToChange.ReservationPhoneNumber}
+");
+                    Console.WriteLine("What do you want to change?");
+                    string tempInput = Console.ReadLine();
+
+                    switch (tempInput)
+                    {
+                        case "1":
+                            {
+                                while (true)
+                                {
+                                    Console.WriteLine("New Party Size (or press 'q' to quit): ");
+                                    partySize = Console.ReadLine();
+
+                                    if (partySize == "q")
+                                    {
+                                        Console.WriteLine("Quitting...");
+                                        break;
+                                    }
+                                    else if (string.IsNullOrEmpty(partySize))
+                                    {
+                                        Console.WriteLine("Can't leave it empty.");
+                                    }
+                                    else if (!int.TryParse(partySize, out int n))
+                                    {
+                                        Console.WriteLine("Must be a number.");
+                                    }
+                                    else if (Convert.ToInt32(partySize) > 48)
+                                    {
+                                        Console.WriteLine("Can't be greater than 48.");
+                                    }
+                                    else if (Convert.ToInt32(partySize) <= 0)
+                                    {
+                                        Console.WriteLine("Can't be less than 1.");
+                                    }
+                                    else
+                                    {
+                                        reservationToChange = partySize;
+                                        break;
+                                    }
+                                }
+
+                                break;
+                            }
+                        case "2":
+                            {
+                                while (true)
+                                {
+                                    Console.WriteLine("New Reservation Date (or press 'q' to quit): ");
+                                    reservationDate = Console.ReadLine();
+
+                                    if (reservationDate == "q")
+                                    {
+                                        Console.WriteLine("Quitting...");
+                                        break;
+                                    }
+                                    else if (string.IsNullOrEmpty(reservationDate))
+                                    {
+                                        Console.WriteLine("You can't leave it empty.");
+                                    }
+                                    else if (!ReserveLogic.IsDateValid(reservationDate))
+                                    {
+                                        Console.WriteLine("Please enter a valid date and time. (DD/MM/YYYY HH:MM)");
+                                    }
+                                    else
+                                    {
+                                        reservationToChange.ReservationDate = reservationDate;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        case "3":
+                            {
+                                while (true)
+                                {
+                                    Console.WriteLine("New Reservation Name (or press 'q' to quit): ");
+                                    reservationName = Console.ReadLine();
+
+                                    if (reservationName == "q")
+                                    {
+                                        Console.WriteLine("Quitting...");
+                                        break;
+                                    }
+                                    else if (string.IsNullOrEmpty(reservationName))
+                                    {
+                                        Console.WriteLine("You can't leave it empty.");
+                                    }
+                                    else if (!UserCheck.isNameAlphabetic(reservationName))
+                                    {
+                                        Console.WriteLine("Please enter a valid name.");
+                                    }
+                                    else
+                                    {
+                                        reservationToChange.ReservationName = reservationName;
+                                        break;
+                                    }
+                                }
+
+                                break;
+                            }
+                        case "4":
+                            {
+                                while (true)
+                                {
+                                    Console.WriteLine("New Reservation Email (or press 'q' to quit): ");
+                                    reservationEmail = Console.ReadLine();
+
+                                    if (reservationEmail == "q")
+                                    {
+                                        Console.WriteLine("Quitting...");
+                                        break;
+                                    }
+                                    else if (string.IsNullOrEmpty(reservationEmail))
+                                    {
+                                        Console.WriteLine("You can't leave it empty.");
+                                    }
+                                    else if (!UserCheck.EmailCheck(reservationEmail))
+                                    {
+                                        Console.WriteLine("Please enter a valid email.");
+                                    }
+                                    else
+                                    {
+                                        reservationToChange.ReservationEmail = reservationEmail;
+                                        break;
+                                    }
+                                }
+
+                                break;
+                            }
+                        case "5":
+                            {
+                                while (true)
+                                {
+                                    Console.WriteLine("New Reservation Phone Number (or press 'q' to quit): ");
+                                    reservationPhoneNumber = Console.ReadLine();
+
+                                    if (reservationPhoneNumber == "q" || reservationPhoneNumber == "Q")
+                                    {
+                                        Console.WriteLine("Quitting...");
+                                        break;
+                                    }
+                                    else if (string.IsNullOrEmpty(reservationPhoneNumber))
+                                    {
+                                        Console.WriteLine("You can't leave the \"Reservation Phone Number *:\" field empty.");
+                                    }
+                                    else if (!UserCheck.IsNumeric(reservationPhoneNumber) || reservationPhoneNumber.Length < 10)
+                                    {
+                                        Console.WriteLine("Please enter a valid phone number.");
+                                    }
+                                    else
+                                    {
+                                        reservationToChange.ReservationPhoneNumber = reservationPhoneNumber;
+                                        break;
+                                    }
+                                }
+
+                                break;
+                            }
+                        default:
+                            {
+                                Console.WriteLine("Invalid input. No changes will be made.");
+                                break;
+                            }
+                    }
+                    string updatedReservation = JsonConvert.SerializeObject(currentReservations, Formatting.Indented);
+                    File.WriteAllText("DataSources/Table.json", updatedReservation);
+                    Console.WriteLine("Reservation updated successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("No reservation found.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No current reservations");
+            }
+        }
+
+        public void DeleteReservation()
+        {
+            dynamic currentReservations = ReadTableJson.LoadTableJson();
+            Console.Clear();
+            Console.WriteLine("Enter Reservation ID: ");
+            string reservationId = Console.ReadLine();
+
+            if (currentReservations != null)
+            {
+                var reservationToDelete = ((IEnumerable<dynamic>)currentReservations).FirstOrDefault(r => r.ReservationID == reservationId);
+
+                if (reservationToDelete != null)
+                {
+                    currentReservations.Remove(reservationToDelete);
+                    string updatedReservation = JsonConvert.SerializeObject(currentReservations, Formatting.Indented);
+                    File.WriteAllText("DataSources/Table.json", updatedReservation);
+                    Console.WriteLine("Reservation deleted successfully.");
+                }
+                else
+                {
+                    Console.WriteLine("No reservation found.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No current reservations.");
+            }
+        }
+
         /*
-        * Reserve.MainReserve() method
-        * This is where all the necessary stuff happens for the Reserve class
+        * Admin Reserve
+        * This is where all the necessary stuff happens for the Admin Reserve class
         ! UNDER CONSTRUCTION
         ! DO NOT TOUCH WITHOUT CONSULTING SHAE
         */
@@ -249,21 +579,47 @@ Please check your inbox and spam.");
             Console.Clear();
             while (true)
             {
-                Console.WriteLine("Continue to reservation form? Y/N");
+                Console.WriteLine(@"1. Make reservation
+2. See reservation
+3. Change reservation
+4. Delete reservation
+5. Exit
+");
                 string tempInput = Console.ReadLine();
 
-                if ((tempInput == "Y") || (tempInput == "y"))
+                switch (tempInput)
                 {
-                    ReservationForm();
-                }
-                else if ((tempInput == "N") || (tempInput == "n"))
-                {
-                    Console.Clear();
-                    AdminMainMenu.Menu();
-                }
-                else
-                {
-                    Console.WriteLine("Please enter Y or N");
+                    case "1":
+                        {
+                            ReservationForm();
+                            break;
+                        }
+                    case "2":
+                        {
+                            SeeReservation();
+                            break;
+                        }
+                    case "3":
+                        {
+                            ChangeReservation();
+                            break;
+                        }
+                    case "4":
+                        {
+                            DeleteReservation();
+                            break;
+                        }
+                    case "5":
+                        {
+                            Console.Clear();
+                            AdminMainMenu.Menu();
+                            break;
+                        }
+                    default:
+                        {
+                            Console.WriteLine("Please enter 1-5.");
+                            continue;
+                        }
                 }
             }
         }

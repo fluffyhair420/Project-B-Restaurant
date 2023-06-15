@@ -1,0 +1,26 @@
+[
+  {
+    "PartySize": 3,
+    "ReservationDate": "29/11/2023 20:00",
+    "ReservationName": "Corina Leeters",
+    "ReservationEmail": "cleeters@kpnplanet.nl",
+    "ReservationPhoneNumber": "0620933230",
+    "ReservationID": "7275854"
+  },
+  {
+    "PartySize": 5,
+    "ReservationDate": "16/06/2023 18:00",
+    "ReservationName": "Kim Leeters",
+    "ReservationEmail": "kimleeters@gmail.com",
+    "ReservationPhoneNumber": "0612345678",
+    "ReservationID": "8062984"
+  },
+  {
+    "PartySize": 4,
+    "ReservationDate": "16/06/2023 19:30",
+    "ReservationName": "Kim Leeters",
+    "ReservationEmail": "kimleeters@gmail.com",
+    "ReservationPhoneNumber": "0612345678",
+    "ReservationID": "3304719"
+  }
+]

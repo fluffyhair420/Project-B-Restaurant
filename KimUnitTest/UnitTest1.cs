@@ -21,7 +21,7 @@ public class TestUser
         Console.SetIn(consoleInput);
 
         // Act
-        string actual = UserCheck.GetValidInput(prompt, validationFunc, errorMessage);
+        string actual = UserCheck.GetValidInput(prompt, validationFunc, errorMessage, true);
 
         // Assert
         Assert.AreEqual(expected, actual);
@@ -70,19 +70,28 @@ public class TestUser
         string.Format("Expected return value: {0}, Actual return value: {1}", expectedReturnValue, actualReturnValue));
     }
 
+    [DataTestMethod]
+    [DataRow("Bergschenhoek", true)]
+    [DataRow("Berkel en Rodenrijs", true)]
+    [DataRow("'s Hertogenbosch", true)]
+    [DataRow("Alphen aan den Rijn", true)]
+    [DataRow("Alphen a/d Rijn", true)]
+    [DataRow("Zuid-Holland", true)]
+    [DataRow("'s-Gravenhave", true)]
+    [DataRow("A'Dam", true)]
+    [DataRow("-Amsterdam", false)] // no - as first character
+    [DataRow("'`", false)] // must contain a letter
+    [DataRow("``````", false)] // must contain a letter
+    [DataRow("`s Hertogenbosch-", false)] // no - as last character
+    [DataRow("Ab", false)] // must be 3 characters long
+    [DataRow("Urk", true)]
+    [DataRow("Alphen-aan-den-rijn", true)]
+
+    public void UserCheck_isCityAlphabetic_ReturnAreEqual(string userInput, bool expectedReturnValue)
+    {
+        bool actualReturnValue = UserCheck.isCityAlphabetic(userInput);
+        Assert.AreEqual(expectedReturnValue, actualReturnValue,
+        string.Format("Expected return value: {0}, Actual return value: {1}", expectedReturnValue, userInput));
+    }
 
 }
-
- // [TestMethod]
-    // public void UsernameCheck_ExistingUsername_ReturnsFalse()
-    // {
-    //     // Arrange
-    //     string existingUsername = "existingUser";
-    //     //string json = File.ReadAllText(UserJsonPath);
-    //     bool expectedResult = true;
-    //     // Act
-    //     bool ActualResult = UserCheck.UsernameCheck(existingUsername);
-
-    //     // Assert
-    //     Assert.IsTrue(ActualResult);
-    // }

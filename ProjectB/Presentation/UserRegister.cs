@@ -5,19 +5,18 @@ using System.Threading.Tasks;
 
 namespace Restaurant
 {
-    class UserRegister : UserInfo
+    public class UserRegister : UserInfo
     {
-        static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
-        //static string currentUserJson = File.ReadAllText(currentUserPath);
         static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
         static string json = File.ReadAllText(path);
 
         public void Register()
         {
-            // Email
+            
             Console.WriteLine("\n=== Register ===");
             Console.WriteLine("Press Q, followed by Enter to go back to the Homepage at any given time.\n");
             Console.WriteLine("* Required field.");
+            // Email vragen
             string userEmail = "";
             bool emailValid = false;
             while (emailValid == false)
@@ -59,10 +58,9 @@ namespace Restaurant
                     emailVerification = true;
                 }
             }
-            base.Email = userEmail;
 
 
-            // Password
+            // Wachtwoord vragen
             string userPassWord = "";
             bool passwordValid = false;
             while (passwordValid == false)
@@ -84,7 +82,7 @@ Password should contain at least
                 passwordValid = UserCheck.PasswordCheck(userPassWord);
             }
 
-            // Password check of password overeenkomt met vorig ingevoerde password
+            // Wachtwoord check of wachtwoord overeenkomt met vorig ingevoerde wachtwoord
             string userPassCheck = "";
             bool passVerification = false;
             while (passVerification == false)
@@ -101,7 +99,6 @@ Password should contain at least
                     passVerification = true;
                 }
             }
-            base.PassWord = userPassWord;
 
             // Check if Email already exists in JSON file
             dynamic data = JsonConvert.DeserializeObject(json);
@@ -111,7 +108,7 @@ Password should contain at least
                 foreach (var item in data)
                 {
                     // Email already exists
-                    if (item.Email == Email)
+                    if (item.Email == userEmailCheck)
                     {
                         Console.Write(@"
 An account using this email address already exists.
@@ -151,50 +148,20 @@ a different email address.");
 
             if (!emailAlreadyExists)
             {
-                string userFirst = UserCheck.GetValidInput("\nFirst name*: ", UserCheck.isNameAlphabetic, "Invalid input. Please enter a first name containing only letters.", false);
-                base.FirstName = userFirst;
-
-                string userLast = UserCheck.GetValidInput("Last name*: ", UserCheck.isNameAlphabetic, "Invalid input. Please enter a last name containing only letters.\n", false);
-                base.LastName = userLast;
-
-                string usernameCheck = UserCheck.GetValidInput("Username*: ", UserCheck.IsUsernameValid, "", false);
-                base.UserName = usernameCheck;
-
-                string userPhoneNumber = UserCheck.GetValidInput("Phonenumber*: ", userInput => UserCheck.IsNumeric(userInput) && userInput.Length == 10, "Invalid input. Please enter a phonenumber that is 10 numbers long.\n", false);
-                base.PhoneNumber = userPhoneNumber;
-
-                string userAddressCity = UserCheck.GetValidInput("City*: ", UserCheck.isCityAlphabetic, "Invalid input. Please enter a city containing only letters.\n", false);
-                string userAddressStreet = UserCheck.GetValidInput("Street*: ", UserCheck.IsAlphabetic, "Invalid input. Please enter a streetname containing only letters.\n", false);
-                string userAddressHousenumber = UserCheck.GetValidInput("Housenumber*: ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n", false);
-                string userAddressZipcode = UserCheck.GetValidInput("Zipcode*: ", UserCheck.IsZipCodeValid, "Invalid input. Zipcode format should be like 1234AB\n", false);
-
-                UserInfo newUser = new UserInfo
-                {
-                    UserName = UserName,
-                    PassWord = PassWord,
-                    FirstName = FirstName,
-                    LastName = LastName,
-                    Email = Email,
-                    PhoneNumber = PhoneNumber,
-                    // Create List object for address
-                    Address = new List<Address>()
-                    {
-                        new Address
-                        {
-                            City = userAddressCity,
-                            Street = userAddressStreet,
-                            HouseNumber = userAddressHousenumber,
-                            ZipCode = userAddressZipcode
-                        }
-                    }
-                };
+                // Checks if the user's inputs are correct and creates the UserInfo object
+                UserRegisterLogic userCheck = new UserRegisterLogic();
+                UserInfo newUser = userCheck.newUserCheck(userEmail, userPassWord);
 
                 // Write all user data to JSON file
                 UpdateJson newUserJson = new UpdateJson();
                 newUserJson.writeToJson(newUser, path);
+                // Write info of the user who just registered to the CurrentUser JSON
+                // the user is now marked as logged in.
                 CurrentUserJson.WriteCurrentUserToJson(newUser);
                 UserLogin.userLoggedIn = true;
                 Console.WriteLine("\n- Successfully created account! -");
+                Console.WriteLine($"\nWelcome, {newUser.UserName}");
+                
             }
             Program.Main();
         }

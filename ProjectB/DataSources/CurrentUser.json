@@ -1,0 +1,17 @@
+{
+  "UserID": 2,
+  "UserName": "gebruiker",
+  "PassWord": "Welkom01",
+  "FirstName": "Kim",
+  "LastName": "Leeters",
+  "Email": "kimleeters@gmail.com",
+  "PhoneNumber": "0612345678",
+  "Address": [
+    {
+      "City": "Berkel",
+      "Street": "romen",
+      "HouseNumber": "133a",
+      "ZipCode": "2652AB"
+    }
+  ]
+}

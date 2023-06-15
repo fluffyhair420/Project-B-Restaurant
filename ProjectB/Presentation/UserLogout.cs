@@ -2,6 +2,7 @@ namespace Restaurant
 {
     class UserLogout
     {
+        // Sets the userLoggedIn boolean to false and empties the CurrentUser JSON file.
         public UserLogout()
         {
 
@@ -15,7 +16,8 @@ namespace Restaurant
             {
                 case "Y":
                     CurrentUserJson.CurrentUserLogout();
-
+                    
+                    // For aesthetical purposes
                     string logoutSuccesDot = "...";
                     foreach (char c in logoutSuccesDot)
                     {

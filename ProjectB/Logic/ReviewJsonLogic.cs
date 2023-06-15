@@ -1,103 +1,132 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-
-public static class JsonLogic
+namespace Restaurant
 {
-
-    static string reviewsStr;
-    static string tempUserName;
-    static string tempReview;
-    static string tempID;
-    static int tempInt = 0;
-
-    public static string LoadReviews()
+    public static class ReviewJsonLogic
     {
-        // Get contents of Reviews.json as JArray
-        JArray JArr = ReadFromJson.ReadJsonFromFile();
 
+        static string reviewsStr;
+        static string tempUserName;
+        static string tempReview;
+        static string tempID;
+        static int tempInt = 0;
 
-        foreach (JObject review in JArr)
+        public static string LoadReviews()
         {
-            tempInt++;
-            // Assign values of current review to temporary variables
-            tempUserName = review.GetValue("UserName").ToString();
-            tempReview = review.GetValue("Review").ToString();
+            // Get contents of Reviews.json as JArray
+            JArray JArr = ReadReviewFromJson.ReadJsonFromFile();
 
-            // Man I love whitespace
-            reviewsStr += 
-@$"
+            string reviewsStr = "";
+            foreach (JObject review in JArr)
+            {
+                tempInt++;
+                // Assign values of current review to temporary variables
+                tempUserName = review.GetValue("UserName").ToString();
+                tempReview = review.GetValue("ReviewText").ToString();
+
+                reviewsStr += 
+    @$"
 [{tempInt}]
 UserName: {tempUserName}
 Review:
 {tempReview}
 
-";
+    ";
+            }
+            tempInt = 0;
+
+            return reviewsStr;
         }
-        tempInt = 0;
 
-        return reviewsStr;
-    }
-
-    public static int CheckID(string reservationID)
-    {
-        /*
-        Code 0: valid ID
-        Code 1: A review for this ID already exists
-        Code 2: No review exists with this ID
-        */
-
-        // Get contents of Reviews.json as JArray
-        JArray JArr = ReadFromJson.ReadJsonFromFile();
-
-        // Check if given reservationID already exists in Reviews.json
-        foreach (JObject review in JArr)
+        public static int CheckID(string reservationID)
         {
-            tempID = review.GetValue("ReservationID").ToString();
+            /*
+            Code 0: valid ID
+            Code 1: A review for this ID already exists
+            Code 2: No review exists with this ID
+            */
 
-            if (tempID == reservationID) return 1;
+            // Get contents of Reviews.json as JArray
+            JArray JArr = ReadReviewFromJson.ReadJsonFromFile();
+
+            // Check if given reservationID already exists in Reviews.json
+            foreach (JObject review in JArr)
+            {
+                tempID = review.GetValue("ReservationID").ToString();
+
+                if (tempID == reservationID) return 1;
+            }
+
+            // TODO add check if a reservation with this ID exists(if not, return code 2)
+
+            // If ID is not found return code 0
+            return 0;
+
         }
 
-        // TODO add check if a reservation with this ID exists(if not, return code 2)
+        // TODO add error codes and return these instead of returning to removereviewadmin
+        // Takes an index(int), and removes the review with this index in Reviews.json
+        public static void RemoveReviewIndex(int reviewIndex)
+        {
+            // Get json contents
+            JArray JArr = ReadReviewFromJson.ReadJsonFromFile();
 
-        // If ID is not found return code 0
-        return 0;
+            // Remove review at given index
+            try
+            {
+                JArr.RemoveAt(reviewIndex);
+            }
+            catch (System.ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("Error: There is no review for this number!");
+                Review.RemoveReviewAdmin();
+            }
+            catch(Exception exep)
+            {
+                Console.WriteLine("An error occurred:");
+                Console.WriteLine(exep);
+                Review.RemoveReviewAdmin();
+            }
+
+            WriteToJson.WriteArrayToFile(JArr);
+
+        }
+
+        // Takes a ReservationID as input, gets the index of the matching review,
+        // and with this calls RemoveReviewIndex to remove this review
+        public static void RemoveReviewID(string reviewID)
+        {
+            Console.WriteLine(reviewID);
+            // Get json contents
+            JArray JArr = ReadReviewFromJson.ReadJsonFromFile();
+            
+            int ReviewIndex = -1;
+            for (int i = 0; i < JArr.Count; i++)
+            {
+                if (JArr[i]["ReservationID"].ToString() == reviewID)
+                {
+                    ReviewIndex = i;
+                    break;
+                }
+            }
+
+            RemoveReviewIndex(ReviewIndex);
+            Console.WriteLine("Review removed!");
+            Review.Start();
+        }
+
+
+        public static string GetCurrentUsername()
+        {
+            string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
+            string currentUserJson = File.ReadAllText(currentUserPath);
+            dynamic data = JsonConvert.DeserializeObject(currentUserJson);
+
+            return data.UserName;
+        }
+
+
 
     }
-
-    public static void RemoveReview(int reviewIndex)
-    {
-        // Get json contents
-        JArray JArr = ReadFromJson.ReadJsonFromFile();
-
-        // Remove review at given index (Reviews start at 1 in presentation so 1 is added to index)
-        JArr.RemoveAt(reviewIndex+1);
-
-        WriteToJson.WriteArrayToFile(JArr);
-
-
-    }
-
-
-    
-//     // public void ConvertToJson(string userName, string reviewText, string reservationID)
-//     // {
-
-//     //     ReviewModel reviewObj = new ReviewModel // Create review object
-//     //     {
-//     //         UserName = userName,
-//     //         ReviewText = reviewText
-//     //     };
-
-//     //     WriteToJson.WriteJsonToFile(reviewObj, reservationID); // Calls WriteToJson.WriteJsonToFile with review object + ID as params
-//     // }
-
-// //     public void ConvertFromJson()
-// //     {
-// //         ReviewModel reviewModel = ReadFromJson.ReadJsonFromFile();
-// //         Console.WriteLine("TEST");
-// //         Console.WriteLine(@$"Username: {reviewModel.UserName}
-// // Review:
-// // {reviewModel.ReviewText}");
-// //     }
 }

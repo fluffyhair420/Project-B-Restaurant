@@ -45,6 +45,7 @@ namespace Restaurant
                 {
                     case "q":
                     case "Q":
+                        Console.Clear();
                         wrongInput = false;
                         Program.Main();
                         break;

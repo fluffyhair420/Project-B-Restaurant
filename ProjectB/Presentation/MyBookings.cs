@@ -14,11 +14,13 @@ namespace Restaurant
 
         public static bool MyBooking()
         {
+            // reads from Table.Json and CurrentUser.Json
             readBookingPath = File.ReadAllText(bookingPath);
             bookingData = JsonConvert.DeserializeObject<List<Table>>(readBookingPath);
             currentUserJson = File.ReadAllText(currentUserPath);
             currentUserData = JsonConvert.DeserializeObject(currentUserJson);
 
+            // check if there's any bookings at all
             if (bookingData == null || bookingData.Count == 0)
             {
                 foundBooking = false;
@@ -27,6 +29,8 @@ namespace Restaurant
                 return foundBooking;
             }
 
+            // filter the bookings where the email address is the same
+            // as the current user's
             var filteredBookings = bookingData.Where(booking => (string)booking.ReservationEmail == (string)currentUserData.Email).ToList();
             Console.WriteLine("\n=== My Bookings ===");
             if (filteredBookings.Count > 0)
@@ -44,7 +48,7 @@ Reservation ID: {booking.ReservationID}
 ");
                 }
 
-                // Rest of the code for actions like edit, cancel, etc.
+                // Edit or cancel booking
                 Console.WriteLine(@"
 1. Edit booking
 2. Cancel booking
@@ -200,7 +204,6 @@ Please make sure you filled in the correct Reservation ID.
                         return;
                     }
 
-                    // Process the key press
                     if (keyInfo.Key != ConsoleKey.Enter)
                         reservationId += keyInfo.KeyChar;
 
@@ -291,7 +294,7 @@ Please make sure you made a reservation with us and filled in the correct Reserv
                 string updatedBookingJsonContents = JsonConvert.SerializeObject(bookingData, Formatting.Indented);
                 File.WriteAllText(bookingPath, updatedBookingJsonContents);
                 Console.WriteLine("Reservation date updated.\n");
-                
+                // create new Email object to send an email to the user
                 Email dateChanged = new Email(booking);
                 dateChanged.DateChangedEmail();
             }
@@ -338,6 +341,7 @@ Please contact us directly if you want to invite more people.
             string updatedBookingJsonContents = JsonConvert.SerializeObject(bookingData, Formatting.Indented);
             File.WriteAllText(bookingPath, updatedBookingJsonContents);
             Console.WriteLine("Party size updated.\n");
+            // create new Email object to send an email to the user
             Email partyChanged = new Email(booking);
             partyChanged.PartySizeChangedEmail();
         }
