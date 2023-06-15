@@ -345,7 +345,7 @@ Press Q: Quit");
             */
 
             dynamic currentUser = ReadCurrentUser.LoadCurrentUser();
-            if (currentUser != null)
+            if (UserLogin.userLoggedIn)
             {
                 reservationName = $"{currentUser.FirstName} {currentUser.LastName}";
                 reservationEmail = $"{currentUser.Email}";
