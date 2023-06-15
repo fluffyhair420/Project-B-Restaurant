@@ -177,21 +177,37 @@ Please check your inbox and spam.");
                     Console.WriteLine("You can't leave the \"Reservation Date *:\" field empty.");
                     PromptRetryOrQuit();
                 }
-                else if (DateTime.ParseExact(input, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture) == DateTime.Now)
-                {
-                    Console.Clear();
-                    Console.WriteLine("If you would like to reserve on the same day, you would have to call.");
-                    PromptRetryOrQuit();
-                }
                 else if (!ReserveLogic.IsDateValid(input)) //*If format not good/on Sunday/not in future go here
                 {
                     Console.Clear();
                     Console.WriteLine("Please enter a valid date and time. (DD/MM/YYYY HH:MM)");
                     PromptRetryOrQuit();
                 }
+                else if (DateTime.ParseExact(input, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture).Date == DateTime.Now.Date)
+                {
+                    Console.Clear();
+                    Console.WriteLine("If you would like to reserve on the same day, you would have to call.");
+                    PromptRetryOrQuit();
+                }
                 else
                 {
-                    return input;
+                    try
+                    {
+                        DateTime reservationDateTime = DateTime.ParseExact(input, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture);
+                        if (reservationDateTime <= DateTime.Now) //* If the entered date is in the past, go here
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Please enter a future date and time.");
+                            PromptRetryOrQuit();
+                        }
+                        return input;
+                    }
+                    catch (FormatException) //* If the format is correct but the date is invalid, go here
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Please enter a valid date and time.");
+                        PromptRetryOrQuit();
+                    }
                 }
             }
         }
