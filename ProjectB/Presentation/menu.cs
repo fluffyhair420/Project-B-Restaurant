@@ -7,11 +7,11 @@ namespace Restaurant
 {
     public class Menu : Screen
     {
+        //create a reference to the menuDis class so we can use it and its methods later in this class
         public menuDis menushow = new menuDis();
         public override void Show()
         {
             ConsoleKeyInfo input;
-            ConsoleKeyInfo input_;
             do
             {
                 Console.Clear();
@@ -39,8 +39,9 @@ namespace Restaurant
                 while (input.Key != ConsoleKey.D1 && input.Key != ConsoleKey.D2 && input.Key != ConsoleKey.Escape);
                 
                 if (input.Key == ConsoleKey.D1){
+                    //add dish
                     Console.Clear();
-                    Console.WriteLine("To what month do you want to add another dish?");
+                    Console.WriteLine("To what month do you want to add another dish? (Example: January)");
                     string month = Console.ReadLine();
                     if (!menuDis.months.Contains(month)){
                         do
@@ -61,7 +62,7 @@ namespace Restaurant
                         dishName = Console.ReadLine();
                     }
 
-                    Console.WriteLine("Enter the dish price:");
+                    Console.WriteLine("Enter the dish price (00,00 format):");
                     decimal dishPrice;
                     while (!decimal.TryParse(Console.ReadLine(), out dishPrice))
                     {
@@ -116,12 +117,12 @@ namespace Restaurant
                     Dish.addDish(month, newDish);
                     do
                     {
-                        Console.WriteLine("Press escape to go back to the mainmenu");                    
-                        input_ = Console.ReadKey(true);
+                        Console.WriteLine("Press escape to go back to the current menu");                    
+                        input = Console.ReadKey(true);
                     }
-                    while (input_.Key != ConsoleKey.Escape);    
+                    while (input.Key != ConsoleKey.Escape);    
 
-                    if (input_.Key == ConsoleKey.Escape)
+                    if (input.Key == ConsoleKey.Escape)
                     {
                         var Menu = new Menu();
                         Menu.Show();
@@ -129,8 +130,10 @@ namespace Restaurant
                 }
 
                 if (input.Key == ConsoleKey.D2){
+                    //delete dish
                     Console.Clear();
-                    Console.WriteLine("Input the month that you want to delete a dish from");
+                    Console.WriteLine("Input the month that you want to delete a dish from (Example: January)");
+                    
                     string month = Console.ReadLine();
                     if (!menuDis.months.Contains(month)){
                         do
@@ -140,6 +143,22 @@ namespace Restaurant
                             Console.WriteLine("Give the Month of what menu you want to delete a dish from");
                             month = Console.ReadLine();
                         }while (!menuDis.months.Contains(month));
+                    }
+                    if (Dish.GetDishCount(month) == 1)
+                    {
+                        do
+                        {
+                            Console.WriteLine("The menu only has one dish, add a dish first before deleting this one so the menu wont be empty");
+                            Console.WriteLine("Press escape to go back to the current menu");                    
+                            input = Console.ReadKey(true);
+                        }
+                        while (input.Key != ConsoleKey.Escape);    
+
+                        if (input.Key == ConsoleKey.Escape)
+                        {
+                            var Menu = new Menu();
+                            Menu.Show();
+                        }                        
                     }
                     List<Dish> dishes = Dish.LoadDishesFromJson(month);
                     string dishesThisMonth = "";
@@ -160,12 +179,12 @@ namespace Restaurant
                     Dish.removeDish(month, Id);
                     do
                     {
-                        Console.WriteLine("Press escape to go back to the mainmenu");                    
-                        input_ = Console.ReadKey(true);
+                        Console.WriteLine("Press escape to go back to the current menu");                    
+                        input= Console.ReadKey(true);
                     }
-                    while (input_.Key != ConsoleKey.Escape);    
+                    while (input.Key != ConsoleKey.Escape);    
 
-                    if (input_.Key == ConsoleKey.Escape)
+                    if (input.Key == ConsoleKey.Escape)
                     {
                         var Menu = new Menu();
                         Menu.Show();
@@ -186,7 +205,7 @@ namespace Restaurant
             //This calls op the method ChangeDish and checks the input of the admin  
             if(input.Key == ConsoleKey.D7 && AdminMainMenu.adminLoggedIn && !UserLogin.userLoggedIn){
                 Console.Clear();
-                Console.WriteLine("Give the Month of what menu you want to change");
+                Console.WriteLine("Give the Month of what menu you want to change (Example: January)");
                 string month = Console.ReadLine();
                 if (!menuDis.months.Contains(month)){
                     do
@@ -216,13 +235,13 @@ namespace Restaurant
                     userInput1 = Console.ReadLine();
                 }
 
-                Console.WriteLine("What do you want to change?\n1. Name\n2. Price (input like: 00,00 NOT 00.00)\n3. Description\n4. Has Fish\n5. Has Shellfish\n6. Has Meat\n7. Is Vegan\n8. Is Gluten-Free");
+                Console.WriteLine("What do you want to change?\n1. Name\n2. Price (input like: 00,00 NOT 00.00)\n3. Description\n4. Has Fish(true/false)\n5. Has Shellfish(true/false)\n6. Has Meat(true/false)\n7. Is Vegan(true/false)\n8. Is Gluten-Free(true/false)");
                 string userInput = Console.ReadLine();
                 int dishKey;
                 while (!int.TryParse(userInput, out dishKey) || dishKey < 1 || dishKey > 8)
                 {
                     Console.WriteLine("Invalid input. Please enter a valid option.");
-                    Console.WriteLine("What do you want to change?\n1. Name\n2. Price (input like: 00,00 NOT 00.00)\n3. Description\n4. Has Fish\n5. Has Shellfish\n6. Has Meat\n7. Is Vegan\n8. Is Gluten-Free");
+                    Console.WriteLine("What do you want to change?\n1. Name\n2. Price (input like: 00,00 NOT 00.00)\n3. Description\n4. Has Fish(true/false)\n5. Has Shellfish(true/false)\n6. Has Meat(true/false)\n7. Is Vegan(true/false)\n8. Is Gluten-Free(true/false)");
                     userInput = Console.ReadLine();
                 }
 
@@ -233,19 +252,20 @@ namespace Restaurant
                     Console.WriteLine("Invalid input. Please enter a valid dish description:");
                     change = Console.ReadLine();
                 }
+                //these if/else if/else statements check if the user input is a bool, decimal or string and then make it the right value
                 if (change == "true") Dish.ChangeDish(Id, month, dishKey, true);
-                if (change == "false") Dish.ChangeDish(Id, month, dishKey, false);
-                if (dishKey == 2) Dish.ChangeDish(Id, month, dishKey, Convert.ToDecimal(change)); 
+                else if (change == "false") Dish.ChangeDish(Id, month, dishKey, false);
+                else if (dishKey == 2) Dish.ChangeDish(Id, month, dishKey, Convert.ToDecimal(change)); 
                 else Dish.ChangeDish(Id, month, dishKey, change);
                 
                 do
                 {
-                    Console.WriteLine("Press escape to go back to the mainmenu");                    
-                    input_ = Console.ReadKey(true);
+                    Console.WriteLine("Press escape to go back to the current menu");                    
+                    input = Console.ReadKey(true);
                 }
-                while (input_.Key != ConsoleKey.Escape);    
+                while (input.Key != ConsoleKey.Escape);    
 
-                if (input_.Key == ConsoleKey.Escape)
+                if (input.Key == ConsoleKey.Escape)
                 {
                     var Menu = new Menu();
                     Menu.Show();
@@ -259,16 +279,16 @@ namespace Restaurant
             //allows the admin to change the month that is being displayed.
             if(input.Key == ConsoleKey.D8 && AdminMainMenu.adminLoggedIn && !UserLogin.userLoggedIn){
                 Console.Clear();
-                Console.WriteLine("input the month");
+                Console.WriteLine("input the month (Example: January)");
                 string month = Console.ReadLine();
                 do
                 {
                     menuDis.changeMonth(month);
-                    input_ = Console.ReadKey(true);
+                    input = Console.ReadKey(true);
                 }
-                while (input_.Key != ConsoleKey.Escape);    
+                while (input.Key != ConsoleKey.Escape);    
 
-                if (input_.Key == ConsoleKey.Escape)
+                if (input.Key == ConsoleKey.Escape)
                 {
                     var Menu = new Menu();
                     Menu.Show();
@@ -285,11 +305,11 @@ namespace Restaurant
                 {
                     Console.Clear();
                     Console.WriteLine("\nWhat would you like to filter on?\n1. Vegan\n2. Gluten free\n3. Vegetarian\n4. sorted by price");
-                    input_ = Console.ReadKey(true);
-                }while (input_.Key != ConsoleKey.Escape && input_.Key != ConsoleKey.D1 && input_.Key != ConsoleKey.D2 && input_.Key != ConsoleKey.D3 && input_.Key != ConsoleKey.D4);
+                    input = Console.ReadKey(true);
+                }while (input.Key != ConsoleKey.Escape && input.Key != ConsoleKey.D1 && input.Key != ConsoleKey.D2 && input.Key != ConsoleKey.D3 && input.Key != ConsoleKey.D4);
 
                 //vegan menu
-                if (input_.Key == ConsoleKey.D1)
+                if (input.Key == ConsoleKey.D1)
                 {
                     do
                     {
@@ -310,7 +330,7 @@ namespace Restaurant
                 }
 
                 //gluten free menu
-                if (input_.Key == ConsoleKey.D2)
+                if (input.Key == ConsoleKey.D2)
                 {
                     do
                     {
@@ -332,8 +352,8 @@ namespace Restaurant
                     }                
                 }
 
-                //vegatarian menu
-                if (input_.Key == ConsoleKey.D3)
+                //vegetarian menu
+                if (input.Key == ConsoleKey.D3)
                 {
                     do
                     {
@@ -357,7 +377,7 @@ namespace Restaurant
                 }
 
                 //sorted by price
-                if (input_.Key == ConsoleKey.D4){
+                if (input.Key == ConsoleKey.D4){
                     do
                     {
                         Console.Clear();
@@ -378,7 +398,7 @@ namespace Restaurant
                 }
 
                 //allows the code to go back to the screen before this one.
-                if (input_.Key == ConsoleKey.Escape)
+                if (input.Key == ConsoleKey.Escape)
                 {
                     var Menu = new Menu();
                     Menu.Show();
@@ -386,8 +406,16 @@ namespace Restaurant
             }
             //exit the program completly
             if (input.Key == ConsoleKey.Q){
-                Console.Clear();
-                Program.Main();
+                if (AdminMainMenu.adminLoggedIn && !UserLogin.userLoggedIn){
+                    Console.Clear();
+                    AdminMainMenu.Menu();
+                }
+                else
+                {
+                    Console.Clear();
+                    Program.Main();
+                }
+                
             }
         }
     }
