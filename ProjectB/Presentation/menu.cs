@@ -413,7 +413,7 @@ namespace Restaurant
                 else
                 {
                     Console.Clear();
-                    MainMenu.Main();
+                    Program.Main();
                 }
                 
             }
