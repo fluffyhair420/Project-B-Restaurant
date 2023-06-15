@@ -610,6 +610,7 @@ Reservation ID: {reservations.ReservationID}
                         }
                     case "5":
                         {
+                            Console.Clear();
                             AdminMainMenu.Menu();
                             break;
                         }
