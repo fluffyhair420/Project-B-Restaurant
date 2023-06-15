@@ -5,11 +5,10 @@ namespace Restaurant
     class UserLogin
     {
         public static bool userLoggedIn { get; set; }
+
         // path for json file that stores all user's information
         static string userPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/User.json"));
         string userJson = File.ReadAllText(userPath);
-        // path for json file that stores currently logged in user
-        static string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
 
         public UserLogin()
         {
@@ -36,14 +35,14 @@ namespace Restaurant
                 Program.Main();
             }
 
+            // Check if email exists in the JSON file 
             dynamic data = JsonConvert.DeserializeObject(userJson);
             bool emailInJson = false;
             if (data != null)
             {
                 foreach (var item in data)
                 {
-                    
-                    // Email in JSON file
+                    // Email in JSON file is the same as the email input
                     if (item.Email == userEmail)
                     {
                         emailInJson = true;
@@ -69,6 +68,7 @@ Incorrect password.");
                     } 
 
                 }
+                // Email was not found in the JSON file
                 if (!emailInJson)
                 {
                     Console.Write(@"
@@ -101,6 +101,8 @@ free to register.");
                     }
                 }
             }
+
+            // JSON file is empty
             else
             {
                 Console.Write(@"

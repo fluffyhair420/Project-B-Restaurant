@@ -10,8 +10,9 @@ namespace Restaurant
         static string adminPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/AdminUser.json"));
         static string adminJson = File.ReadAllText(adminPath);
 
-        public static void Menu()
+        public static void Menu() // This only ever gets displayed if the Admin is logged in
         {
+            
             Console.WriteLine(@"
 === Admin Homepage ===
 1. My Account
@@ -27,24 +28,28 @@ namespace Restaurant
                     switch (userChoice)
                     {
                         case "1":
+                            Console.Clear();
                             wrongInput = false;
                             Info();
                             break;
-                        case "2": // VIEW / CHANGE MENU GOES HERE
+                        case "2":
+                            Console.Clear();
                             wrongInput = false;
                             Menu menu = new Menu();
                             menu.Show();
                             break;
 
-                        case "3": // ADMIN BOOK A TABLE GOES HERE
+                        case "3":
+                            Console.Clear();
                             wrongInput = false;
                             AdminReserve reserve = new AdminReserve();
                             reserve.AdminMainReserve();
                             break;
 
-                        case "4": // ADMIN REMOVE REVIEW GOES HERE
+                        case "4":
+                            Console.Clear();
                             wrongInput = false;
-                            // Review.Start();
+                            Review.RemoveReviewAdmin();
                             break;
                         case "5":
                             adminLoggedIn = false;
@@ -68,6 +73,7 @@ namespace Restaurant
                                 Console.Write(c);
                                 Thread.Sleep(50);
                             }
+                            Console.Clear();
                             Program.Main();
                             break;
                         default:
@@ -100,9 +106,7 @@ namespace Restaurant
                     if (item.PassWord == adminPassword)
                     {
                         Console.WriteLine($"\nWelcome, {item.UserName}");
-                        //CurrentUserJson.WriteCurrentUserToJson(item);
                         adminLoggedIn = true;
-                        //Program.Main();
                         AdminMainMenu.Menu();
                         break;
                     }
@@ -151,9 +155,6 @@ Go back to homepage? Y/N: ");
 
         public static void Info()
         {
-            // path for currently logged in user
-            // string currentUserPath = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/CurrentUser.json"));
-            // string currentUserJson = File.ReadAllText(currentUserPath);
             dynamic data = JsonConvert.DeserializeObject(adminJson);
             Console.WriteLine("\n\n=== Admin Information ===");
             foreach (var item in data)
@@ -177,9 +178,11 @@ Zipcode: {item.Address[0].ZipCode}");
             switch (userInput)
             {
                 case 1:
+                    Console.Clear();
                     ChangeInfo();
                     break;
                 case 2:
+                    Console.Clear();
                     AdminMainMenu.Menu();
                     break;
                 default:
@@ -188,12 +191,12 @@ Zipcode: {item.Address[0].ZipCode}");
             }
         }
 
+        // Change admin account's info
         public static void ChangeInfo()
         {
             dynamic data = JsonConvert.DeserializeObject(adminJson);
             List<AdminInfo> admins = JsonConvert.DeserializeObject<List<AdminInfo>>(adminJson);
 
-            //var allData = JsonConvert.DeserializeObject<List<UserInfo>>(userJson);
             AdminInfo adminToUpdate = null;
             foreach (var item in data)
             {
@@ -267,10 +270,6 @@ Password should contain at least
                                     }
                                     
                                     passwordValid = UserCheck.PasswordCheck(adminPassword);
-                                    // if (passwordValid == false)
-                                    // {
-                                        
-                                    // }
                                     
                                 }
                                 if (!string.IsNullOrEmpty(adminPassword))
@@ -354,7 +353,7 @@ An account using this email address already exists.
                                 }
                                 break;
                             case "7":
-                                string adminAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber (or press Enter to cancel): ", UserCheck.IsNumeric, "Invalid input. Please enter a housenumber containing only numbers.\n", true);
+                                string adminAddressHousenumber = UserCheck.GetValidInput("Enter a new housenumber (or press Enter to cancel): ", UserCheck.IsNumericAlphabetic, "Invalid input. Please enter a housenumber containing only numbers.\n", true);
                                 if (!string.IsNullOrEmpty(adminAddressHousenumber))
                                 {
                                     adminToUpdate.Address[0].HouseNumber = adminAddressHousenumber;
@@ -384,13 +383,14 @@ An account using this email address already exists.
                                     Thread.Sleep(50);
                                 }
                                 wrongInput = false;
+                                Console.Clear();
                                 Info();
                                 break;
                         }
                     }
                     
 
-                    // Step 4: Write the modified list back to the User.JSON file
+                    // Write the modified list back to the User.JSON file
                     string updatedJsonContents = JsonConvert.SerializeObject(admins, Formatting.Indented);
                     File.WriteAllText(adminPath, updatedJsonContents);
                     // Read the updated JSON data again

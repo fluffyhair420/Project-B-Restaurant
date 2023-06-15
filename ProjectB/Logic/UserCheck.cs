@@ -184,14 +184,31 @@ namespace Restaurant
 
         public static bool isCityAlphabetic(string input)
         {
-            Regex regex = new Regex(@"^[a-zA-Z/\s]+$");
-            return regex.IsMatch(input);
+            bool containsLetter = false;
+            foreach (char character in input)
+            {
+                if (char.IsLower(character) || char.IsUpper(character))
+                {
+                    containsLetter = true;
+                }
+
+            }
+            Regex regex = new Regex(@"^['`a-zA-Z/\s]+(?:-[a-zA-Z/\s]+)*$");
+            // Regex regex2 = new Regex(@"^[a-zA-Z/\s]+$");
+            return (regex.IsMatch(input) && input.Length > 2 && containsLetter);
         }
 
         public static bool IsNumeric(string input)
         {
             Regex regex = new Regex(@"^[0-9\s]+$");
             return regex.IsMatch(input);
+        }
+
+        public static bool IsNumericAlphabetic(string input)
+        {
+            Regex regex = new Regex(@"^[0-9]+[a-zA-Z]$");
+            Regex regex2 = new Regex(@"^[0-9\s]+$");
+            return (regex.IsMatch(input) || regex2.IsMatch(input));
         }
 
         public static bool IsZipCodeValid(string input)

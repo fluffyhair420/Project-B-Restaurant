@@ -1,22 +1,32 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-public class ReadFromJson
+namespace Restaurant
 {
-    // Get filepath of json file
-    static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Reviews.json"));
-
-    public static JArray ReadJsonFromFile()
+    public class ReadReviewFromJson
     {
+        // Get filepath of json file
+        static string path = System.IO.Path.GetFullPath(System.IO.Path.Combine(Environment.CurrentDirectory, @"DataSources/Reviews.json"));
 
-        // Read contents of Reviews.json into a JArray(JArr) and returns it
-        using (StreamReader file = File.OpenText(path))
-        using (JsonTextReader reader = new JsonTextReader(file))
+        public static JArray ReadJsonFromFile()
         {
-            JArray JArr = (JArray)JToken.ReadFrom(reader);
 
-            return JArr;
+            // Read contents of Reviews.json into a JArray(JArr) and returns it
+            using (StreamReader file = File.OpenText(path))
+            using (JsonTextReader reader = new JsonTextReader(file))
+            {
+                JArray JArr;
+                // Try to read Reviews.json, if it cant be read, create a new empty array
+                try
+                {
+                    JArr = (JArray)JToken.ReadFrom(reader);
+                }
+                catch(JsonReaderException)
+                {
+                    JArr = new();
+                }
+                return JArr;
+            }
         }
-        
     }
 }

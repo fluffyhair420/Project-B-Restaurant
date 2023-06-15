@@ -49,7 +49,14 @@ namespace Restaurant
                 string subject = "Booking Confirmation";
                 string body = @$"Dear {lastBooking.ReservationName},
 
-We are delighted to inform you that your booking with reference number {lastBooking.ReservationID} for {lastBooking.ReservationDate} for a {lastBooking.PartySize} person table has been booked successfully.
+We are delighted to inform you that your booking with reference number {lastBooking.ReservationID} has been received successfully.
+
+Your reservation:
+Reservation name: {lastBooking.ReservationName}
+Booking date: {lastBooking.ReservationDate}
+Party size: {lastBooking.PartySize}
+
+
 We look forward to welcome you in our restaurant!";
                 SendEmail(recipientEmail, lastBooking, subject, body);
             }
@@ -70,6 +77,13 @@ We look forward to welcome you in our restaurant!";
                 string body = @$"Dear {Booking.ReservationName},
 
 We would like to inform you that the date of your booking with reference number {Booking.ReservationID} has successfully been changed to {Booking.ReservationDate}.
+
+Your reservation:
+Reservation name: {Booking.ReservationName}
+Booking date: {Booking.ReservationDate}
+Party size: {Booking.PartySize}
+
+
 We look forward to welcome you in our restaurant!";
                 SendEmail(recipientEmail, Booking, subject, body);
             }
@@ -88,7 +102,14 @@ We look forward to welcome you in our restaurant!";
                 string subject = "Party size changed";
                 string body = @$"Dear {Booking.ReservationName},
 
-We would like to inform you that the party size of your booking with reference number {Booking.ReservationID} for {Booking.ReservationDate} has successfully been changed to {Booking.PartySize}.
+We would like to inform you that the party size of your booking with reference number {Booking.ReservationID} has successfully been changed.
+
+Your reservation:
+Reservation name: {Booking.ReservationName}
+Booking date: {Booking.ReservationDate}
+Party size: {Booking.PartySize}
+
+
 We look forward to welcome you in our restaurant!";
                 SendEmail(recipientEmail, Booking, subject, body);
             }
@@ -113,7 +134,7 @@ We look forward to welcome you in our restaurant some other time!";
             }
         }
 
-        private static void SendEmail(string recipientEmail, dynamic reservation, string subject, string body) // string subject, string body
+        private static void SendEmail(string recipientEmail, dynamic reservation, string subject, string body)
         {
             // setup sender's information
             EmailInfo senderInfo = new EmailInfo();

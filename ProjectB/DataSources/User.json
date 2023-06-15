@@ -1,0 +1,53 @@
+[
+  {
+    "UserID": 1,
+    "UserName": "Corina",
+    "PassWord": "Lavendel0",
+    "FirstName": "Corina",
+    "LastName": "Leeters",
+    "Email": "cleeters@kpnplanet.nl",
+    "PhoneNumber": "0620933230",
+    "Address": [
+      {
+        "City": "Bergschenhoek",
+        "Street": "Lavendeltuin",
+        "HouseNumber": "3",
+        "ZipCode": "2662CL"
+      }
+    ]
+  },
+  {
+    "UserID": 2,
+    "UserName": "gebruiker",
+    "PassWord": "Welkom01",
+    "FirstName": "Kim",
+    "LastName": "Leeters",
+    "Email": "kimleeters@gmail.com",
+    "PhoneNumber": "0612345678",
+    "Address": [
+      {
+        "City": "Berkel",
+        "Street": "romen",
+        "HouseNumber": "133a",
+        "ZipCode": "2652AB"
+      }
+    ]
+  },
+  {
+    "UserID": 3,
+    "UserName": "gebruiker1",
+    "PassWord": "Welkom03",
+    "FirstName": "Kim",
+    "LastName": "Leeters",
+    "Email": "kimleeters3@gmail.com",
+    "PhoneNumber": "0612345678",
+    "Address": [
+      {
+        "City": "Berkel en Rodenrijs",
+        "Street": "Romenpad",
+        "HouseNumber": "133a",
+        "ZipCode": "2652BZ"
+      }
+    ]
+  }
+]
